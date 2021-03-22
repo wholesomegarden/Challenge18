@@ -60,7 +60,7 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-Headless = False
+Headless = True
 noFlask = False
 useDB = True
 
