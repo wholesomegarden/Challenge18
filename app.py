@@ -218,10 +218,10 @@ class Master(object):
 			profileDir = "/"+"/".join(profileDir.split("/")[2:])
 			chrome_options = webdriver.ChromeOptions()
 			binPath = "/usr/bin/google-chrome"
-			executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
-			profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
-			# executable_path = "/root/Challenge18/chromedriver"
-			# profileDir = "/root/Challenge18"+profileDir
+			# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+			# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+			executable_path = "/root/Challenge18/chromedriver"
+			profileDir = "/root/Challenge18"+profileDir
 
 			print(binPath, executable_path)
 			# input()
