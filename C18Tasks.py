@@ -1051,7 +1051,6 @@ A magical evening full of sustainability, leadership and passing on the good ðŸ’
 		,
 		"20:00:10":
 		'''
-WhatsApp message
 *Welcome to the thirteenth day of the challenge - Climate Action*
 When I was a young student they talked about global warming. I remember coming out of the class scared and terrified that the end of the world was near. Yes, for over 30 years the scientific community has been warning of an increase in carbon dioxide levels in the atmosphere, while the global world population has nearly doubled. The growth rate of our emissions is rising fast, and it is rising even faster than we thought it was the worst case scenario just a few years ago, so yes it is right for me to be scared and terrified, and do something about it.
 Greta Thunberg, at the age of 15, realized the lapse in what several climate experts were saying and in the actions that were being taken in society. The difference was so drastic in her opinion that she decided to take matters into her own hands.
