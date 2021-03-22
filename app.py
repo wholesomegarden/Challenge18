@@ -126,7 +126,7 @@ class Master(object):
 		print("::::::::::STAGING::::::::::::::")
 	# availableChats = {}
 	publicServices = [""]
-	sendToAny = [""]
+	sendToAny = ["Challenge18"]
 
 	''' start master driver and log in '''
 	def __init__(self, profileDir = "/app/session/rprofile2"):
