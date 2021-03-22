@@ -60,9 +60,9 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-Headless = True
+Headless = False
 noFlask = False
-useDB = False
+useDB = True
 
 
 LASTGROUP = {0:1000}
@@ -89,7 +89,7 @@ if runLocal:
 	:::::::::::::::::::::::::::::::::
 	'''
 	)
-	print('export PATH="$HOME/wholesomegarden/Challenge18:$PATH"')
+	print('export PATH="$HOME/wholesomegarden/LinkNarrow:$PATH"')
 
 
 class Master(object):
@@ -107,11 +107,11 @@ class Master(object):
 	# db = {'masters': ['972512170493', '972547932000'], 'system': ['972512170493', '972543610404'], 'users': {}, 'groups': {}, 'id': '972547932000-1610379075@g.us'}
 	# mynumber = '972512170493'
 	# mynumber = '972584422646'
-	mynumber = '972733989898'
+	mynumber = '972559468468'
 	operator = '972547932000'
 	emptyNumber = '972543610404'
 	# db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}}
-	db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}, 'id': '972733989898-1615280291@g.us'}
+	db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}, 'id': '972559468468-1616398365@g.us'}
 	# db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}}
 
 	 # 'lastBackup': 1611071801.4876792, 'init': 1611071653.7335632, 'backupInterval': 0, 'backupDelay': 3, 'lastBackupServices': 0, 'servicesDB': {'Echo': {'dbID': '972512170493-1610802351@g.us'}, 'Danilator': {'dbID': '972512170493-1610802360@g.us'}, 'Reminders': {'dbID': '972512170493-1610802365@g.us'}, 'Music': {'dbID': '972512170493-1610802370@g.us'}, 'Master': {'dbID': '972512170493-1610965551@g.us'}, 'Experimental': {'dbID': '972512170493-1611059017@g.us'}}, 'availableChats': {'Master': {'972512170493-1611068831@g.us': 'https://chat.whatsapp.com/GhTABLFn3Aq18MI89MFBU8', '972512170493-1611071667@g.us': 'https://chat.whatsapp.com/LGABshra2Wd8rpZ8AduhuX'}, 'Music': {'972512170493-1611071128@g.us': 'https://chat.whatsapp.com/G3VQkKSrsuZJ3OiRz3Iof9', '972512170493-1611071137@g.us': 'https://chat.whatsapp.com/JN4juvGVYbbLVOoehExtTY'}, 'Experimental': {'972512170493-1611059125@g.us': 'https://chat.whatsapp.com/GIUwJiF3iCg1vioSHkkkQ8', '972512170493-1611059200@g.us': 'https://chat.whatsapp.com/IZXOC41bg112sKwE5UcoQO'}}}
@@ -218,8 +218,8 @@ class Master(object):
 			profileDir = "/"+"/".join(profileDir.split("/")[2:])
 			chrome_options = webdriver.ChromeOptions()
 			binPath = "/usr/bin/google-chrome"
-			# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
-			# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+			# executable_path = "/home/magic/wholesomegarden/LinkNarrow/chromedriver"
+			# profileDir = "/home/magic/wholesomegarden/LinkNarrow"+profileDir
 			executable_path = "/root/Challenge18/chromedriver"
 			profileDir = "/root/Challenge18"+profileDir
 

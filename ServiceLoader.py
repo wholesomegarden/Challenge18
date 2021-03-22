@@ -19,10 +19,10 @@ from Challenge18Service import *
 from threading import Thread
 
 # masterServices = ["Master","Experimental","TofaatTeva"]
-masterServices = ["Master","Challenge18"]
+masterServices = ["Master",]
 
 class ServiceLoader(object):
-    def LoadServices(send, backup, genLink, list = ["Master", "Challenge18", "Echo", "Experimental"], master = None):
+    def LoadServices(send, backup, genLink, list = ["Master", "Challenge18"], master = None):
     # def LoadServices(send, backup, genLink, list = ["Master", "Echo", "Experimental"], master = None):
     # def LoadServices(send, backup, genLink, list = ["Master"], master = None):
         services = {}
@@ -37,12 +37,12 @@ class ServiceLoader(object):
         # Load Dynamicly
         # api = API(service, send, backup, genLink)
         foundServiceClass = None
-        if service is "Echo":
-            foundServiceClass = EchoService
+        # if service is "Echo":
+        #     foundServiceClass = EchoService
         if service is "Master":
             foundServiceClass = MasterService
-        if service is "Experimental":
-            foundServiceClass = ExperimentalService
+        # if service is "Experimental":
+        #     foundServiceClass = ExperimentalService
         if service is "Challenge18":
             foundServiceClass = Challenge18Service
 
