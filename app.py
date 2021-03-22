@@ -694,9 +694,10 @@ class Master(object):
 			if self.services[service]["api"] is api:
 				targetIsService = False
 				subscribed = target in self.db["groups"] and "service" in self.db["groups"][target] and service.lower() == self.db["groups"][target]["service"].lower()
-				print("SubscribedDDDDDDDD",subscribed,target,target in self.db["groups"], "service" in self.db["groups"][target], service.lower() == self.db["groups"][target]["service"].lower())
+				# print("SubscribedDDDDDDDD",subscribed,target,target in self.db["groups"], "service" in self.db["groups"][target], service.lower() == self.db["groups"][target]["service"].lower())
 				if service in self.sendToAny:
 					subscribed = True
+				print("SubscribedDDDDDDDD",subscribed)
 				if len(target.split("/")) > 1 and len(target.split("/")[0]) > 0 and len(target.split("/")[1]) > 0:
 					if target.split("/")[0] in self.services:
 						targetService = target.split("/")[0]
