@@ -1,0 +1,3 @@
+[5175:5175:0309/115506.529574:ERROR:profile_manager.cc(1459)] Cannot create profile at path /home/magic/wholesomegarden/LinkNarrow/session/rprofile2//home/magic/wholesomegarden/LinkNarrow/session/rprofile2rprofile2/Profile 1
+[5175:5175:0309/115506.752873:WARNING:CONSOLE(1693)] "HTML Imports is deprecated and will be removed in M80, around February 2020. Please use ES modules instead. See https://www.chromestatus.com/features/5144752345317376 and https://developers.google.com/web/updates/2019/07/web-components-time-to-upgrade for more details.", source: chrome://md-user-manager/ (1693)
+[5175:5175:0309/115708.606593:WARNING:pref_notifier_impl.cc(40)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

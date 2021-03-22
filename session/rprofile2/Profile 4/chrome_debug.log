@@ -1,0 +1,3 @@
+[0309/110121.884277:ERROR:indexed_db_factory_impl.cc(950)] IndexedDB backing store had unknown schema, treating it as failure to open.
+[0309/110121.884385:ERROR:indexed_db_factory_impl.cc(736)] Got corruption for https://web.whatsapp.com, Unknown corruption
+[0309/110121.886019:ERROR:indexed_db_factory_impl.cc(873)] IndexedDB recovering from a corrupted (and deleted) database.

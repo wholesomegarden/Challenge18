@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <title>IIIIIIIIIIi</title>
+
+      <meta http-equiv="cache-control" content="no-cache" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      <meta http-equiv="Expires" content="-1" />
+      <meta http-equiv="refresh" content="1" >
+
+    <style>
+    h1 {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+    h3 {text-align: center;}
+    </style>
+</head>
+<body>
+    <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
+
+    <p>
+        Click on the button below to
+        close the current window.
+    </p>
+
+    <!-- Define the button to
+       close the window -->
+    <button onclick="return closeWindow();">
+        Close Window
+    </button>
+
+    <script type="text/javascript">
+        function closeWindow() {
+
+            // Open the new window
+            // with the URL replacing the
+            // current page using the
+            // _self value
+            let new_window =
+                open(location, '_self');
+
+            // Close this window
+            new_window.close();
+
+            return false;
+        }
+    </script>
+  <div>
+    <a href="blablabla" onclick="setTimeout(function(){var ww = window.open(window.location, '_self'); ww.close(); }, 1000);">
+      "If you click on this the window will be closed after 1000ms"
+    </a>
+  </div>
+  <h3> 1. Open incognito 2. wait for new QR 3. scan QR QUICKLY! </h3>
+  <h3> status: "{{ status }}"</h3>
+  <div>
+    <img src="{{ user_image }}" alt="User Image">
+  </div>
+</body>
+</html>
