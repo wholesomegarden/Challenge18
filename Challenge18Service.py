@@ -245,8 +245,10 @@ class Challenge18Service():
 		return sum, backmsg.replace("@", "❤️")
 
 	def rate(self, group, msg, user):
+		print("RATE1")
 		challenge = None
 		if group in self.db["challenges"]:
+			print("RATE2")
 			challenge = self.db["challenges"][group]
 			day = challenge["today"]
 			isDay, d, m = self.hasDay(msg)
@@ -271,6 +273,8 @@ class Challenge18Service():
 				str(self.db["users"][user]["score"]) + "*"
 
 			''' for now send directly to user - later in group '''
+
+			print("RATE3",user,sendBack)
 			self.api.send(user, sendBack)  # send to user
 			# self.api.send(group,sendBack) # send to user
 
