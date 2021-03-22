@@ -89,7 +89,7 @@ if runLocal:
 	:::::::::::::::::::::::::::::::::
 	'''
 	)
-	print('export PATH="$HOME/wholesomegarden/LinkNarrow:$PATH"')
+	print('export PATH="$HOME/wholesomegarden/Challenge18:$PATH"')
 
 
 class Master(object):
@@ -218,10 +218,10 @@ class Master(object):
 			profileDir = "/"+"/".join(profileDir.split("/")[2:])
 			chrome_options = webdriver.ChromeOptions()
 			binPath = "/usr/bin/google-chrome"
-			# executable_path = "/home/magic/wholesomegarden/LinkNarrow/chromedriver"
-			# profileDir = "/home/magic/wholesomegarden/LinkNarrow"+profileDir
-			executable_path = "/root/LinkNarrow/chromedriver"
-			profileDir = "/root/LinkNarrow"+profileDir
+			# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+			# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+			executable_path = "/root/Challenge18/chromedriver"
+			profileDir = "/root/Challenge18"+profileDir
 
 			print(binPath, executable_path)
 			# input()

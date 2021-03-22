@@ -754,10 +754,10 @@ class WhatsAPIDriver(object):
 				chrome_options = webdriver.ChromeOptions()
 				binPath = "/usr/bin/google-chrome"
 				profileDir = "/session/rprofile2"
-				executable_path = "/root/LinkNarrow/chromedriver"
-				profileDir = "/root/LinkNarrow"+profileDir
-				# executable_path = "/home/magic/wholesomegarden/LinkNarrow/chromedriver"
-				# profileDir = "/home/magic/wholesomegarden/LinkNarrow"+profileDir
+				executable_path = "/root/Challenge18/chromedriver"
+				profileDir = "/root/Challenge18"+profileDir
+				# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+				# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
 				print(binPath, executable_path)
 				print(binPath, executable_path)
 				print(binPath, executable_path)
