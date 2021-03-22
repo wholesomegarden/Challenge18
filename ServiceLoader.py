@@ -12,8 +12,8 @@ from ExperimentalService import *
 # from ScraperService import *
 # from PistonService import *
 # from StockService import *
-# from Challenge18Service import *
-from TofaatTevaService import *
+from Challenge18Service import *
+# from TofaatTevaService import *
 # from ClearVisionService import *
 
 from threading import Thread
