@@ -390,7 +390,7 @@ class Master(object):
 			process.start()
 
 			''' check available groups '''
-			checkAvailable = False
+			checkAvailable = True
 
 			if checkAvailable:
 				process2 = Thread(target = self.checkAvailableGroups, args=[None])
