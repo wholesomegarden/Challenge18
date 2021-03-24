@@ -322,6 +322,7 @@ class Challenge18Service():
 				if user.split("@")[0] in m:
 					self.simulation = True
 					emptyContent = False
+					noTimes = True
 					allDays = True
 
 					currentDay = self.db["challenges"][origin]["today"]
@@ -346,7 +347,9 @@ class Challenge18Service():
 								print("_____________________________________")
 								print()
 								print(d, "AT TIME:::", atTime)
-								if not emptyContent:
+								if noTimes:
+									self.api.send(origin, str(self.push[d][atTime]), autoPreview=True)
+								elif not emptyContent:
 									self.api.send(origin, "DAY " + str(d) + " " + atTime +
 												  "\n\n\n" + str(self.push[d][atTime]), autoPreview=True)
 								else:

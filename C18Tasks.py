@@ -16,7 +16,7 @@ international = {
 
 			# ''' DAY -5 ''' 5 dayד before the challenge
 		-5:{
-			"12:00:00": "image/C18/pre5.png"
+			"12:00:00": "image/root/Challenge18/C18/pre5.png"
 			,
 			"12:00:05":
 			'''
@@ -28,7 +28,7 @@ Hello everyone, I am surprised and happy with the number of participants and hop
 		},
 			# ''' DAY -4 ''' 4 dayד before the challenge
 		-4:{
-			"12:00:00": "image/C18/pre4.png"
+			"12:00:00": "image/root/Challenge18/C18/pre4.png"
 			,
 			"12:00:05":
 			'''
@@ -53,7 +53,7 @@ Sharon Gal-Or
 		},
 			# ''' DAY -3 ''' 3 dayד before the challenge
 		-3:{
-			"12:00:00": "image/C18/pre3.png"
+			"12:00:00": "image/root/Challenge18/C18/pre3.png"
 			,
 			"12:00:05":
 			'''
@@ -66,7 +66,7 @@ Hello everyone, I am surprised and happy with the number of participants and hop
 
 			# ''' DAY -2 ''' 2 dayד before the challenge
 		-2:{
-			"12:00:00": "image/C18/pre2.png"
+			"12:00:00": "image/root/Challenge18/C18/pre2.png"
 			,
 			"12:00:05":
 			'''
@@ -84,7 +84,7 @@ https://chat.whatsapp.com/LLGHvVQ7Z5oAKJR329CeDt
 
 			# ''' DAY -1 ''' one day before the challenge
 		-1:{
-			"12:00:00": "image/C18/pre1.png"
+			"12:00:00": "image/root/Challenge18/C18/pre1.png"
 			,
 			"12:00:05":
 			'''
@@ -110,7 +110,7 @@ I am surprised and happy with the number of participants and I hope that this pr
 		},
 			# ''' DAY 0 ''' the challenge starting day
 		0:{
-			"12:00:00": "image/C18/pre0.png"
+			"12:00:00": "image/root/Challenge18/C18/pre0.png"
 			,
 			"12:00:05":
 			'''
@@ -182,7 +182,7 @@ We will start with daily practice ... towards a new reality that awaits you, you
 			# ''' DAY 1 '''
 		1:{
 
-		"20:00:00": "image/C18/1.png"
+		"20:00:00": "image/root/Challenge18/C18/1.png"
 		,
 		"20:00:05":
 		'''
@@ -222,7 +222,7 @@ The main thought for today:
 		'''
 		,
 
-		"20:00:13": "image/C18/1.opus"
+		"20:00:13": "image/root/Challenge18/C18/1.opus"
 
 		,
 
@@ -260,7 +260,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		2:{
 
-		"20:00:00": "image/C18/2.png"
+		"20:00:00": "image/root/Challenge18/C18/2.png"
 		,
 		"20:00:05":
 		'''
@@ -290,7 +290,7 @@ It is important to know that it is possible otherwise, that we can imagine and a
 The main thought for today: *"Who is a rich man? He who shares".*
 		'''
 		,
-		"20:00:13": "image/C18/2.opus"
+		"20:00:13": "image/root/Challenge18/C18/2.opus"
 		,
 		"18:00:00":
 		'''
@@ -322,7 +322,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		3:{
 
-		"20:00:00": "image/C18/3.png"
+		"20:00:00": "image/root/Challenge18/C18/3.png"
 		,
 		"20:00:05":
 		'''
@@ -367,7 +367,7 @@ What can you do now to become healthier, body, mind and spirit?
 The main thought for today: a healthy mind in a healthy body in a healthy world
 		'''
 		,
-		"20:00:13": "image/C18/3.opus"
+		"20:00:13": "image/root/Challenge18/C18/3.opus"
 		,
 		"18:00:00":
 		'''
@@ -400,7 +400,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 4 '''
 
 		4:{
-		"20:00:00": "image/C18/4.png"
+		"20:00:00": "image/root/Challenge18/C18/4.png"
 		,
 		"20:00:05":
 		'''
@@ -414,7 +414,7 @@ https://youtu.be/Xe2nlti47kA
 
 3. *Thank you letter* - Write a letter to the teacher (teacher for life) that influenced you, in which you will express all your feelings, the feelings you have. Write everything you want. You are of course welcome to share with the group what you have written. Feel free to send the letter to the same teacher and watch the magic take place. Feel free to share here.
 May you all have a day full of Sustainability & Leadership 🌈🌈🌈
-❤️💜💛💙💚🤎💛💜💚❤️
+❤️💜💛💙💚💛💜💚❤️
 		''',
 		"20:00:08":
 		'''
@@ -430,7 +430,7 @@ Everyone wants to be heard and no one is listening. The corona crisis has helped
 		'''
 		,
 
-		"20:00:13": "image/C18/4.opus"
+		"20:00:13": "image/root/Challenge18/C18/4.opus"
 		,
 		"18:00:00":
 		'''
@@ -463,7 +463,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		5:{
 
-		"20:00:00": "image/C18/5.png"
+		"20:00:00": "image/root/Challenge18/C18/5.png"
 		,
 		"20:00:05":
 		'''
@@ -505,7 +505,7 @@ Today we will focus on opportunities instead of obstacles. Today, we will focus 
 The main thought for today: *"We do not discriminate between people. We do not ask what a person's religion is, and what race he belongs to. He must be a human and for that we say enough"*. - Benjamin Zeev Herzl {From the book "Altneuland"}
 		'''
 		,
-		"20:00:13": "image/C18/5.opus"
+		"20:00:13": "image/root/Challenge18/C18/5.opus"
 		,
 
 		"18:00:00":
@@ -539,7 +539,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		6:{
 
-		"20:00:00": "image/C18/6.png"
+		"20:00:00": "image/root/Challenge18/C18/6.png"
 		,
 		"20:00:05":
 		'''
@@ -573,7 +573,7 @@ The thought for today: *"Today and every day - I give what I want to attract int
 		'''
 		,
 
-		"20:00:13": "image/C18/6.opus"
+		"20:00:13": "image/root/Challenge18/C18/6.opus"
 		,
 		"18:00:00":
 		'''
@@ -606,7 +606,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		7:{
 
-		"20:00:00": "image/C18/7.png"
+		"20:00:00": "image/root/Challenge18/C18/7.png"
 		,
 		"20:00:05":
 		'''
@@ -648,7 +648,7 @@ Listen to your heart, hear the answer and give trust in the right choice - becau
 The main thought for today: *"Today I make great choices because they are made with pure love"*
 		'''
 		,
-		"20:00:13": "image/C18/7.opus"
+		"20:00:13": "image/root/Challenge18/C18/7.opus"
 		,
 		"18:00:00":
 		'''
@@ -681,7 +681,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		8:{
 
-		"20:00:00": "image/C18/8.png"
+		"20:00:00": "image/root/Challenge18/C18/8.png"
 		,
 		"20:00:05":
 		'''
@@ -719,7 +719,7 @@ The main thought for today: *"If you will it, it is no dream; and if you don't, 
 		'''
 		,
 
-		"20:00:13": "image/C18/8.opus"
+		"20:00:13": "image/root/Challenge18/C18/8.opus"
 		,
 		"18:00:00":
 		'''
@@ -752,7 +752,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		9:{
 
-		"20:00:00": "image/C18/9.png"
+		"20:00:00": "image/root/Challenge18/C18/9.png"
 		,
 		"20:00:05":
 		'''
@@ -791,7 +791,7 @@ The main thought for today: *"Focus is a key & Imagination is your wings"*
 
 		'''
 		,
-		"20:00:13": "image/C18/9.opus"
+		"20:00:13": "image/root/Challenge18/C18/9.opus"
 		,
 		"18:00:00":
 		'''
@@ -824,7 +824,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		10:{
 
-		"20:00:00": "image/C18/10.png"
+		"20:00:00": "image/root/Challenge18/C18/10.png"
 		,
 		"20:00:05":
 		'''
@@ -868,7 +868,7 @@ The main thought for today: *"I listen to my inner voice. The answers are inside
 
 		'''
 		,
-		"20:00:13": "image/C18/10.opus"
+		"20:00:13": "image/root/Challenge18/C18/10.opus"
 		,
 		"18:00:00":
 		'''
@@ -901,7 +901,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		11:{
 
-		"20:00:00": "image/C18/11.png"
+		"20:00:00": "image/root/Challenge18/C18/11.png"
 		,
 		"20:00:05":
 		'''
@@ -933,7 +933,7 @@ The main thought for today: *"I have a dream as I care about my city, my country
 		'''
 
 		,
-		"20:00:13": "image/C18/11.opus"
+		"20:00:13": "image/root/Challenge18/C18/11.opus"
 		,
 		"18:00:00":
 		'''
@@ -966,7 +966,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		12:{
 
-		"20:00:00": "image/C18/12.png"
+		"20:00:00": "image/root/Challenge18/C18/12.png"
 		,
 		"20:00:05":
 		'''
@@ -996,7 +996,7 @@ The main thought for today: *I stop to think (3) three times before I consume*
 		'''
 		,
 
-		"20:00:13": "image/C18/12.opus"
+		"20:00:13": "image/root/Challenge18/C18/12.opus"
 		,
 		"18:00:00":
 		'''
@@ -1028,7 +1028,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 13 '''
 
 		13:{
-		"20:00:00": "image/C18/13.png"
+		"20:00:00": "image/root/Challenge18/C18/13.png"
 		,
 		"20:00:05":
 		'''
@@ -1064,7 +1064,7 @@ The main thought for today: *"The climate crisis is also my challenge"*
 
 		'''
 		,
-		"20:00:13": "image/C18/13.opus"
+		"20:00:13": "image/root/Challenge18/C18/13.opus"
 		,
 		"18:00:00":
 		'''
@@ -1096,7 +1096,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 14 '''
 
 		14:{
-		"20:00:00": "image/C18/14.png"
+		"20:00:00": "image/root/Challenge18/C18/14.png"
 		,
 		"20:00:05":
 		'''
@@ -1136,7 +1136,7 @@ Is it our responsibility to support people who depend on the oceans, whether the
 The main thought for today is, *“Life is a beautiful, magnificent thing, even to a jellyfish.”*
 		'''
 		,
-		"20:00:13": "image/C18/14.opus"
+		"20:00:13": "image/root/Challenge18/C18/14.opus"
 		,
 		"18:00:00":
 		'''
@@ -1169,7 +1169,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		15:{
 
-		"20:00:00": "image/C18/15.png"
+		"20:00:00": "image/root/Challenge18/C18/15.png"
 		,
 		"20:00:05":
 		'''
@@ -1199,7 +1199,7 @@ The main thought for today: *“Man is as the tree in the field - as the tree he
 		'''
 		,
 
-		"20:00:13": "image/C18/15.opus"
+		"20:00:13": "image/root/Challenge18/C18/15.opus"
 		,
 		"18:00:00":
 		'''
@@ -1232,7 +1232,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		16:{
 
-		"20:00:00": "image/C18/16.png"
+		"20:00:00": "image/root/Challenge18/C18/16.png"
 		,
 		"20:00:05":
 		'''
@@ -1259,7 +1259,7 @@ And even better - share the group if you want🌹🌹🌹 everything that comes 
 Sophie was 😨. She woke up 😭 from her dream.
 So she packed her  👜and set out on a journey to see the🌍 ,
 She first met a puppy 🐕; He asked for 💧 so she shared her 💧,
-She met a 🧍‍♂️ who was hungry, so she shared her 🍌,
+She met a boy 👦 who was hungry, so she shared her 🍌,
 She met a 🐤 that had fallen from the 🌳. So she took off her 👟 and made a 🏠 for the 🐤,
 She met an 👴🏼 who was cold 🥶 so she gave him her 🧥,
 She met a lost 🐑 who was crying so she sang her a happy 😁🎶🎵🎶 song,
@@ -1285,7 +1285,7 @@ Ting Global
 
 		'''
 		,
-		"20:00:13": "image/C18/16.opus"
+		"20:00:13": "image/root/Challenge18/C18/16.opus"
 		,
 		"18:00:00":
 		'''
@@ -1317,7 +1317,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 17 '''
 
 		17:{
-		"20:00:00": "image/C18/17.png"
+		"20:00:00": "image/root/Challenge18/C18/17.png"
 		,
 		"20:00:05":
 		'''
@@ -1386,7 +1386,7 @@ The main thought for today: *"If you want to go fast - go alone*
 
 		'''
 		,
-		"20:00:17": "image/C18/17.opus"
+		"20:00:17": "image/root/Challenge18/C18/17.opus"
 		,
 		"18:00:00":
 		'''
@@ -1419,7 +1419,7 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		18:{
 
-		"20:00:00": "image/C18/18.png"
+		"20:00:00": "image/root/Challenge18/C18/18.png"
 		,
 		"20:00:05":
 		'''
@@ -1457,7 +1457,7 @@ Ting Global
 For more information contact me: +972 55-9721123 | ting.go.global@gmail.com
 		'''
 		,
-		"20:00:13": "image/C18/18.opus"
+		"20:00:13": "image/root/Challenge18/C18/18.opus"
 		,
 
 		},
@@ -1483,7 +1483,7 @@ For more information contact me: +972 55-9721123 | ting.go.global@gmail.com
 		# ''' DAY 19 '''
 
 		19:{
-		"10:00:00": "image/C18/19.png"
+		"10:00:00": "image/root/Challenge18/C18/19.png"
 		,
 		"10:00:05":
 		'''
