@@ -1,3 +1,6 @@
-2021/03/24-20:56:57.841 4e6f Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/03/24-20:56:57.841 4e6f Recovering log #3
-2021/03/24-20:56:57.872 4e6f Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000003.log 
+2021/03/24-21:04:10.978 555f Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/03/24-21:04:10.978 555f Recovering log #3
+2021/03/24-21:04:11.024 555f Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000003.log 
+2021/03/24-21:04:24.187 555f Level-0 table #5: started
+2021/03/24-21:04:24.206 555f Level-0 table #5: 1147083 bytes OK
+2021/03/24-21:04:24.212 555f Delete type=0 #3
