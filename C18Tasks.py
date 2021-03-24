@@ -414,7 +414,7 @@ https://youtu.be/Xe2nlti47kA
 
 3. *Thank you letter* - Write a letter to the teacher (teacher for life) that influenced you, in which you will express all your feelings, the feelings you have. Write everything you want. You are of course welcome to share with the group what you have written. Feel free to send the letter to the same teacher and watch the magic take place. Feel free to share here.
 May you all have a day full of Sustainability & Leadership 🌈🌈🌈
-❤️💜💛💙💚🤎💛💜💚❤️
+❤️💜💛💙💚💛💜💚❤️
 		''',
 		"20:00:08":
 		'''
@@ -1259,7 +1259,7 @@ And even better - share the group if you want🌹🌹🌹 everything that comes 
 Sophie was 😨. She woke up 😭 from her dream.
 So she packed her  👜and set out on a journey to see the🌍 ,
 She first met a puppy 🐕; He asked for 💧 so she shared her 💧,
-She met a 🧍‍♂️ who was hungry, so she shared her 🍌,
+She met a boy 👦 who was hungry, so she shared her 🍌,
 She met a 🐤 that had fallen from the 🌳. So she took off her 👟 and made a 🏠 for the 🐤,
 She met an 👴🏼 who was cold 🥶 so she gave him her 🧥,
 She met a lost 🐑 who was crying so she sang her a happy 😁🎶🎵🎶 song,

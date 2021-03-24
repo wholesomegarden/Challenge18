@@ -218,8 +218,8 @@ class Master(object):
 			profileDir = "/"+"/".join(profileDir.split("/")[2:])
 			chrome_options = webdriver.ChromeOptions()
 			binPath = "/usr/bin/google-chrome"
-			# executable_path = "/home/magic/wholesomegarden/LinkNarrow/chromedriver"
-			# profileDir = "/home/magic/wholesomegarden/LinkNarrow"+profileDir
+			# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+			# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
 			executable_path = "/root/Challenge18/chromedriver"
 			profileDir = "/root/Challenge18"+profileDir
 
@@ -637,7 +637,7 @@ class Master(object):
 
 
 		if "/" in content:
-			if "image" == content.split("/")[0]:
+			if "image" == content.split("/")[0] or "path" == content.split("/")[0] :
 				imagepath = "/".join(content.split("\n")[0].split("/")[1:])
 				sendBack = ""
 				if "\n" in content:
