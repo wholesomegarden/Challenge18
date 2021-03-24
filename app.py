@@ -119,9 +119,9 @@ class Master(object):
 	services = {}
 	links = {}
 	runningSubscriptions = 0
-	baseURL = "akeyo.io/link?"
+	baseURL = "akeyo.io/c?"
 	if production:
-		baseURL = "akeyo.io/link?"
+		baseURL = "akeyo.io/c?"
 	else:
 		print("::::::::::STAGING::::::::::::::")
 	# availableChats = {}
