@@ -322,7 +322,7 @@ class Challenge18Service():
 				if user.split("@")[0] in m:
 					self.simulation = True
 					emptyContent = False
-					noTimes = False
+					noTimes = True
 					allDays = True
 
 					currentDay = self.db["challenges"][origin]["today"]
