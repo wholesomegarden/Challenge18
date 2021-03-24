@@ -29,7 +29,7 @@ class MasterService(object):
 	welcome = "Welcome to ✨WhatsappMaster✨ \nCheck out our services!"
 	help = "send a message to get it back"
 	# imageurl = "https://businesstech.co.za/news/wp-content/uploads/2020/09/WhatsApp-logo.png"
-	imageurl = "https://www.nicepng.com/png/detail/5-52288_colores-del-logo-de-whatsapp-whatsapp-icon-red.png"
+	imageurl = "https://p.kindpng.com/picc/s/247-2476548_logo-de-whatsapp-en-colores-hd-png-download.png"
 	shortDescription = "Whatsapp Service Platform"
 	share = None
 
@@ -320,7 +320,8 @@ class MasterService(object):
 		if dbChanged:
 			self.master.backup()
 
-	def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972543610404"):
+	# def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972543610404"):
+	def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972547932000"):
 		text, chatID, senderID = data
 
 		if text is not None and len(text.split("group")) > 1:
