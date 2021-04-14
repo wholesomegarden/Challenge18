@@ -754,6 +754,10 @@ The main thought for today: *"If you will it, it is no dream; and if you don't, 
 
 		"20:00:13": "image/C18/8.opus"
 		,
+		"20:00:20": "image/C18/8.2.1.png",
+		"20:00:25": "image/C18/8.2.2.png",
+		"20:00:30": "image/C18/8.2.3.png",
+		"20:00:35": "image/C18/8.2.4.png",
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
