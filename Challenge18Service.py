@@ -29,6 +29,33 @@ cFormat = {"today": -1, "upcoming": {}}
 # class Challenge18Service(Service):
 
 
+'''
+# at 20:00
+Monday		: Day 1
+Tuesday		: Day 2
+Wednesday	: Day 3
+Thursday	: Day 4
+Friday		: Day 4.5
+Saturday	: Day 5
+
+Sunday		: Day 6
+Monday		: Day 7
+Tuesday		: Day 8
+Wednesday	: Day 9
+Thursday	: Day 10
+Friday		: Day 10.5
+Saturday	: Day 11
+
+Sunday		: Day 12
+Monday		: Day 13
+Tuesday		: Day 14
+Wednesday	: Day 15
+Thursday	: Day 16
+Friday		: Day 16.5
+Saturday	: Day 17
+
+Sunday		: Day 18
+'''
 class Challenge18Service():
 	id = "Challenge18"
 	name = "🙏🌍 Challenge18 🐋🌸 "
@@ -52,7 +79,8 @@ class Challenge18Service():
 				   17: "️👣",
 				   180: "🕉️"}
 
-	push = C18Tasks.international
+	daysToSkip = [4,10,16]
+	push = {"international": C18Tasks.international, "Hebrew", C18Tasks.hebrew}
 	debug = False
 	simulation = False
 
@@ -72,6 +100,14 @@ class Challenge18Service():
 		# self.emojiValues = Challenge18Service.emojiValues
 		# self.help = Challenge18Service.help
 		self.managePush()
+
+	def halfday(self, day):
+		return day/.5 % 2 == 1
+
+	def updateDay(self, current):
+		if self.halfday(current) or current in self.daysToSkip :
+			return int(current + .5)
+		return int(current + 1)
 
 	def managePush(self):
 		p = Thread(target=self.managePushAsync, args=[None])
@@ -99,7 +135,8 @@ class Challenge18Service():
 				challenge = self.db["challenges"][ch]
 				if "upcoming" not in challenge:
 					challenge["upcoming"] = {}
-
+				if "template" not in challenge:
+					challenge["template"] = "international"
 				sent = []
 				for up in challenge["upcoming"]:
 					# print("UP",up)
@@ -109,8 +146,9 @@ class Challenge18Service():
 					if passedTime:
 						try:
 							day = challenge["today"]
-							if day in self.push and up in self.push[day]:
-								content = self.push[day][up]
+							# if day in self.push and up in self.push[day]:
+							if day in self.push[challenge["template"]] and up in self.push[challenge["template"]][day]:
+								content = self.push[challenge["template"]][day][up]
 								if content is not None:
 									content = content.replace(
 										"DDD", str(day)).replace("TTT", up)
@@ -164,21 +202,30 @@ class Challenge18Service():
 				# print(passed2000, time.time() ,"\n", self.db["last2000"] ,"\n", dayly)
 				if passed2000 and time.time() - self.db["last2000"] > dayly:
 					self.db["last2000"] = time.time()
-					for challenge in self.db["challenges"]:
-						self.db["challenges"][challenge]["today"] += 1
+
+					for ch in self.db["challenges"]:
+						challenge = self.db["challenges"][ch]
+					# for challenge in self.db["challenges"]:
+
+						# self.db["challenges"][challenge]["today"] += 1
+						self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"])
+
 						# if self.db["challenges"][challenge]["today"] == 0:
 						# 	self.db["challenges"][challenge]["today"] += 1
-						day = self.db["challenges"][challenge]["today"]
+						day = self.db["challenges"][ch]["today"]
 						if self.debug:
 							# send to user
 							self.api.send(
-								challenge, "CHALLENGE CHANGED TO DAY " + str(day))
-						if day in self.push:
-							for tm in self.push[day]:
-								self.db["challenges"][challenge]["upcoming"][tm] = "_"
+								ch, "CHALLENGE CHANGED TO DAY " + str(day))
 
-						print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", challenge,
-							  "DAY: ", self.db["challenges"][challenge]["today"])
+						if "template" not in challenge:
+							challenge["template"] = "international"
+						if day in self.push[challenge["template"]]:
+							for tm in self.push[challenge["template"]][day]:
+								self.db["challenges"][ch]["upcoming"][tm] = "_"
+
+						print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
+							  "DAY: ", challenge["today"])
 					self.backup()
 			except:
 				traceback.print_exc()
@@ -312,8 +359,10 @@ class Challenge18Service():
 							gotDay = int(res[0])
 						except:
 							traceback.print_exc()
+					if "template" not in self.db["challenges"][origin]:
+						self.db["challenges"][origin]["template"] = "international"
 					self.db["challenges"][origin] = self.formatChallenge(
-						day=gotDay)
+						day=gotDay, template = self.db["challenges"][origin]["template"])
 					self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
 					dbChanged = True
 
@@ -325,13 +374,17 @@ class Challenge18Service():
 					noTimes = True
 					allDays = True
 
+					challenge = self.db["challenges"][origin]
 					currentDay = self.db["challenges"][origin]["today"]
+
+					if "template" not in challenge:
+						challenge["template"] = "international"
 					# send to user
 					self.api.send(
 						origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
-					for d in self.push:
+					for d in self.push[challenge["template"]]:
 						self.db["challenges"][origin] = self.formatChallenge(
-							day=d)
+							day=d, template = self.db["challenges"][origin]["template"])
 						self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
 							self.db["challenges"][origin]) + "\n\n=====================")  # send to user
 						print("_____________________________________")
@@ -339,7 +392,7 @@ class Challenge18Service():
 						print("_____________________________________")
 						print("DAY ", d)
 						time.sleep(.5)
-						print(self.push[d].keys())
+						print(self.push[challenge["template"]][d].keys())
 						if d > -2 or allDays:
 							print(str(self.db["challenges"]
 									  [origin]["upcoming"]))
@@ -348,10 +401,10 @@ class Challenge18Service():
 								print()
 								print(d, "AT TIME:::", atTime)
 								if noTimes:
-									self.api.send(origin, str(self.push[d][atTime]), autoPreview=True)
+									self.api.send(origin, str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
 								elif not emptyContent:
 									self.api.send(origin, "DAY " + str(d) + " " + atTime +
-												  "\n\n\n" + str(self.push[d][atTime]), autoPreview=True)
+												  "\n\n\n" + str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
 								else:
 									self.api.send(
 										origin, "DAY " + str(d) + " " + atTime + "\n", autoPreview=True)
@@ -380,7 +433,7 @@ class Challenge18Service():
 		self.api.backup(self.db)
 		# self.api.backup({"upcoming":self.db["upcoming"],"users":User.usersToJSONusers(self.db["users"])})
 
-	def formatChallenge(self, day=None):
+	def formatChallenge(self, day=None, template = "international"):
 		if day is None:
 			today = datetime.date.today()
 			if today == today + datetime.timedelta((0 - today.weekday()) % 7, weeks=0):
@@ -398,7 +451,7 @@ class Challenge18Service():
 
 			day = day - 7
 
-		nc = {"today": day, "upcoming": {}}
+		nc = {"today": day, "upcoming": {}, "template" = template}
 		# for k in cFormat:
 		# 	nc[k] = cFormat[k]
 		#
@@ -406,8 +459,8 @@ class Challenge18Service():
 		# if "upcoming" not in nc:
 		# 	nc["upcoming"] = {}
 
-		if day in self.push:
-			for tm in self.push[day]:
+		if day in self.push[template]:
+			for tm in self.push[template][day]:
 				nc["upcoming"][tm] = "_"
 
 		return nc
