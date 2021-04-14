@@ -13,9 +13,6 @@
 import C18HEB
 
 hebrew = C18HEB.HEB
-hebrew[4.5] = {}
-hebrew[10.5] = {}
-hebrew[16.5] = {}
 
 # hebrew = {
 #
