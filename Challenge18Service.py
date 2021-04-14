@@ -80,7 +80,7 @@ class Challenge18Service():
 				   180: "🕉️"}
 
 	daysToSkip = [4,10,16]
-	push = {"international": C18Tasks.international, "Hebrew", C18Tasks.hebrew}
+	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew}
 	debug = False
 	simulation = False
 
@@ -451,7 +451,7 @@ class Challenge18Service():
 
 			day = day - 7
 
-		nc = {"today": day, "upcoming": {}, "template" = template}
+		nc = {"today": day, "upcoming": {}, "template": template}
 		# for k in cFormat:
 		# 	nc[k] = cFormat[k]
 		#
