@@ -105,7 +105,9 @@ class Challenge18Service():
 		return day/.5 % 2 == 1
 
 	def updateDay(self, current):
-		if self.halfday(current) or current in self.daysToSkip :
+		if current in self.daysToSkip :
+			return current + .5
+		elif self.halfday(current):
 			return int(current + .5)
 		return int(current + 1)
 
