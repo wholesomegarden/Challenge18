@@ -378,14 +378,23 @@ class Challenge18Service():
 					gotTemplate = None
 					# res = re.findall("[-\d]+", content)
 					res = content.split("=")[1]
-					if len(res) > 0:
-						self.db["challenges"][origin]["template"] = res
-						self.db["challenges"][origin] = self.formatChallenge(
-							day=self.db["challenges"][origin]["today"], template = self.db["challenges"][origin]["template"])
-						self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
-						dbChanged = True
+					if len(res) > 0 and res in self.push:
+						try:
+							self.db["challenges"][origin]["template"] = res
+							self.db["challenges"][origin] = self.formatChallenge(
+								day=self.db["challenges"][origin]["today"], template = self.db["challenges"][origin]["template"])
+							self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
+							dbChanged = True
+						except:
+							traceback.print_exc()
+							self.api.send(origin, "COULD NOT CHANGE TEMPLATE ERROR"+traceback.format_exc())  # send to user
 					else:
-						self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
+						txt = "COULD NOT CHANGE TEMPLATE to "+res
+						txt+= "\n\nAvailable templates:\n"
+						for k in self.push:
+							txt+=k+"\n"
+						self.api.send(origin, txt)  # send to user
+
 		if "day=" in content.lower():
 			for m in self.addMasters:
 				if user.split("@")[0] in m:
