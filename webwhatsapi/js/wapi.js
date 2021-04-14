@@ -1001,6 +1001,14 @@ window.WAPI.sendMessageToID = function (id, message, done) {
 						if (contact.status === 404) {
 								done(true);
 						} else {
+							if(typeof contact.jid === 'undefined')
+					      {
+					          contact.jid = {
+					              '_serialized' : id,
+					              'server' : '@' + id.split('@')[1],
+					              'user' : id.split('@')[0]
+					          }
+					      }
 								Store.Chat.find(contact.jid).then(chat => {
 										chat.sendMessage(message);
 										return true;
