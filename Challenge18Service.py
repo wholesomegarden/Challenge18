@@ -339,6 +339,7 @@ class Challenge18Service():
 		if "challenges" not in self.db:
 			self.db["challenges"] = {}
 
+
 		dbChanged = False
 
 		userID = str(user)
@@ -349,7 +350,43 @@ class Challenge18Service():
 			self.db["challenges"][origin] = self.formatChallenge()
 			dbChanged = True
 
-		if "day=" in content:
+
+		challenge = self.db["challenges"][origin]
+
+		if "template" not in challenge:
+			challenge["template"] = "international"
+
+		if "day=" in content.lower():
+			for m in self.addMasters:
+				if user.split("@")[0] in m:
+					gotDay = None
+					res = re.findall("[-\d]+", content)
+					if len(res) > 0:
+						try:
+							gotDay = int(res[0])
+						except:
+							traceback.print_exc()
+					if "template" not in self.db["challenges"][origin]:
+						self.db["challenges"][origin]["template"] = "international"
+					self.db["challenges"][origin] = self.formatChallenge(
+						day=gotDay, template = self.db["challenges"][origin]["template"])
+					self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
+					dbChanged = True
+		if "template=" in content.lower() or "tem=" in content.lower():
+			for m in self.addMasters:
+				if user.split("@")[0] in m:
+					gotTemplate = None
+					# res = re.findall("[-\d]+", content)
+					res = content.split("=")[1]
+					if len(res) > 0:
+						self.db["challenges"][origin]["template"] = res
+						self.db["challenges"][origin] = self.formatChallenge(
+							day=self.db["challenges"][origin]["today"], template = self.db["challenges"][origin]["template"])
+						self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
+						dbChanged = True
+					else:
+						self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
+		if "day=" in content.lower():
 			for m in self.addMasters:
 				if user.split("@")[0] in m:
 					gotDay = None
@@ -374,11 +411,7 @@ class Challenge18Service():
 					noTimes = True
 					allDays = True
 
-					challenge = self.db["challenges"][origin]
 					currentDay = self.db["challenges"][origin]["today"]
-
-					if "template" not in challenge:
-						challenge["template"] = "international"
 					# send to user
 					self.api.send(
 						origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
