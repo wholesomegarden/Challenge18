@@ -11,8 +11,10 @@
 # send msgs with url as attachments with preview
 
 import C18HEB
+import C18Family
 
 hebrew = C18HEB.HEB
+Family = C18Family.Family
 
 # hebrew = {
 #
