@@ -1425,6 +1425,8 @@ The main thought for today: *"If you want to go fast - go alone*
 		,
 		"20:00:17": "image/C18/17.opus"
 		,
+		"20:00:25": "image/C18/17.1.png",
+
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
