@@ -10,6 +10,8 @@ from dateparser.search import search_dates
 import time
 import datetime
 import re
+import random
+import json
 
 import emoji
 
@@ -19,6 +21,7 @@ from pprint import pprint as pp
 
 import C18Tasks
 
+from urllib.request import urlopen, Request, quote
 
 known = {"morning": "at 08:00", "afternoon": "at 16:00", "evening": "at 18:00",
 		 "in in": "in", "at at": "at", "בבוקר": "08:00", "בצהריים": "12:00", "בערב": "18:00"}
@@ -56,6 +59,53 @@ Saturday	: Day 17
 
 Sunday		: Day 18
 '''
+# from Challenge18Service import *
+# site = "https://www.youtube.com/watch?v=QkF3oxziUI4&ab_channel=LedZeppelin"
+# views(site)
+
+def views(url):
+	# url = "https://www.youtube.com/watch?v=QkF3oxziUI4&ab_channel=LedZeppelin"
+	t = time.time()
+	headers_Get = {
+			'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0',
+			'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+			'Accept-Language': 'en-US,en;q=0.5',
+			'Accept-Encoding': 'gzip, deflate',
+			'DNT': '1',
+			'Connection': 'keep-alive',
+			'Upgrade-Insecure-Requests': '1'
+		}
+	with requests.Session() as session:
+		res=session.get(url, headers=headers_Get,cookies={'CONSENT': 'YES+cb.20210328-17-p0.en-GB+FX+{}'.format(random.randint(100, 999))})
+	numOfViews = -1
+	try:
+		x = res.text.split("viewCount")[4][2:].split(",\"")[0]
+		numOfViews = json.loads(x)["simpleText"]
+	except :
+		traceback.print_exc()
+		return -1
+
+	# res = urlopen(url)
+	# html = res.read()
+	# wordBreak = ['<','>']
+	# for i in range(len(html)):
+	# 	if html[i] in wordBreak:
+	# 		html[i] = ' '
+	#
+	# html = html.split()
+	# dataSwitch = False
+	# numOfViews = ''
+	# for element in html:
+	# 	if element == '/div':
+	# 		dataSwitch = False
+	# 	if dataSwitch:
+	# 		numOfViews += str(element)
+	# 	if "view-count" in str(element):
+	# 		dataSwitch = True
+	# print(numOfViews, " Views - Time: ",time.time()-t)
+	return numOfViews
+
+
 class Challenge18Service():
 	id = "Challenge18"
 	name = "🙏🌍 Challenge18 🐋🌸 "

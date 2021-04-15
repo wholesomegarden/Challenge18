@@ -14,7 +14,7 @@ import C18HEB
 import C18Family
 
 hebrew = C18HEB.HEB
-Family = C18Family.Family
+family = C18Family.Family
 
 # hebrew = {
 #
