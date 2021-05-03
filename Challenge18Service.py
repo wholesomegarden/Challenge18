@@ -355,28 +355,27 @@ class Challenge18Service():
 				day = d
 				msg = m
 
-			if day > 9999:
-				''' max by day '''
-				score, backmsg = self.getScore(
-					msg.replace(" ", "").replace("❤️", "@"), max=6)
-				self.prepUser(user, day)
+			''' max by day '''
+			score, backmsg = self.getScore(
+				msg.replace(" ", "").replace("❤️", "@"), max=6)
+			self.prepUser(user, day)
 
-				''' get score - later check by task'''
-				self.db["users"][user]["score"] += score
-				self.db["users"][user]["days"][day] += score
+			''' get score - later check by task'''
+			self.db["users"][user]["score"] += score
+			self.db["users"][user]["days"][day] += score
 
-				''' for now just thankyou - later add custom message based on score / random '''
-				# sendBack = "🙏🌍 *Challenge18* 🐋🌸"+"\n\n*Thank you!* "+user.split("@")[0]+"\n*your current score is now "+str(self.db["users"][user]["score"])+"*"
-				sendBack = "🙏🌍 *Challenge18* 🐋🌸" + "\n" + "Day " + \
-					str(day) + " - " + backmsg + "\n*Thank you!* " + \
-					"\n*your current score is now " + \
-					str(self.db["users"][user]["score"]) + "*"
+			''' for now just thankyou - later add custom message based on score / random '''
+			# sendBack = "🙏🌍 *Challenge18* 🐋🌸"+"\n\n*Thank you!* "+user.split("@")[0]+"\n*your current score is now "+str(self.db["users"][user]["score"])+"*"
+			sendBack = "🙏🌍 *Challenge18* 🐋🌸" + "\n" + "Day " + \
+				str(day) + " - " + backmsg + "\n*Thank you!* " + \
+				"\n*your current score is now " + \
+				str(self.db["users"][user]["score"]) + "*"
 
-				''' for now send directly to user - later in group '''
+			''' for now send directly to user - later in group '''
 
-				print("RATE3",user,sendBack)
-				self.api.send(user, sendBack)  # send to user
-				# self.api.send(group,sendBack) # send to user
+			print("RATE3",user,sendBack)
+			self.api.send(user, sendBack)  # send to user
+			# self.api.send(group,sendBack) # send to user
 
 	def process(self, info):
 		origin, user, content = None, None, None
@@ -448,23 +447,6 @@ class Challenge18Service():
 							txt+=k+"\n"
 						self.api.send(origin, txt)  # send to user
 
-		if "day=" in content.lower():
-			for m in self.addMasters:
-				if user.split("@")[0] in m:
-					gotDay = None
-					res = re.findall("[-\d]+", content)
-					if len(res) > 0:
-						try:
-							gotDay = int(res[0])
-						except:
-							traceback.print_exc()
-					if "template" not in self.db["challenges"][origin]:
-						self.db["challenges"][origin]["template"] = "international"
-					self.db["challenges"][origin] = self.formatChallenge(
-						day=gotDay, template = self.db["challenges"][origin]["template"])
-					self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
-					dbChanged = True
-
 		elif "sim" == content.lower():
 			for m in self.addMasters:
 				if user.split("@")[0] in m:
@@ -513,7 +495,7 @@ class Challenge18Service():
 
 		else:
 			thisDay = self.db["challenges"][origin]["today"]
-			if thisDay > 0:
+			if thisDay > 0 and thisDay<9999:
 				self.rate(origin, content, userID)
 				dbChanged = True
 			else:
