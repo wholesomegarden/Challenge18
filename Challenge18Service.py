@@ -364,17 +364,18 @@ class Challenge18Service():
 			self.db["users"][user]["score"] += score
 			self.db["users"][user]["days"][day] += score
 
-			''' for now just thankyou - later add custom message based on score / random '''
-			# sendBack = "🙏🌍 *Challenge18* 🐋🌸"+"\n\n*Thank you!* "+user.split("@")[0]+"\n*your current score is now "+str(self.db["users"][user]["score"])+"*"
-			sendBack = "🙏🌍 *Challenge18* 🐋🌸" + "\n" + "Day " + \
-				str(day) + " - " + backmsg + "\n*Thank you!* " + \
-				"\n*your current score is now " + \
-				str(self.db["users"][user]["score"]) + "*"
+			if score > 0:
+				''' for now just thankyou - later add custom message based on score / random '''
+				# sendBack = "🙏🌍 *Challenge18* 🐋🌸"+"\n\n*Thank you!* "+user.split("@")[0]+"\n*your current score is now "+str(self.db["users"][user]["score"])+"*"
+				sendBack = "🙏🌍 *Challenge18* 🐋🌸" + "\n" + "Day " + \
+					str(day) + " - " + backmsg + "\n*Thank you!* " + \
+					"\n*your current score is now " + \
+					str(self.db["users"][user]["score"]) + "*"
 
-			''' for now send directly to user - later in group '''
+				''' for now send directly to user - later in group '''
 
-			print("RATE3",user,sendBack)
-			self.api.send(user, sendBack)  # send to user
+				print("RATE3",user,sendBack)
+				self.api.send(user, sendBack)  # send to user
 			# self.api.send(group,sendBack) # send to user
 
 	def process(self, info):
