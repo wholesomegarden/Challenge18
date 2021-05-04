@@ -244,7 +244,8 @@ class Challenge18Service():
 		content = "*Total Points in the group: "
 		total = 0
 		if self.manager is None:
-
+			print("XXXXXXXXXXX NO MANAGER")
+			self.maneger = Challenge18Manager.share
 		res = self.manager.getChallenge({"origin":origin})
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRR")
