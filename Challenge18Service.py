@@ -152,7 +152,7 @@ class Challenge18Service():
 		# self.emojiValues = Challenge18Service.emojiValues
 		# self.help = Challenge18Service.help
 		self.managePush()
-		self.commands = {"#totalPoints":self.sendTotal}
+		self.commands = {"#totalPoints":self.sendTotal,"#totalPointsHeb":self.sendTotalHeb}
 		# self.manager = Challenge18Manager.share
 		self.manager = None
 		self.master = master
@@ -276,7 +276,24 @@ class Challenge18Service():
 	def isCommand(self, content):
 		return content.split("/")[0] in self.commands
 
-	def sendTotal(self, data, ret = False):
+	def sendTotalHeb(self, data, ret = False):
+		self.sendTotal(data,ret=ret,def = "heb")
+
+	def sendTotal(self, data, ret = False, def = "eng", strings = {
+	"eng":
+	'''
+🌴🌴🌴🌴🌴🌴🌴
+*Total Points in the group: {0}*
+🐋🌸🙏
+	'''
+	,
+	"heb":
+	'''
+🌴🌴🌴🌴🌴🌴🌴🌴
+*ניקוד קבוצתי מצטבר: {0}*
+🙏🌍 *אתגר 18* 🐋🌸
+	'''
+	}):
 		print("DDDDDDDDDDd")
 		print(data)
 		print("DDDDDDDDDDd")
@@ -284,7 +301,6 @@ class Challenge18Service():
 		if "origin" in data:
 			origin = data["origin"]
 
-		content = "*Total Points in the group: "
 		total = 0
 		if self.manager is None:
 			print("XXXXXXXXXXX NO MANAGER")
@@ -298,10 +314,12 @@ class Challenge18Service():
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		if "total" in res:
 			total += res["total"]
-			content += str(total)+"*"
-			content += "\n"
+			content = strings[def].format(str(total))
+			# content += str(total)+"*"
+			# content += "\n"
 		else:
 			content = ""
+
 		if not ret and content != "":
 			self.api.send(
 				origin, content, autoPreview=True)
@@ -566,7 +584,9 @@ class Challenge18Service():
 								print()
 								print(d, "AT TIME:::", atTime)
 								sendTxt = str(self.push[challenge["template"]][d][atTime])
-								if "#totalPoints" in sendTxt:
+								if "#totalPointsHeb" in sendTxt:
+									sendTxt = self.sendTotal({"origin":origin, "content":""},ret=True)
+								elif "#totalPoints" in sendTxt:
 									sendTxt = self.sendTotal({"origin":origin, "content":""},ret=True)
 								if noTimes:
 									self.api.send(origin, sendTxt, autoPreview=True)
