@@ -240,7 +240,7 @@ class Challenge18Service():
 		origin, content = None, ""
 		if "origin" in data:
 			origin = data["origin"]
-		]
+		
 		content = "*Total Points in the group: "
 		total = 0
 		res = self.manager.getChallenge({"origin":origin})
