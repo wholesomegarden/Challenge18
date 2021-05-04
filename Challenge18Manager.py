@@ -135,7 +135,7 @@ class Challenge18Manager():
 	debug = False
 	simulation = False
 	commands = {}
-	rolling = {"international":{}, "Hebrew"}
+	rolling = {"international":{}, "Hebrew":{}}
 
 
 	''' start master driver and log in '''
