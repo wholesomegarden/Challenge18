@@ -21,7 +21,7 @@ from pprint import pprint as pp
 
 import C18Tasks
 
-import Challenge18Manager as Challenge18Manager
+# from Challenge18Manager import Challenge18Manager
 
 from urllib.request import urlopen, Request, quote
 
@@ -245,7 +245,7 @@ class Challenge18Service():
 		total = 0
 		if self.manager is None:
 			print("XXXXXXXXXXX NO MANAGER")
-			self.maneger = Challenge18Manager.share
+			# self.manager = self.Challenge18Manager.share
 		res = self.manager.getChallenge({"origin":origin})
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRR")
