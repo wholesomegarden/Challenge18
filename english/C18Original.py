@@ -288,7 +288,7 @@ https://chat.whatsapp.com/LLGHvVQ7Z5oAKJR329CeDt
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 		},
@@ -335,7 +335,7 @@ The main thought for today: *"Who is a rich man? He who shares".*
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -415,7 +415,7 @@ The main thought for today: a healthy mind in a healthy body in a healthy world
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -481,7 +481,7 @@ Everyone wants to be heard and no one is listening. The corona crisis has helped
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -560,7 +560,7 @@ The main thought for today: *"We do not discriminate between people. We do not a
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -630,7 +630,7 @@ The thought for today: *"Today and every day - I give what I want to attract int
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -708,7 +708,7 @@ The main thought for today: *"Today I make great choices because they are made w
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -786,7 +786,7 @@ The main thought for today: *"If you will it, it is no dream; and if you don't, 
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -861,7 +861,7 @@ The main thought for today: *"Focus is a key & Imagination is your wings"*
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -941,7 +941,7 @@ The main thought for today: *"I listen to my inner voice. The answers are inside
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1009,7 +1009,7 @@ The main thought for today: *"I have a dream as I care about my city, my country
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1075,7 +1075,7 @@ The main thought for today: *I stop to think (3) three times before I consume*
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1146,7 +1146,7 @@ The main thought for today: *"The climate crisis is also my challenge"*
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1221,7 +1221,7 @@ The main thought for today is, *“Life is a beautiful, magnificent thing, even 
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1287,7 +1287,7 @@ The main thought for today: *“Man is as the tree in the field - as the tree he
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1376,7 +1376,7 @@ Ting Global
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
@@ -1482,7 +1482,7 @@ The main thought for today: *"If you want to go fast - go alone*
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
-_Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
+_Rasing humanity on a new path - it all starts with us_ 🐋🌸🙏
 		'''
 		,
 
