@@ -135,7 +135,7 @@ class Challenge18Manager():
 	debug = False
 	simulation = False
 	commands = {}
-
+	rolling = {"international":{}, "Hebrew"}
 
 
 	''' start master driver and log in '''
@@ -249,20 +249,61 @@ class Challenge18Manager():
 		# 		needsBackup = False
 
 	def go(self):
+		# while(True):
+
 		# resetLast2000 = False
-		# while "challenges" not in self.db:
-		# 	print("C18 waiting for db")
-		# 	time.sleep(2)
+		while "challenges" not in self.challenge18.db:
+			print("C18 Manager waiting for db")
+			time.sleep(2)
 		# if "last2000" not in self.db or resetLast2000:
 		# 	self.db["last2000"] = 0
 		# 	# self.backup()
 		# 	print("22222222222222222222222222222222222222222222000")
-		# while(True):
-		# 	# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
-		# 	# 	self.db["upcoming"] = {}
-		# 	if "users" not in self.db:
-		# 		self.db["users"] = {}
-		#
+		maxUsers = 200
+		print("ROLLING PUBLIC CHALLENGES")
+		print("ROLLING PUBLIC CHALLENGES")
+		print("ROLLING PUBLIC CHALLENGES")
+		print("ROLLING PUBLIC CHALLENGES")
+		while(True):
+			print("ROLLING PUBLIC CHALLENGES")
+			# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
+			# 	self.db["upcoming"] = {}
+			if "rolling" not in self.challenge18.db:
+				self.challenge18.db["rolling"] = {}
+
+			for roll in self.rolling:
+				if roll not in self.challenge18.db["rolling"]:
+					self.challenge18.db["rolling"][roll] = {"group":None, "discussion":None}
+				r = self.challenge18.db["rolling"][roll]
+				if r["discussion"] is None:
+					pass ''' create new discussion group '''
+				else:
+					try:
+						dparticipants = self.master.driver.group_get_participants_ids(r["discussion"])
+						if len(dparticipants) > maxUsers:
+							r["discussion"]=None
+					except :
+						traceback.print_exc()
+						r["discussion"]=None
+				if r["group"] is None:
+					pass ''' create new group '''
+
+				else:
+					day = -1 ''' check day '''
+					if day >= 0:
+						r["group"]=None
+					else:
+						try:
+							participants = self.master.driver.group_get_participants_ids(r["discussion"])
+							if len(participants) > maxUsers:
+								r["group"]=None
+						except :
+							traceback.print_exc()
+							r["group"]=None
+
+			time.sleep(10)
+
+
 		# 	''' UPDATE CHALLENGE DAYS '''
 		# 	''' SEND DAYLIES '''
 		# 	''' USER engagment '''
@@ -434,7 +475,7 @@ class Challenge18Manager():
 
 	def getChallenge(self,info):
 		return self.challenge18.getChallenge(info)
-		
+
 	def getChallengeX(self,info):
 		res = {}
 		origin, user, content = None, None, None

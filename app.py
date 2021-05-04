@@ -800,13 +800,31 @@ class Master(object):
 					traceback.print_exc()
 			autoReplyMsg = '''
 *We Got Your Message*
-(הודעה אוטמטית מותאמת אישית) ♥️
+ ♥️ (This is an automated message)
+🌴🌴🌴🌴🌴🌴🌴🌴
+Thank you for showing interest in
+🙏🌍 Challenge18 🐋🌸
+
+If you'd like to join the upcoming international training challenge 🌍 please join here: {0}
+🧡❤️💛💚💙💜
+
+If you'd like to register your school or company to a private challenge, you're welcome to reach us here: {1}
+🌎🌍🌏🌷🌹🌺🌸🌼🌻🪴🎍🍀🌱🌿🌴🎋🍃🌳🌵⚽🏃🏃‍♀️👟💡🏐🏀⚾🎾🎱🏓🥍⛹️‍♀️⛹️🏌️‍♀️🏌️🥥
+
 '''
+			aLink, bLink = "google.com", "youtube.com"
+			cDB = Challenge18Service.share.db
+			if "rolling" in cDB and "international" in cDB["rolling"]:
+				groupData = cDB["rolling"]["international"]
+				aLink, bLink = groupData["group"], groupData["discussion"]
+
+			autoReplyMsg = autoReplyMsg.format(aLink, bLink)
 			# backChannel = "972547932000@c.us"
-			backChannel = "972733989898-1615901493@g.us"
+			# backChannel = "972733989898-1615901493@g.us"
+			backChannel = "972547932000-1620161178@g.us"
 
 			if "c" in mChatID and "chat" not in str(mType):
-				self.sendMessage(mSenderID, autoReplyMsg)
+				self.sendMessage(mSenderID, autoReplyMsg, autoPreview=True)
 				isMedia = "video" in str(mType)
 				heading = "{"+str(mType)+"}"
 				if "ptt" in mType.lower() or "audio" in mType.lower():
@@ -847,7 +865,7 @@ class Master(object):
 							self.sendMessage(senderID, "אנא שלחו *שם מלא* ובנוסף *לאיזה חילוץ* אתם רוצים לצאת:")
 						else:
 
-							self.sendMessage(senderID, autoReplyMsg)
+							self.sendMessage(senderID, autoReplyMsg, autoPreview = True)
 							# self.driver.forward_messages(chatID,msgID,isMedia, add = )
 							self.sendMessage(backChannel, mContent+"\n\nלמענה לשולח לחצו כאן:\nwa.me/"+chatID.split("@")[0])
 

@@ -378,6 +378,8 @@ https://www.youtube.com/watch?v=_b0rNa-ts2g
 		,
 		"20:00:13": "image/C18Heb/3.opus"
 		,
+		"20:00:20": "פלאנק-איט ⚽\nhttps://youtu.be/p4cDh0FrrdQ"
+		,
 		"18:00:00":
 		'''
 *נותרו שעתיים להשלמת המשימות היום*

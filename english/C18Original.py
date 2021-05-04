@@ -412,6 +412,8 @@ The main thought for today: a healthy mind in a healthy body in a healthy world
 		,
 		"20:00:13": "image/C18/3.opus"
 		,
+		"20:00:20": "⚽ Planck-It\nhttps://youtu.be/p4cDh0FrrdQ"
+		,
 		"18:00:00":
 		'''
 *Two hours left to complete today's tasks*
