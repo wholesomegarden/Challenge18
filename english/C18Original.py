@@ -212,7 +212,7 @@ We will start with daily practice ... towards a new reality that awaits you, you
 
 			'''
 			,
-			
+
 			"12:00:35": "image/english/0.ogg"
 			,
 		},
@@ -297,6 +297,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		2:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/2.png"
 		,
 		"20:00:05":
@@ -358,6 +361,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 3 '''
 
 		3:{
+
+"19:45:00": "#totalPoints",
+
 
 		"20:00:00": "image/C18/3.png"
 		,
@@ -437,6 +443,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 4 '''
 
 		4:{
+
+"19:45:00": "#totalPoints",
+
 		"20:00:00": "image/C18/4.png"
 		,
 		"20:00:05":
@@ -499,6 +508,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 5 '''
 
 		5:{
+
+"19:45:00": "#totalPoints",
+
 
 		"20:00:00": "image/C18/5.png"
 		,
@@ -576,6 +588,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		6:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/6.png"
 		,
 		"20:00:05":
@@ -642,6 +657,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 7 '''
 
 		7:{
+
+"19:45:00": "#totalPoints",
+
 
 		"20:00:00": "image/C18/7.png"
 		,
@@ -718,6 +736,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		8:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/8.png"
 		,
 		"20:00:05":
@@ -793,6 +814,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		9:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/9.png"
 		,
 		"20:00:05":
@@ -864,6 +888,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 10 '''
 
 		10:{
+
+"19:45:00": "#totalPoints",
+
 
 		"20:00:00": "image/C18/10.png"
 		,
@@ -942,6 +969,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 11 '''
 		11:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/11.png"
 		,
 		"20:00:05":
@@ -1007,6 +1037,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		12:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/12.png"
 		,
 		"20:00:05":
@@ -1069,6 +1102,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 13 '''
 
 		13:{
+
+"19:45:00": "#totalPoints",
+
 		"20:00:00": "image/C18/13.png"
 		,
 		"20:00:05":
@@ -1137,6 +1173,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 14 '''
 
 		14:{
+
+"19:45:00": "#totalPoints",
+
 		"20:00:00": "image/C18/14.png"
 		,
 		"20:00:05":
@@ -1210,6 +1249,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		15:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/15.png"
 		,
 		"20:00:05":
@@ -1272,6 +1314,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 16 '''
 
 		16:{
+
+"19:45:00": "#totalPoints",
+
 
 		"20:00:00": "image/C18/16.png"
 		,
@@ -1358,6 +1403,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 		# ''' DAY 17 '''
 
 		17:{
+
+"19:45:00": "#totalPoints",
+
 		"20:00:00": "image/C18/17.png"
 		,
 		"20:00:05":
@@ -1462,6 +1510,9 @@ _Rasing humanity on a new path - it all starts with you_ 🐋🌸🙏
 
 		18:{
 
+"19:45:00": "#totalPoints",
+
+
 		"20:00:00": "image/C18/18.png"
 		,
 		"20:00:05":
@@ -1526,6 +1577,9 @@ For more information contact me: +972 55-9721123 | ting.go.global@gmail.com
 		# ''' DAY 19 '''
 
 		19:{
+
+"19:45:00": "#totalPoints",
+
 		"10:00:00": "image/C18/19.png"
 		,
 		"10:00:05":

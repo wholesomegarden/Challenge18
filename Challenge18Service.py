@@ -21,6 +21,8 @@ from pprint import pprint as pp
 
 import C18Tasks
 
+# from Challenge18Manager import Challenge18Manager
+
 from urllib.request import urlopen, Request, quote
 
 known = {"morning": "at 08:00", "afternoon": "at 16:00", "evening": "at 18:00",
@@ -150,6 +152,8 @@ class Challenge18Service():
 		# self.emojiValues = Challenge18Service.emojiValues
 		# self.help = Challenge18Service.help
 		self.managePush()
+		self.commands = {"#totalPoints":self.sendTotal}
+		self.manager = None
 
 	def halfday(self, day):
 		return day/.5 % 2 == 1
@@ -208,8 +212,12 @@ class Challenge18Service():
 										"#################### SENDING PUSH TO C18", ch, "DAY", day, "time", up)
 									sent.append(up)
 									# send to user
-									self.api.send(
-										ch, content, autoPreview=True)
+									if self.isCommand(content):
+										tCommand = Thread(target = self.commands[content.split("/")[0]], args = [{"origin":ch, "content":content}])
+										tCommand.start()
+									else:
+										self.api.send(
+											ch, content, autoPreview=True)
 									needsBackup = True
 						except:
 							traceback.print_exc()
@@ -221,6 +229,38 @@ class Challenge18Service():
 			if needsBackup:
 				self.backup()
 				needsBackup = False
+
+	def isCommand(self, content):
+		return content.split("/")[0] in self.commands
+
+	def sendTotal(self, data, ret = False):
+		print("DDDDDDDDDDd")
+		print(data)
+		print("DDDDDDDDDDd")
+		origin, content = None, ""
+		if "origin" in data:
+			origin = data["origin"]
+		]
+		content = "*Total Points in the group: "
+		total = 0
+		res = self.manager.getChallenge({"origin":origin})
+		print("RRRRRRRRRRRRRRRRRRRRR")
+		print("RRRRRRRRRRRRRRRRRRRRR")
+		print(res)
+		print("RRRRRRRRRRRRRRRRRRRRR")
+		print("RRRRRRRRRRRRRRRRRRRRR")
+		if "total" in res:
+			total += res["total"]
+			content += str(total)+"*"
+			content += "\n"
+		else:
+			content = ""
+		if not ret and content != "":
+			self.api.send(
+				origin, content, autoPreview=True)
+		else:
+			return content
+
 
 	def go(self):
 		resetLast2000 = False
@@ -454,35 +494,38 @@ class Challenge18Service():
 					self.simulation = True
 					emptyContent = False
 					noTimes = True
-					allDays = True
+					allDays = False
 
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
 					self.api.send(
 						origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
 					for d in self.push[challenge["template"]]:
-						self.db["challenges"][origin] = self.formatChallenge(
-							day=d, template = self.db["challenges"][origin]["template"])
-						self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
-							self.db["challenges"][origin]) + "\n\n=====================")  # send to user
-						print("_____________________________________")
-						print("_____________________________________")
-						print("_____________________________________")
-						print("DAY ", d)
-						time.sleep(.5)
-						print(self.push[challenge["template"]][d].keys())
-						if d > -2 or allDays:
+						if (d > 2 and d < 4) or allDays:
+							self.db["challenges"][origin] = self.formatChallenge(
+								day=d, template = self.db["challenges"][origin]["template"])
+							self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
+								self.db["challenges"][origin]) + "\n\n=====================")  # send to user
+							print("_____________________________________")
+							print("_____________________________________")
+							print("_____________________________________")
+							print("DAY ", d)
+							time.sleep(.5)
+							print(self.push[challenge["template"]][d].keys())
 							print(str(self.db["challenges"]
 									  [origin]["upcoming"]))
 							for atTime, v in self.db["challenges"][origin]["upcoming"].items():
 								print("_____________________________________")
 								print()
 								print(d, "AT TIME:::", atTime)
+								sendTxt = str(self.push[challenge["template"]][d][atTime])
+								if "#totalPoints" in sendTxt:
+									sendTxt = self.sendTotal({"origin":origin, "content":""],ret=True)
 								if noTimes:
-									self.api.send(origin, str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
+									self.api.send(origin, sendTxt, autoPreview=True)
 								elif not emptyContent:
 									self.api.send(origin, "DAY " + str(d) + " " + atTime +
-												  "\n\n\n" + str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
+												  "\n\n\n" + sendTxt, autoPreview=True)
 								else:
 									self.api.send(
 										origin, "DAY " + str(d) + " " + atTime + "\n", autoPreview=True)

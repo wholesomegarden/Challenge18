@@ -152,7 +152,9 @@ class Challenge18Manager():
 		self.master = master
 
 		self.challenge18 = Challenge18Service.share
-		self.commands = {"hi":self.hello,"yo":self.hello,"list":self.listChallenges}
+		self.challenge18.manager = Challenge18Manager.share
+		self.commands = {"hi":self.hello,"yo":self.hello,"list":self.listChallenges,
+		"create":None, "delete":None,"edit":None,"get":self.getChallenge}
 		# self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
 		Challenge18Manager.examples = self.commands
 
@@ -413,9 +415,62 @@ class Challenge18Manager():
 		print("list challenges!")
 		txt = "*Challenges:*\n\n"
 		for ch in self.challenge18.db["challenges"]:
-			txt +=ch+"\n"
+			txt += ch
+			cData = self.getChallenge({"origin":ch})
+			txt+="\n"
+			if "day" in cData:
+				txt+="day:{0}:".format(cData["day"])
+			if "users" in cData:
+				txt+="users:{0}:".format(len(cData["users"]))
+			if "scores" in cData:
+				txt+="scores:{0}:".format(cData["scores"])
+			if "total" in cData:
+				txt+=":::total:{0}:".format(cData["total"])
+			txt += "\n\n"
+
+
 
 		self.api.send(origin, txt)  # send to user
+
+	def getChallenge(self,info):
+		res = {}
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		# if "user" in info:
+		# 	user = info["user"]
+		# if "content" in info:
+		# 	content = info["content"]
+		res["users"] = {}
+		res["total"] = 0
+		res["scores"] = []
+		res["day"] = None
+		if origin in self.challenge18.db["challenges"]:
+			if "today" in self.challenge18.db["challenges"][origin]:
+				res["day"] = self.challenge18.db["challenges"][origin]["today"]
+		try:
+			print("OOOOOOOOOOOOOOOOOOOOO",info)
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print(":"+origin+":")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			participants = self.master.driver.group_get_participants_ids(origin)
+		except :
+			traceback.print_exc()
+			participants = {}
+		if participants:
+			for user in participants:
+				userData = res["users"][user] = {}
+				if user in self.challenge18.db["users"]:
+					u = self.challenge18.db["users"][user]
+					if "score" in u:
+						res["scores"].append(u["score"])
+						res["total"]+=u["score"]
+					else:
+						res["scores"].append(0)
+
+		return res
 
 
 	def hello(self, info):

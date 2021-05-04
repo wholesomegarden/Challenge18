@@ -1,18 +1,20 @@
-2021/05/04-15:32:28.416 a5c Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/05/04-15:32:28.416 a5c Recovering log #664
-2021/05/04-15:32:28.450 a5c Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000664.log 
-2021/05/04-15:32:43.675 a63 Level-0 table #672: started
-2021/05/04-15:32:43.698 a63 Level-0 table #672: 1212606 bytes OK
-2021/05/04-15:32:43.700 a63 Delete type=0 #664
-2021/05/04-15:32:46.081 a5d Compacting 1@1 + 4@2 files
-2021/05/04-15:32:46.125 a5d Generated table #673@1: 38228 keys, 2238267 bytes
-2021/05/04-15:32:46.157 a5d Generated table #674@1: 27336 keys, 2229180 bytes
-2021/05/04-15:32:46.188 a5d Generated table #675@1: 28342 keys, 2235666 bytes
-2021/05/04-15:32:46.229 a5d Generated table #676@1: 83625 keys, 2319548 bytes
-2021/05/04-15:32:46.230 a5d Compacted 1@1 + 4@2 files => 9022661 bytes
-2021/05/04-15:32:46.232 a5d compacted to: files[ 0 0 4 0 0 0 0 ]
-2021/05/04-15:32:46.232 a5d Delete type=2 #668
-2021/05/04-15:32:46.232 a5d Delete type=2 #669
-2021/05/04-15:32:46.232 a5d Delete type=2 #672
-2021/05/04-15:32:46.232 a5d Delete type=2 #666
-2021/05/04-15:32:46.232 a5d Delete type=2 #667
+2021/05/04-18:39:37.489 486f Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/05/04-18:39:37.489 486f Recovering log #709
+2021/05/04-18:39:37.528 486f Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000709.log 
+2021/05/04-18:39:52.543 483d Level-0 table #718: started
+2021/05/04-18:39:52.563 483d Level-0 table #718: 1257571 bytes OK
+2021/05/04-18:39:52.566 483d Delete type=0 #709
+2021/05/04-18:39:52.874 486f Compacting 1@1 + 5@2 files
+2021/05/04-18:39:52.922 486f Generated table #719@1: 39821 keys, 2250760 bytes
+2021/05/04-18:39:52.954 486f Generated table #720@1: 27894 keys, 2230662 bytes
+2021/05/04-18:39:52.986 486f Generated table #721@1: 27805 keys, 2228947 bytes
+2021/05/04-18:39:53.023 486f Generated table #722@1: 69820 keys, 2248503 bytes
+2021/05/04-18:39:53.048 486f Generated table #723@1: 40534 keys, 1505664 bytes
+2021/05/04-18:39:53.048 486f Compacted 1@1 + 5@2 files => 10464536 bytes
+2021/05/04-18:39:53.049 486f compacted to: files[ 0 0 5 0 0 0 0 ]
+2021/05/04-18:39:53.049 486f Delete type=2 #711
+2021/05/04-18:39:53.049 486f Delete type=2 #712
+2021/05/04-18:39:53.049 486f Delete type=2 #715
+2021/05/04-18:39:53.049 486f Delete type=2 #718
+2021/05/04-18:39:53.049 486f Delete type=2 #714
+2021/05/04-18:39:53.049 486f Delete type=2 #713
