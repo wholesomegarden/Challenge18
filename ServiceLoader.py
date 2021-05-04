@@ -20,7 +20,7 @@ from Challenge18Manager import *
 from threading import Thread
 
 # masterServices = ["Master","Experimental","TofaatTeva"]
-masterServices = ["Master","Manager"]
+masterServices = ["Master","Manager", "Challenge18"]
 
 class ServiceLoader(object):
     def LoadServices(send, backup, genLink, list = ["Master", "Challenge18", "Manager"], master = None):

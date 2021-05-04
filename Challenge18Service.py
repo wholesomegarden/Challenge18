@@ -136,7 +136,7 @@ class Challenge18Service():
 	debug = False
 	simulation = False
 
-	def __init__(self, db, api):
+	def __init__(self, db, api, master):
 		Challenge18Service.share = self
 		self.db = db
 		self.api = api
@@ -155,6 +155,8 @@ class Challenge18Service():
 		self.commands = {"#totalPoints":self.sendTotal}
 		# self.manager = Challenge18Manager.share
 		self.manager = None
+		self.master = master
+
 
 	def halfday(self, day):
 		return day/.5 % 2 == 1
