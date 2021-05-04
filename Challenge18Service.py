@@ -498,7 +498,7 @@ class Challenge18Service():
 					self.simulation = True
 					emptyContent = False
 					noTimes = True
-					allDays = True
+					allDays = False
 
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
