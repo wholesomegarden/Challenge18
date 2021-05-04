@@ -188,6 +188,8 @@ class Challenge18Service():
 		if origin in self.db["challenges"]:
 			if "today" in self.db["challenges"][origin]:
 				res["day"] = self.db["challenges"][origin]["today"]
+			if "template" in self.db["challenges"][origin]:
+				res["template"] = self.db["challenges"][origin]["template"]
 		try:
 			print("OOOOOOOOOOOOOOOOOOOOO",info)
 			print("OOOOOOOOOOOOOOOOOOOOO")
@@ -277,22 +279,35 @@ class Challenge18Service():
 		return content.split("/")[0] in self.commands
 
 	def sendTotalHeb(self, data, ret = False):
-		return self.sendTotal(data,ret=ret, defaultLanguage = "heb")
+		return self.sendTotal(data,ret=ret, defaultLanguage = "hebrew")
 
-	def sendTotal(self, data, ret = False, defaultLanguage = "eng", strings = {
-	"eng":
+	def sendTotal(self, data, ret = False, defaultLanguage = "internetional", strings = {
+	"internetional":
 	'''
 🌴🌴🌴🌴🌴🌴🌴
 *Total Points in the group: {0}*
 🐋🌸🙏
 	'''
 	,
-	"heb":
+	"hebrew":
 	'''
 🌴🌴🌴🌴🌴🌴🌴🌴
 *ניקוד קבוצתי מצטבר: {0}*
 🙏🌍 *אתגר 18* 🐋🌸
+	''',
+	"family":
 	'''
+🌴🌴🌴🌴🌴🌴🌴
+*Total Points in the group: {0}*
+🐋🌸🙏
+	'''
+	,
+	"familyheb":
+	'''
+🌴🌴🌴🌴🌴🌴🌴🌴
+*ניקוד קבוצתי מצטבר: {0}*
+🙏🌍 *אתגר 18* 🐋🌸
+	''',
 	}):
 		print("DDDDDDDDDDd")
 		print(data)
@@ -312,6 +327,9 @@ class Challenge18Service():
 		print(res)
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRR")
+		if "template" in res:
+			defaultLanguage = res["template"].lower()
+			print("RRRRRRRRRRRRRRRRRRRRRoooooooo", "template",defaultLanguage)
 		if "total" in res:
 			total += res["total"]
 			content = strings[defaultLanguage].format(str(total))
