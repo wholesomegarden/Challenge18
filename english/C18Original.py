@@ -1591,6 +1591,19 @@ THANK YOU FOR SUCCESSFULLY FINISHING THE CHALLENGE
 
 
 		},
+		500:{
+
+"20:55:00": "#totalPoints",
+
+		"20:55:05":
+		'''
+THANK YOU FOR SUCCESSFULLY RUNNING YOUR FEATURE BABY :P
+💖 💖 💖
+
+		'''
+
+
+		},
 
 
 }
