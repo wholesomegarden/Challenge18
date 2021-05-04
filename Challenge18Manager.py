@@ -31,7 +31,7 @@ cFormat = {"today": -1, "upcoming": {}}
 
 # class Challenge18Manager(Service):
 
-import Challenge18Manager
+from Challenge18Service import Challenge18Service
 
 '''
 # at 20:00
@@ -109,7 +109,7 @@ def views(url):
 
 class Challenge18Manager():
 	id = "Challenge18Manager"
-	name = "🙏🌍 Challenge18 🐋🌸 "
+	name = "🙏🌍 Challenge18 Manager 🐋🌸 "
 	welcome = "*Welcome to 🙏🌍 Challenge18 🐋🌸* \n*שלחו* הודעה ואנחנו כבר נזכיר לכם :)"
 	help = "Challenge18 help message"
 	shortDescription = "Get your Challenge18 as whatsapp messages!"
@@ -134,6 +134,8 @@ class Challenge18Manager():
 	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew, "Family": C18Tasks.familyEng, "FamilyHeb": C18Tasks.familyHeb}
 	debug = False
 	simulation = False
+	commands = {}
+
 
 
 	''' start master driver and log in '''
@@ -150,7 +152,8 @@ class Challenge18Manager():
 		self.master = master
 
 		self.challenge18 = Challenge18Service.share
-		self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
+		self.commands = {"hi":self.hello,"yo":self.hello,"list":self.listChallenges}
+		# self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
 		Challenge18Manager.examples = self.commands
 
 	#
@@ -186,135 +189,136 @@ class Challenge18Manager():
 		p.start()
 
 	def managePushAsync(self, data):
-		needsBackup = False
-		while "challenges" not in self.db:
-			time.sleep(1)
-		print("##################################")
-		print("##################################")
-		print("##################################")
-		print("MANAGING PUSH FOR C18")
-		lastHour = 60 * 60
-		while(True):
-			simCounter = 0
-			while self.simulation:
-				if simCounter < 10:
-					simCounter += 1
-					time.sleep(0.1)
-					print("SIMULATION")
-				else:
-					time.sleep(1)
-			for ch in self.db["challenges"]:
-				challenge = self.db["challenges"][ch]
-				if "upcoming" not in challenge:
-					challenge["upcoming"] = {}
-				if "template" not in challenge:
-					challenge["template"] = "international"
-				sent = []
-				for up in challenge["upcoming"]:
-					# print("UP",up)
-
-					timeDiff = time.time() - search_dates(up)[0][1].timestamp()
-					passedTime = timeDiff > 0 and timeDiff < lastHour
-					if passedTime:
-						try:
-							day = challenge["today"]
-							# if day in self.push and up in self.push[day]:
-							if day in self.push[challenge["template"]] and up in self.push[challenge["template"]][day]:
-								content = self.push[challenge["template"]][day][up]
-								if content is not None:
-									content = content.replace(
-										"DDD", str(day)).replace("TTT", up)
-									print(
-										"#################### SENDING PUSH TO C18", ch, "DAY", day, "time", up)
-									sent.append(up)
-									# send to user
-									self.api.send(
-										ch, content, autoPreview=True)
-									needsBackup = True
-						except:
-							traceback.print_exc()
-				for up in sent:
-					challenge["upcoming"].pop(up)
-				# challenge["today"] += 1
-
-			time.sleep(5)
-			if needsBackup:
-				self.backup()
-				needsBackup = False
+		pass
+		# needsBackup = False
+		# while "challenges" not in self.db:
+		# 	time.sleep(1)
+		# print("##################################")
+		# print("##################################")
+		# print("##################################")
+		# print("MANAGING PUSH FOR C18")
+		# lastHour = 60 * 60
+		# while(True):
+		# 	simCounter = 0
+		# 	while self.simulation:
+		# 		if simCounter < 10:
+		# 			simCounter += 1
+		# 			time.sleep(0.1)
+		# 			print("SIMULATION")
+		# 		else:
+		# 			time.sleep(1)
+		# 	for ch in self.db["challenges"]:
+		# 		challenge = self.db["challenges"][ch]
+		# 		if "upcoming" not in challenge:
+		# 			challenge["upcoming"] = {}
+		# 		if "template" not in challenge:
+		# 			challenge["template"] = "international"
+		# 		sent = []
+		# 		for up in challenge["upcoming"]:
+		# 			# print("UP",up)
+		#
+		# 			timeDiff = time.time() - search_dates(up)[0][1].timestamp()
+		# 			passedTime = timeDiff > 0 and timeDiff < lastHour
+		# 			if passedTime:
+		# 				try:
+		# 					day = challenge["today"]
+		# 					# if day in self.push and up in self.push[day]:
+		# 					if day in self.push[challenge["template"]] and up in self.push[challenge["template"]][day]:
+		# 						content = self.push[challenge["template"]][day][up]
+		# 						if content is not None:
+		# 							content = content.replace(
+		# 								"DDD", str(day)).replace("TTT", up)
+		# 							print(
+		# 								"#################### SENDING PUSH TO C18", ch, "DAY", day, "time", up)
+		# 							sent.append(up)
+		# 							# send to user
+		# 							self.api.send(
+		# 								ch, content, autoPreview=True)
+		# 							needsBackup = True
+		# 				except:
+		# 					traceback.print_exc()
+		# 		for up in sent:
+		# 			challenge["upcoming"].pop(up)
+		# 		# challenge["today"] += 1
+		#
+		# 	time.sleep(5)
+		# 	if needsBackup:
+		# 		self.backup()
+		# 		needsBackup = False
 
 	def go(self):
-		resetLast2000 = False
-		while "challenges" not in self.db:
-			print("C18 waiting for db")
-			time.sleep(2)
-		if "last2000" not in self.db or resetLast2000:
-			self.db["last2000"] = 0
-			# self.backup()
-			print("22222222222222222222222222222222222222222222000")
-		while(True):
-			# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
-			# 	self.db["upcoming"] = {}
-			if "users" not in self.db:
-				self.db["users"] = {}
-
-			''' UPDATE CHALLENGE DAYS '''
-			''' SEND DAYLIES '''
-			''' USER engagment '''
-
-			''' check time after 20:00 '''
-			dayly = 60 * 60 * 23
-			# dayly = 60*60*13
-			# dayly = 60
-			atTime = "19:30"
-			# passed2000 = time.time() - search_dates("20:00")[0][1].timestamp() > 0
-			# print("C18",time.time(),"\nc18",search_dates(atTime)[0][1].timestamp(),"\n",self.db["last2000"])
-			passed2000 = time.time() - \
-				search_dates(atTime)[0][1].timestamp() > 0
-			try:
-				# print(passed2000, time.time() ,"\n", self.db["last2000"] ,"\n", dayly)
-				if passed2000 and time.time() - self.db["last2000"] > dayly:
-					self.db["last2000"] = time.time()
-
-					for ch in self.db["challenges"]:
-						challenge = self.db["challenges"][ch]
-					# for challenge in self.db["challenges"]:
-
-						# self.db["challenges"][challenge]["today"] += 1
-						self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"])
-
-						# if self.db["challenges"][challenge]["today"] == 0:
-						# 	self.db["challenges"][challenge]["today"] += 1
-						day = self.db["challenges"][ch]["today"]
-						if self.debug:
-							# send to user
-							self.api.send(
-								ch, "CHALLENGE CHANGED TO DAY " + str(day))
-
-						if "template" not in challenge:
-							challenge["template"] = "international"
-						if day in self.push[challenge["template"]]:
-							for tm in self.push[challenge["template"]][day]:
-								self.db["challenges"][ch]["upcoming"][tm] = "_"
-
-						print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
-							  "DAY: ", challenge["today"])
-					self.backup()
-			except:
-				traceback.print_exc()
-			# passed2000 update day += 1
-
-			# while len(self.db["upcoming"]) > 0:
-			# 	key = self.db["upcoming"].pop(0)
-			# 	origin, content = item
-			# for key in list(self.db["upcoming"].keys()):
-			# 	t = self.db["upcoming"][key]
-			# 	if time.time()-t > 0:
-			# 		userID,remID = key.split("_")
-			# 		self.remind(userID, remID)
-
-			#
-			#
-			#
+		# resetLast2000 = False
+		# while "challenges" not in self.db:
+		# 	print("C18 waiting for db")
+		# 	time.sleep(2)
+		# if "last2000" not in self.db or resetLast2000:
+		# 	self.db["last2000"] = 0
+		# 	# self.backup()
+		# 	print("22222222222222222222222222222222222222222222000")
+		# while(True):
+		# 	# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
+		# 	# 	self.db["upcoming"] = {}
+		# 	if "users" not in self.db:
+		# 		self.db["users"] = {}
+		#
+		# 	''' UPDATE CHALLENGE DAYS '''
+		# 	''' SEND DAYLIES '''
+		# 	''' USER engagment '''
+		#
+		# 	''' check time after 20:00 '''
+		# 	dayly = 60 * 60 * 23
+		# 	# dayly = 60*60*13
+		# 	# dayly = 60
+		# 	atTime = "19:30"
+		# 	# passed2000 = time.time() - search_dates("20:00")[0][1].timestamp() > 0
+		# 	# print("C18",time.time(),"\nc18",search_dates(atTime)[0][1].timestamp(),"\n",self.db["last2000"])
+		# 	passed2000 = time.time() - \
+		# 		search_dates(atTime)[0][1].timestamp() > 0
+		# 	try:
+		# 		# print(passed2000, time.time() ,"\n", self.db["last2000"] ,"\n", dayly)
+		# 		if passed2000 and time.time() - self.db["last2000"] > dayly:
+		# 			self.db["last2000"] = time.time()
+		#
+		# 			for ch in self.db["challenges"]:
+		# 				challenge = self.db["challenges"][ch]
+		# 			# for challenge in self.db["challenges"]:
+		#
+		# 				# self.db["challenges"][challenge]["today"] += 1
+		# 				self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"])
+		#
+		# 				# if self.db["challenges"][challenge]["today"] == 0:
+		# 				# 	self.db["challenges"][challenge]["today"] += 1
+		# 				day = self.db["challenges"][ch]["today"]
+		# 				if self.debug:
+		# 					# send to user
+		# 					self.api.send(
+		# 						ch, "CHALLENGE CHANGED TO DAY " + str(day))
+		#
+		# 				if "template" not in challenge:
+		# 					challenge["template"] = "international"
+		# 				if day in self.push[challenge["template"]]:
+		# 					for tm in self.push[challenge["template"]][day]:
+		# 						self.db["challenges"][ch]["upcoming"][tm] = "_"
+		#
+		# 				print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
+		# 					  "DAY: ", challenge["today"])
+		# 			self.backup()
+		# 	except:
+		# 		traceback.print_exc()
+		# 	# passed2000 update day += 1
+		#
+		# 	# while len(self.db["upcoming"]) > 0:
+		# 	# 	key = self.db["upcoming"].pop(0)
+		# 	# 	origin, content = item
+		# 	# for key in list(self.db["upcoming"].keys()):
+		# 	# 	t = self.db["upcoming"][key]
+		# 	# 	if time.time()-t > 0:
+		# 	# 		userID,remID = key.split("_")
+		# 	# 		self.remind(userID, remID)
+		#
+		# 	#
+		# 	#
+		# 	#
 			time.sleep(3)
 
 	def prepUser(self, user, day):
@@ -398,6 +402,33 @@ class Challenge18Manager():
 				self.api.send(user, sendBack)  # send to user
 			# self.api.send(group,sendBack) # send to user
 
+	def listChallenges(self, info):
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		if "user" in info:
+			user = info["user"]
+		if "content" in info:
+			content = info["content"]
+		print("list challenges!")
+		txt = "*Challenges:*\n\n"
+		for ch in self.challenge18.db["challenges"]:
+			txt +=ch+"\n"
+
+		self.api.send(origin, txt)  # send to user
+
+
+	def hello(self, info):
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		if "user" in info:
+			user = info["user"]
+		if "content" in info:
+			content = info["content"]
+		print("HELLO!")
+		self.api.send(origin, "hello!")  # send to user
+
 	def process(self, info):
 		origin, user, content = None, None, None
 		if "origin" in info:
@@ -423,106 +454,110 @@ class Challenge18Manager():
 			self.db["challenges"][origin] = self.formatChallenge()
 			dbChanged = True
 
+		print(self.commands,"CCCCCCCCCCCCCCComands")
+		if content.lower() in self.commands:
+			tCommand = Thread(target = self.commands[content.lower()], args = [info])
+			tCommand.start()
 
-		challenge = self.db["challenges"][origin]
-
-		if "template" not in challenge:
-			challenge["template"] = "international"
-
-		if "day=" in content.lower():
-			for m in self.addMasters:
-				if user.split("@")[0] in m:
-					gotDay = None
-					res = re.findall("[-\d]+", content)
-					if len(res) > 0:
-						try:
-							gotDay = int(res[0])
-						except:
-							traceback.print_exc()
-					if "template" not in self.db["challenges"][origin]:
-						self.db["challenges"][origin]["template"] = "international"
-					self.db["challenges"][origin] = self.formatChallenge(
-						day=gotDay, template = self.db["challenges"][origin]["template"])
-					self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
-					dbChanged = True
-		if "template=" in content.lower() or "tem=" in content.lower():
-			for m in self.addMasters:
-				if user.split("@")[0] in m:
-					gotTemplate = None
-					# res = re.findall("[-\d]+", content)
-					res = content.split("=")[1]
-					if len(res) > 0 and res in self.push:
-						try:
-							self.db["challenges"][origin]["template"] = res
-							self.db["challenges"][origin] = self.formatChallenge(
-								day=self.db["challenges"][origin]["today"], template = self.db["challenges"][origin]["template"])
-							self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
-							dbChanged = True
-						except:
-							traceback.print_exc()
-							self.api.send(origin, "COULD NOT CHANGE TEMPLATE ERROR"+traceback.format_exc())  # send to user
-					else:
-						txt = "COULD NOT CHANGE TEMPLATE to "+res
-						txt+= "\n\nAvailable templates:\n"
-						for k in self.push:
-							txt+=k+"\n"
-						self.api.send(origin, txt)  # send to user
-
-		elif "sim" == content.lower():
-			for m in self.addMasters:
-				if user.split("@")[0] in m:
-					self.simulation = True
-					emptyContent = False
-					noTimes = True
-					allDays = True
-
-					currentDay = self.db["challenges"][origin]["today"]
-					# send to user
-					self.api.send(
-						origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
-					for d in self.push[challenge["template"]]:
-						self.db["challenges"][origin] = self.formatChallenge(
-							day=d, template = self.db["challenges"][origin]["template"])
-						self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
-							self.db["challenges"][origin]) + "\n\n=====================")  # send to user
-						print("_____________________________________")
-						print("_____________________________________")
-						print("_____________________________________")
-						print("DAY ", d)
-						time.sleep(.5)
-						print(self.push[challenge["template"]][d].keys())
-						if d > -2 or allDays:
-							print(str(self.db["challenges"]
-									  [origin]["upcoming"]))
-							for atTime, v in self.db["challenges"][origin]["upcoming"].items():
-								print("_____________________________________")
-								print()
-								print(d, "AT TIME:::", atTime)
-								if noTimes:
-									self.api.send(origin, str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
-								elif not emptyContent:
-									self.api.send(origin, "DAY " + str(d) + " " + atTime +
-												  "\n\n\n" + str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
-								else:
-									self.api.send(
-										origin, "DAY " + str(d) + " " + atTime + "\n", autoPreview=True)
-								time.sleep(.5)
-
-					self.db["challenges"][origin] = self.formatChallenge(
-						day=currentDay)
-					self.api.send(origin, "FIN - SIMULATING - BACK TO DAY " + str(
-						self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))
-					self.simulation = False
-
-		else:
-			thisDay = self.db["challenges"][origin]["today"]
-			if thisDay > 0 and thisDay<9999:
-				self.rate(origin, content, userID)
-				dbChanged = True
-			else:
-				print("DONT RATE BEFORE FIRSTDAY", thisDay)
-		# user = self.db["users"][userID]
-
+		# challenge = self.db["challenges"][origin]
+		#
+		# if "template" not in challenge:
+		# 	challenge["template"] = "international"
+		#
+		# if "day=" in content.lower():
+		# 	for m in self.addMasters:
+		# 		if user.split("@")[0] in m:
+		# 			gotDay = None
+		# 			res = re.findall("[-\d]+", content)
+		# 			if len(res) > 0:
+		# 				try:
+		# 					gotDay = int(res[0])
+		# 				except:
+		# 					traceback.print_exc()
+		# 			if "template" not in self.db["challenges"][origin]:
+		# 				self.db["challenges"][origin]["template"] = "international"
+		# 			self.db["challenges"][origin] = self.formatChallenge(
+		# 				day=gotDay, template = self.db["challenges"][origin]["template"])
+		# 			self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
+		# 			dbChanged = True
+		# if "template=" in content.lower() or "tem=" in content.lower():
+		# 	for m in self.addMasters:
+		# 		if user.split("@")[0] in m:
+		# 			gotTemplate = None
+		# 			# res = re.findall("[-\d]+", content)
+		# 			res = content.split("=")[1]
+		# 			if len(res) > 0 and res in self.push:
+		# 				try:
+		# 					self.db["challenges"][origin]["template"] = res
+		# 					self.db["challenges"][origin] = self.formatChallenge(
+		# 						day=self.db["challenges"][origin]["today"], template = self.db["challenges"][origin]["template"])
+		# 					self.api.send(origin, "CHALLENGE TEMPLATE TO " + self.db["challenges"][origin]["template"])  # send to user
+		# 					dbChanged = True
+		# 				except:
+		# 					traceback.print_exc()
+		# 					self.api.send(origin, "COULD NOT CHANGE TEMPLATE ERROR"+traceback.format_exc())  # send to user
+		# 			else:
+		# 				txt = "COULD NOT CHANGE TEMPLATE to "+res
+		# 				txt+= "\n\nAvailable templates:\n"
+		# 				for k in self.push:
+		# 					txt+=k+"\n"
+		# 				self.api.send(origin, txt)  # send to user
+		#
+		# elif "sim" == content.lower():
+		# 	for m in self.addMasters:
+		# 		if user.split("@")[0] in m:
+		# 			self.simulation = True
+		# 			emptyContent = False
+		# 			noTimes = True
+		# 			allDays = True
+		#
+		# 			currentDay = self.db["challenges"][origin]["today"]
+		# 			# send to user
+		# 			self.api.send(
+		# 				origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
+		# 			for d in self.push[challenge["template"]]:
+		# 				self.db["challenges"][origin] = self.formatChallenge(
+		# 					day=d, template = self.db["challenges"][origin]["template"])
+		# 				self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
+		# 					self.db["challenges"][origin]) + "\n\n=====================")  # send to user
+		# 				print("_____________________________________")
+		# 				print("_____________________________________")
+		# 				print("_____________________________________")
+		# 				print("DAY ", d)
+		# 				time.sleep(.5)
+		# 				print(self.push[challenge["template"]][d].keys())
+		# 				if d > -2 or allDays:
+		# 					print(str(self.db["challenges"]
+		# 							  [origin]["upcoming"]))
+		# 					for atTime, v in self.db["challenges"][origin]["upcoming"].items():
+		# 						print("_____________________________________")
+		# 						print()
+		# 						print(d, "AT TIME:::", atTime)
+		# 						if noTimes:
+		# 							self.api.send(origin, str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
+		# 						elif not emptyContent:
+		# 							self.api.send(origin, "DAY " + str(d) + " " + atTime +
+		# 										  "\n\n\n" + str(self.push[challenge["template"]][d][atTime]), autoPreview=True)
+		# 						else:
+		# 							self.api.send(
+		# 								origin, "DAY " + str(d) + " " + atTime + "\n", autoPreview=True)
+		# 						time.sleep(.5)
+		#
+		# 			self.db["challenges"][origin] = self.formatChallenge(
+		# 				day=currentDay)
+		# 			self.api.send(origin, "FIN - SIMULATING - BACK TO DAY " + str(
+		# 				self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))
+		# 			self.simulation = False
+		#
+		# else:
+		# 	thisDay = self.db["challenges"][origin]["today"]
+		# 	if thisDay > 0 and thisDay<9999:
+		# 		self.rate(origin, content, userID)
+		# 		dbChanged = True
+		# 	else:
+		# 		print("DONT RATE BEFORE FIRSTDAY", thisDay)
+		# # user = self.db["users"][userID]
+		#
 		if dbChanged:
 			self.backup()
 		# self.api.backup(self.db)

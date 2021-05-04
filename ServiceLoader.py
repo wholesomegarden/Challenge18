@@ -13,16 +13,17 @@ from ExperimentalService import *
 # from PistonService import *
 # from StockService import *
 from Challenge18Service import *
+from Challenge18Manager import *
 # from TofaatTevaService import *
 # from ClearVisionService import *
 
 from threading import Thread
 
 # masterServices = ["Master","Experimental","TofaatTeva"]
-masterServices = ["Master",]
+masterServices = ["Master","Manager"]
 
 class ServiceLoader(object):
-    def LoadServices(send, backup, genLink, list = ["Master", "Challenge18"], master = None):
+    def LoadServices(send, backup, genLink, list = ["Master", "Challenge18", "Manager"], master = None):
     # def LoadServices(send, backup, genLink, list = ["Master", "Echo", "Experimental"], master = None):
     # def LoadServices(send, backup, genLink, list = ["Master"], master = None):
         services = {}
@@ -45,6 +46,8 @@ class ServiceLoader(object):
         #     foundServiceClass = ExperimentalService
         if service is "Challenge18":
             foundServiceClass = Challenge18Service
+        if service is "Manager":
+            foundServiceClass = Challenge18Manager
 
         if foundServiceClass is not None:
             api = API(service, send, backup, genLink)
