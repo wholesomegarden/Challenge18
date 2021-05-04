@@ -21,7 +21,7 @@ from pprint import pprint as pp
 
 import C18Tasks
 
-# from Challenge18Manager import Challenge18Manager
+from Challenge18Manager import Challenge18Manager
 
 from urllib.request import urlopen, Request, quote
 
@@ -153,7 +153,7 @@ class Challenge18Service():
 		# self.help = Challenge18Service.help
 		self.managePush()
 		self.commands = {"#totalPoints":self.sendTotal}
-		self.manager = None
+		self.manager = Challenge18Manager.share
 
 	def halfday(self, day):
 		return day/.5 % 2 == 1
@@ -243,6 +243,8 @@ class Challenge18Service():
 
 		content = "*Total Points in the group: "
 		total = 0
+		if self.manager is None:
+
 		res = self.manager.getChallenge({"origin":origin})
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRR")
