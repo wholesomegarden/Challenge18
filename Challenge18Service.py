@@ -248,7 +248,7 @@ class Challenge18Service():
 			# self.manager = self.Challenge18Manager.share
 		res = self.manager.getChallenge({"origin":origin})
 		print("RRRRRRRRRRRRRRRRRRRRR")
-		print("RRRRRRRRRRRRRRRRRRRRR")
+		print("RRRRRRRRRRRRRRRRRRRRRoooooooo")
 		print(res)
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRR")
