@@ -265,7 +265,7 @@ class Challenge18Manager():
 		print("ROLLING PUBLIC CHALLENGES")
 		print("ROLLING PUBLIC CHALLENGES")
 		while(True):
-			print("ROLLING PUBLIC CHALLENGES")
+			# print("ROLLING PUBLIC CHALLENGES")
 			# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
 			# 	self.db["upcoming"] = {}
 			if "rolling" not in self.challenge18.db:

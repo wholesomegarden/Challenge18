@@ -809,7 +809,7 @@ If you'd like to join the upcoming international training challenge 🌍 please 
 🧡❤️💛💚💙💜
 
 If you'd like to register your school or company to a private challenge, you're welcome to reach us here: {1}
-🌎🌍🌏🌷🌹🌺🌸🌼🌻🪴🎍🍀🌱🌿🌴🎋🍃🌳🌵⚽🏃🏃‍♀️👟💡🏐🏀⚾🎾🎱🏓🥍⛹️‍♀️⛹️🏌️‍♀️🏌️🥥
+🌎🌍🌏🌷🌹🌺🌸🌼🌻👣🎍🍀🌱🌿🌴🎋🍃🌳🌵⚽🏃🏃‍♀️👟💡🏐🏀⚾🎾🎱🏓🥍⛹️‍♀️⛹️🏌️‍♀️🏌️🥥
 
 '''
 			aLink, bLink = "google.com", "youtube.com"
