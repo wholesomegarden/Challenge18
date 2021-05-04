@@ -282,7 +282,7 @@ class Challenge18Service():
 		return self.sendTotal(data,ret=ret, defaultLanguage = "hebrew")
 
 	def sendTotal(self, data, ret = False, defaultLanguage = "internetional", strings = {
-	"internetional":
+	"international":
 	'''
 🌴🌴🌴🌴🌴🌴🌴
 *Total Points in the group: {0}*
