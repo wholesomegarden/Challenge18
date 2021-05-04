@@ -10,12 +10,11 @@
 # make sure messages early in the day are sent in the morning (send one by one)
 # send msgs with url as attachments with preview
 
-from hebrew import *
-from english import *
+import C18HEB
+import C18Family
 
 hebrew = C18HEB.HEB
 family = C18Family.Family
-international = C18Original.international
 
 # hebrew = {
 #
