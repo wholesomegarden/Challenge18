@@ -276,7 +276,7 @@ class Challenge18Manager():
 					self.challenge18.db["rolling"][roll] = {"group":None, "discussion":None}
 				r = self.challenge18.db["rolling"][roll]
 				if r["discussion"] is None:
-					pass ''' create new discussion group '''
+					pass #''' create new discussion group '''
 				else:
 					try:
 						dparticipants = self.master.driver.group_get_participants_ids(r["discussion"])
@@ -286,19 +286,23 @@ class Challenge18Manager():
 						traceback.print_exc()
 						r["discussion"]=None
 				if r["group"] is None:
-					pass ''' create new group '''
+					pass #''' create new group '''
 
 				else:
-					day = -1 ''' check day '''
-					if day >= 0:
-						r["group"]=None
-					else:
-						try:
-							participants = self.master.driver.group_get_participants_ids(r["discussion"])
-							if len(participants) > maxUsers:
+					if r["group"] in self.challenge18.db["challenges"]:
+						if "today" in self.challenge18.db["challenges"][r["group"]]:
+							day = self.challenge18.db["challenges"][r["group"]]["today"] #''' check day '''
+							if day >= 0:
 								r["group"]=None
-						except :
-							traceback.print_exc()
+							else:
+								try:
+									participants = self.master.driver.group_get_participants_ids(r["discussion"])
+									if len(participants) > maxUsers:
+										r["group"]=None
+								except :
+									traceback.print_exc()
+									r["group"]=None
+						else:
 							r["group"]=None
 
 			time.sleep(10)
