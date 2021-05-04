@@ -130,7 +130,7 @@ class Challenge18Service():
 				   180: "🕉️"}
 
 	daysToSkip = [4,10,16]
-	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew, "Family": C18Tasks.family}
+	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew, "Family": C18Tasks.familyEng, "FamilyHeb": C18Tasks.familyHeb}
 	debug = False
 	simulation = False
 
