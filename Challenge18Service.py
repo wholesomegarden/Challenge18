@@ -153,7 +153,8 @@ class Challenge18Service():
 		# self.help = Challenge18Service.help
 		self.managePush()
 		self.commands = {"#totalPoints":self.sendTotal}
-		self.manager = Challenge18Manager.share
+		# self.manager = Challenge18Manager.share
+		self.manager = None
 
 	def halfday(self, day):
 		return day/.5 % 2 == 1
@@ -497,7 +498,7 @@ class Challenge18Service():
 					self.simulation = True
 					emptyContent = False
 					noTimes = True
-					allDays = False
+					allDays = True
 
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
