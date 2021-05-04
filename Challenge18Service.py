@@ -277,9 +277,9 @@ class Challenge18Service():
 		return content.split("/")[0] in self.commands
 
 	def sendTotalHeb(self, data, ret = False):
-		self.sendTotal(data,ret=ret,def = "heb")
+		return self.sendTotal(data,ret=ret, defaultLanguage = "heb")
 
-	def sendTotal(self, data, ret = False, def = "eng", strings = {
+	def sendTotal(self, data, ret = False, defaultLanguage = "eng", strings = {
 	"eng":
 	'''
 🌴🌴🌴🌴🌴🌴🌴
@@ -314,7 +314,7 @@ class Challenge18Service():
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		if "total" in res:
 			total += res["total"]
-			content = strings[def].format(str(total))
+			content = strings[defaultLanguage].format(str(total))
 			# content += str(total)+"*"
 			# content += "\n"
 		else:
