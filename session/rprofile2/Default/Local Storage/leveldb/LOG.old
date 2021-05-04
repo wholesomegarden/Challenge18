@@ -1,5 +1,6 @@
-2021/05/04-18:39:37.545 483b Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Default/Local Storage/leveldb/MANIFEST-000001
-2021/05/04-18:39:37.545 483b Recovering log #172
-2021/05/04-18:39:37.545 483b Level-0 table #175: started
-2021/05/04-18:39:37.546 483b Level-0 table #175: 43769 bytes OK
-2021/05/04-18:39:37.547 483b Delete type=0 #172
+2021/05/04-22:19:04.001 285 Reusing MANIFEST /root/Challenge18/session/rprofile2/Default/Local Storage/leveldb/MANIFEST-000001
+2021/05/04-22:19:04.001 285 Recovering log #187
+2021/05/04-22:19:04.004 285 Reusing old log /root/Challenge18/session/rprofile2/Default/Local Storage/leveldb/000187.log 
+2021/05/04-22:21:04.007 28a Level-0 table #191: started
+2021/05/04-22:21:04.010 28a Level-0 table #191: 44098 bytes OK
+2021/05/04-22:21:04.011 28a Delete type=0 #187
