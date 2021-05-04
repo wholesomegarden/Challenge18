@@ -1,3 +1,0 @@
-[0405/195949.087364:INFO:CONSOLE(2)] "Uncaught (in promise) TypeError: Cannot read property 'addQueue' of undefined", source: https://web.whatsapp.com/bootstrap_main.ef6b5ea9cb55cc0c4253.js (2)
-[0408/212026.055474:INFO:CONSOLE(2)] "Uncaught (in promise) TypeError: Cannot read property 'addQueue' of undefined", source: https://web.whatsapp.com/bootstrap_main.ef6b5ea9cb55cc0c4253.js (2)
-[0414/150130.998591:INFO:CONSOLE(2)] "Uncaught (in promise) TypeError: Cannot read property 'addQueue' of undefined", source: https://web.whatsapp.com/bootstrap_main.ef6b5ea9cb55cc0c4253.js (2)
