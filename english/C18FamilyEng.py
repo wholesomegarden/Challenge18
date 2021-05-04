@@ -172,7 +172,7 @@ https://chat.whatsapp.com/JZikTOFwjdXJnGjG8V4GXh
 
 			'''
 			,
-			,
+			
 			"12:00:35": "image/english/0.ogg"
 
 			,

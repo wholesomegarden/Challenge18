@@ -168,7 +168,7 @@ https://chat.whatsapp.com/JZikTOFwjdXJnGjG8V4GXh
 
 			'''
 			,
-			,
+			
 			"12:00:35": "image/hebrew/0.ogg"
 
 			,

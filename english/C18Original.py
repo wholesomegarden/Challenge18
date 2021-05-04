@@ -212,7 +212,7 @@ We will start with daily practice ... towards a new reality that awaits you, you
 
 			'''
 			,
-			,
+			
 			"12:00:35": "image/english/0.ogg"
 			,
 		},
