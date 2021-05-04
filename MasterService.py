@@ -51,6 +51,7 @@ class MasterService(object):
 		self.master = master
 
 		self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
+		MasterService.examples = self.commands
 
 
 	def findElement(self, data):
