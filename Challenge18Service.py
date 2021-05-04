@@ -21,7 +21,7 @@ from pprint import pprint as pp
 
 import C18Tasks
 
-from Challenge18Manager import Challenge18Manager
+from Challenge18Manager as Challenge18Manager
 
 from urllib.request import urlopen, Request, quote
 
