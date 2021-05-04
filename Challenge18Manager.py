@@ -433,6 +433,9 @@ class Challenge18Manager():
 		self.api.send(origin, txt)  # send to user
 
 	def getChallenge(self,info):
+		return self.challenge18.getChallenge(info)
+		
+	def getChallengeX(self,info):
 		res = {}
 		origin, user, content = None, None, None
 		if "origin" in info:

@@ -170,6 +170,46 @@ class Challenge18Service():
 		p = Thread(target=self.managePushAsync, args=[None])
 		p.start()
 
+	def getChallenge(self,info):
+		res = {}
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		# if "user" in info:
+		# 	user = info["user"]
+		# if "content" in info:
+		# 	content = info["content"]
+		res["users"] = {}
+		res["total"] = 0
+		res["scores"] = []
+		res["day"] = None
+		if origin in self.db["challenges"]:
+			if "today" in self.db["challenges"][origin]:
+				res["day"] = self.db["challenges"][origin]["today"]
+		try:
+			print("OOOOOOOOOOOOOOOOOOOOO",info)
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print(":"+origin+":")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			participants = self.master.driver.group_get_participants_ids(origin)
+		except :
+			traceback.print_exc()
+			participants = {}
+		if participants:
+			for user in participants:
+				userData = res["users"][user] = {}
+				if user in self.db["users"]:
+					u = self.db["users"][user]
+					if "score" in u:
+						res["scores"].append(u["score"])
+						res["total"]+=u["score"]
+					else:
+						res["scores"].append(0)
+
+		return res
+
 	def managePushAsync(self, data):
 		needsBackup = False
 		while "challenges" not in self.db:
@@ -247,7 +287,8 @@ class Challenge18Service():
 		if self.manager is None:
 			print("XXXXXXXXXXX NO MANAGER")
 			# self.manager = self.Challenge18Manager.share
-		res = self.manager.getChallenge({"origin":origin})
+		# res = self.manager.getChallenge({"origin":origin})
+		res = self.getChallenge({"origin":origin})
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		print("RRRRRRRRRRRRRRRRRRRRRoooooooo")
 		print(res)
