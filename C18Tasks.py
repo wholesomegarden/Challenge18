@@ -14,7 +14,8 @@ from hebrew import *
 from english import *
 
 hebrew = C18HEB.HEB
-family = C18Family.Family
+familyEng = C18FamilyEng.Family
+familyHeb = C18FamilyHeb.Family
 international = C18Original.international
 
 # hebrew = {
@@ -48,7 +49,7 @@ international = C18Original.international
 # 		19:{},
 # }
 
-international = {
+internationalx = {
 
 			# ''' DAY -5 ''' 5 dayד before the challenge
 		-5:{
