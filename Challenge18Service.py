@@ -240,7 +240,7 @@ class Challenge18Service():
 		origin, content = None, ""
 		if "origin" in data:
 			origin = data["origin"]
-		
+
 		content = "*Total Points in the group: "
 		total = 0
 		res = self.manager.getChallenge({"origin":origin})
@@ -520,7 +520,7 @@ class Challenge18Service():
 								print(d, "AT TIME:::", atTime)
 								sendTxt = str(self.push[challenge["template"]][d][atTime])
 								if "#totalPoints" in sendTxt:
-									sendTxt = self.sendTotal({"origin":origin, "content":""],ret=True)
+									sendTxt = self.sendTotal({"origin":origin, "content":""},ret=True)
 								if noTimes:
 									self.api.send(origin, sendTxt, autoPreview=True)
 								elif not emptyContent:
