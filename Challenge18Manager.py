@@ -150,11 +150,12 @@ class Challenge18Manager():
 		# self.master.services = services
 		# self.master.driver = driver
 		self.master = master
+		self.data = {}
 
 		self.challenge18 = Challenge18Service.share
 		self.challenge18.manager = Challenge18Manager.share
 		self.commands = {"hi":self.hello,"yo":self.hello,"list":self.listChallenges,
-		"create":None, "delete":None,"edit":None,"get":self.getChallenge}
+		"create":None, "delete":self.deleteChallenge, "edit":self.editChallenge,"get":self.getChallengeID}
 		# self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
 		Challenge18Manager.examples = self.commands
 
@@ -464,8 +465,9 @@ class Challenge18Manager():
 			content = info["content"]
 		print("list challenges!")
 		txt = "*Challenges:*\n\n"
+		counter = 1
 		for ch in self.challenge18.db["challenges"]:
-			txt += ch
+			txt += "Challenge *#"+str(counter)+"*\n"+ch
 			cData = self.getChallenge({"origin":ch})
 			txt+="\n"
 			if "day" in cData:
@@ -477,8 +479,89 @@ class Challenge18Manager():
 			if "total" in cData:
 				txt+=":::total:{0}:".format(cData["total"])
 			txt += "\n\n"
+			counter+=1
+
+		self.api.send(origin, txt)  # send to user
 
 
+	def editChallenge(self, info):
+		if "chosen" not in self.data or len(self.data["chosen"]) < 1:
+			self.api.send(info["origin"],"Please first choose a challenge.\nFor example to choose challenge #5 send:\n*get/5*")
+			self.data["chosen"] = {}
+		else:
+			chosen = self.data["chosen"]
+			key = info["content"].split("/")[1]
+			value = info["content"].split("/")[2]
+			if key in self.challenge18.db["challenges"][chosen]:
+				self.api.send(info["origin"],"Set {0} from {2} to {1}".format(key,value, self.challenge18.db["challenges"][chosen][key]))
+			else:
+				self.api.send(info["origin"],"Set {0} to {1}".format(key,value))
+
+			self.challenge18.db["challenges"][chosen][key] = value
+			self.getChallengeID({"origin":info["origin"], "user":info["user"], "content":self.data["chosenID"]})
+			self.challenge18.backup()
+
+	def deleteChallenge(self, info):
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		if "user" in info:
+			user = info["user"]
+		if "content" in info:
+			content = info["content"]
+		print("delete challenges!")
+
+		if "yes" in content.lower():
+			txt = "*Deleting Challenges *#{0}*\n\n".format(content.split("/")[1:])
+
+			chosenChallenges = []
+			counter = 1
+			for ch in self.challenge18.db["challenges"]:
+				if str(counter) in content.split("/")[1:]:
+					chosenChallenges.append(ch)
+				counter+=1
+			for ch in chosenChallenges:
+				chData = self.challenge18.db["challenges"].pop(ch)
+				if "archive" not in self.challenge18.db:
+					self.challenge18.db["archive"] = {}
+				self.challenge18.db["archive"][ch] = chData
+
+			self.challenge18.backup()
+			self.api.send(origin, txt)  # send to user
+
+		else:
+			txt = "".join("*Are you sure you want to delete Challenges #{0} ?*\n\n".format(content.split("/")[1:]).split("\'"))
+			counter = 1
+			for ch in self.challenge18.db["challenges"]:
+				if str(counter) in content.split("/")[1:]:
+					txt += "Challenge #{0}\n".format(counter)
+					txt += str(self.challenge18.db["challenges"][ch]) + "\n"
+					txt += str(self.getChallenge({"origin":ch})) + "\n\n"
+				counter+=1
+			self.api.send(origin, txt)  # send to user
+
+
+	def getChallengeID(self, info):
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		if "user" in info:
+			user = info["user"]
+		if "content" in info:
+			content = info["content"]
+		print("list challenges!")
+		txt = "*Challenge *#{0}\n\n".format(content.split("/")[1])
+		chosenChallenge = {}
+		counter = 1
+		for ch in self.challenge18.db["challenges"]:
+			if str(counter) == content.split("/")[1]:
+				chosenChallenge = self.challenge18.db["challenges"][ch]
+				self.data["chosen"] = ch
+				self.data["chosenID"] = counter
+			counter+=1
+
+		txt += str(chosenChallenge) + "\n"
+		txt += str(self.getChallenge({"origin":ch})) + "\n\n"
 
 		self.api.send(origin, txt)  # send to user
 
@@ -563,8 +646,8 @@ class Challenge18Manager():
 			dbChanged = True
 
 		print(self.commands,"CCCCCCCCCCCCCCComands")
-		if content.lower() in self.commands:
-			tCommand = Thread(target = self.commands[content.lower()], args = [info])
+		if content.split("/")[0].lower() in self.commands:
+			tCommand = Thread(target = self.commands[content.split("/")[0].lower()], args = [info])
 			tCommand.start()
 
 		# challenge = self.db["challenges"][origin]

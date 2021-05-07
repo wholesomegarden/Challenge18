@@ -631,7 +631,7 @@ class Challenge18Service():
 					goRate = True
 					if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
 						firstWord = content.split("\n")[0].split(" ")[0]
-						if "user=" not in firstWord.lower:
+						if "user=" not in firstWord.lower():
 							self.signupUser(userID, origin)
 						else:
 							self.registerUsername(firstWord.split("=")[1], userID)

@@ -870,7 +870,7 @@ If you'd like to register your school or company to a private challenge, you're 
 							firstWord = mContent.split("\n")[0].split(" ")[0].lower()
 							if "user=" in firstWord:
 								username = firstWord.split("=")[1]
-								Challenge18Service.share.registerUsername(username, userID)
+								Challenge18Service.share.registerUsername(username, senderID)
 							else:
 								self.sendMessage(senderID, autoReplyMsg, autoPreview = True)
 
