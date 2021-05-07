@@ -405,7 +405,7 @@ Example: The person who chose the challenge to avoid sweets from the second day 
 		'''
 		Welcome to the third day of the challenge - GOOD HEALTH & WELL BEING
 "Health is a basic human right" (International Health Organization), and a key indicator of sustainable development.
-Women all over the world still lack access to medical care related to sex and fertility; Billions of people are left without access to essential medicines, millions of adults and children will suffer from malnutrition this year, and some estimate that the amount of waste will triple this year. This will have serious health effects. In addition, thousands of new cases of the corona plague continue to happen every day, leading to political and economic instability, threatening the livelihoods of many of the world’s inhabitants. True, the Corona vaccine has not yet been found, development is under way, but think - who do you think will be the first to benefit from it?
+Women all over the world still lack access to medical care related to sex and fertility; Billions of people are left without access to essential medicines, millions of adults and children will suffer from malnutrition this year, and some estimate that the amount of waste will triple this year. This will have serious health effects. 
 What can you do now to become healthier, body, mind and spirit?
 The main thought for today: a healthy mind in a healthy body in a healthy world
 		'''
