@@ -156,6 +156,7 @@ class Challenge18Service():
 		# self.manager = Challenge18Manager.share
 		self.manager = None
 		self.master = master
+		self.exludeNumbers = ["972559721123@c.us","972547932000@c.us"]
 
 
 	def halfday(self, day):
@@ -625,7 +626,22 @@ class Challenge18Service():
 		else:
 			thisDay = self.db["challenges"][origin]["today"]
 			if thisDay > 0 and thisDay<9999:
-				self.rate(origin, content, userID)
+				if userID not in self.exludeNumbers:
+					self.rate(origin, content, userID)
+					if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
+						firstWord = content.split("\n")[0].split(" ")[0]
+						if "user=" not in firstWord:
+							self.signupUser(userID, origin)
+						else:
+							self.registerUsername(firstWord.split("user=")[1], userID)
+				else:
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
+					print("SHARON!!!!!!!!!!!!")
 				dbChanged = True
 			else:
 				print("DONT RATE BEFORE FIRSTDAY", thisDay)
@@ -634,6 +650,26 @@ class Challenge18Service():
 		if dbChanged:
 			self.backup()
 		# self.api.backup(self.db)
+
+	def signupUser(self, userID, challengeGroup):
+		signupMessage = "To show up on the scoreboard please choose a username, and send back:\n\n*user=MyUserName*"
+		self.api.send(userID, signupMessage, autoPreview=True)
+
+	def registerUsername(self, username, userID):
+		res = self.usernameLegal(username, userID)
+		if res[0]:
+			self.db["users"][userID]["username"] = username
+			self.api.backup()
+
+		sendBack = res[1]
+		self.api.send(userID, sendBack, autoPreview=True)
+
+	def usernameLegal(self, username, userID):
+		for user in self.db["users"]:
+			if "username" in user:
+				if user["username"] == username && user != userID:
+					return False, "Oops! This username is already taken,\nplease choose another :)"
+		return True, "Great! your username is now: *{0}*".format(username)
 
 	def backup(self):
 		self.api.backup(self.db)
