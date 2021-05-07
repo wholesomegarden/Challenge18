@@ -105,7 +105,7 @@ JS_ADD_TEXT_TO_INPUT = """
   elm.dispatchEvent(new Event('input', {bubbles: true}));
   elm.dispatchEvent(new Event('keyup', {bubbles: true}));
   """
-
+onServer = True
 
 class WhatsAPIDriver(object):
 	"""
@@ -754,10 +754,12 @@ class WhatsAPIDriver(object):
 				chrome_options = webdriver.ChromeOptions()
 				binPath = "/usr/bin/google-chrome"
 				profileDir = "/session/rprofile2"
-				executable_path = "/root/Challenge18/chromedriver"
-				profileDir = "/root/Challenge18"+profileDir
-				# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
-				# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+				if not onServer:
+					executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+					profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+				else:
+					executable_path = "/root/Challenge18/chromedriver"
+					profileDir = "/root/Challenge18"+profileDir
 				print(binPath, executable_path)
 				print(binPath, executable_path)
 				print(binPath, executable_path)

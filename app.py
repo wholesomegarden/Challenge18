@@ -60,9 +60,10 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-Headless = True
+Headless = False
 noFlask = False
 useDB = True
+onServer = True
 
 
 LASTGROUP = {0:1000}
@@ -218,10 +219,12 @@ class Master(object):
 			profileDir = "/"+"/".join(profileDir.split("/")[2:])
 			chrome_options = webdriver.ChromeOptions()
 			binPath = "/usr/bin/google-chrome"
-			# executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
-			# profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
-			executable_path = "/root/Challenge18/chromedriver"
-			profileDir = "/root/Challenge18"+profileDir
+			if not onServer:
+				executable_path = "/home/magic/wholesomegarden/Challenge18/chromedriver"
+				profileDir = "/home/magic/wholesomegarden/Challenge18"+profileDir
+			else:
+				executable_path = "/root/Challenge18/chromedriver"
+				profileDir = "/root/Challenge18"+profileDir
 
 			print(binPath, executable_path)
 			# input()
@@ -864,8 +867,13 @@ If you'd like to register your school or company to a private challenge, you're 
 						if "אני רוצה לצאת לחילוץ" in mContent:
 							self.sendMessage(senderID, "אנא שלחו *שם מלא* ובנוסף *לאיזה חילוץ* אתם רוצים לצאת:")
 						else:
+							firstWord = mContent.split("\n")[0].split(" ")[0].lower()
+							if "user=" in firstWord:
+								username = firstWord.split("=")[1]
+								Challenge18Service.share.registerUsername(username, userID)
+							else:
+								self.sendMessage(senderID, autoReplyMsg, autoPreview = True)
 
-							self.sendMessage(senderID, autoReplyMsg, autoPreview = True)
 							# self.driver.forward_messages(chatID,msgID,isMedia, add = )
 							self.sendMessage(backChannel, mContent+"\n\nלמענה לשולח לחצו כאן:\nwa.me/"+chatID.split("@")[0])
 

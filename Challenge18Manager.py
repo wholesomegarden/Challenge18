@@ -285,6 +285,9 @@ class Challenge18Manager():
 					except :
 						traceback.print_exc()
 						r["discussion"]=None
+
+
+
 				if r["group"] is None:
 					pass #''' create new group '''
 
@@ -299,9 +302,11 @@ class Challenge18Manager():
 									participants = self.master.driver.group_get_participants_ids(r["discussion"])
 									if len(participants) > maxUsers:
 										r["group"]=None
+										r["discussion"]=None #
 								except :
 									traceback.print_exc()
 									r["group"]=None
+									r["discussion"]=None
 						else:
 							r["group"]=None
 

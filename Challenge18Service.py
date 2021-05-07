@@ -156,7 +156,8 @@ class Challenge18Service():
 		# self.manager = Challenge18Manager.share
 		self.manager = None
 		self.master = master
-		self.exludeNumbers = ["972559721123@c.us","972547932000@c.us"]
+		self.excludeNumbers = ["972559721123@c.us"]
+		# self.excludeNumbers = []
 
 
 	def halfday(self, day):
@@ -626,14 +627,17 @@ class Challenge18Service():
 		else:
 			thisDay = self.db["challenges"][origin]["today"]
 			if thisDay > 0 and thisDay<9999:
-				if userID not in self.exludeNumbers:
-					self.rate(origin, content, userID)
+				if userID not in self.excludeNumbers:
+					goRate = True
 					if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
 						firstWord = content.split("\n")[0].split(" ")[0]
-						if "user=" not in firstWord:
+						if "user=" not in firstWord.lower:
 							self.signupUser(userID, origin)
 						else:
-							self.registerUsername(firstWord.split("user=")[1], userID)
+							self.registerUsername(firstWord.split("=")[1], userID)
+							goRate = False
+					if goRate:
+						self.rate(origin, content, userID)
 				else:
 					print("SHARON!!!!!!!!!!!!")
 					print("SHARON!!!!!!!!!!!!")
@@ -659,7 +663,7 @@ class Challenge18Service():
 		res = self.usernameLegal(username, userID)
 		if res[0]:
 			self.db["users"][userID]["username"] = username
-			self.api.backup()
+			self.backup()
 
 		sendBack = res[1]
 		self.api.send(userID, sendBack, autoPreview=True)
@@ -667,7 +671,7 @@ class Challenge18Service():
 	def usernameLegal(self, username, userID):
 		for user in self.db["users"]:
 			if "username" in user:
-				if user["username"] == username && user != userID:
+				if user["username"] == username and user != userID:
 					return False, "Oops! This username is already taken,\nplease choose another :)"
 		return True, "Great! your username is now: *{0}*".format(username)
 
