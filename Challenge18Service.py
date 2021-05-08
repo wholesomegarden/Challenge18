@@ -626,29 +626,36 @@ class Challenge18Service():
 
 		else:
 			thisDay = self.db["challenges"][origin]["today"]
-			if thisDay > 0 and thisDay<9999:
-				if userID not in self.excludeNumbers:
-					goRate = True
-					if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
-						firstWord = content.split("\n")[0].split(" ")[0]
-						if "user=" not in firstWord.lower():
-							self.signupUser(userID, origin)
-						else:
-							self.registerUsername(firstWord.split("=")[1], userID)
-							goRate = False
-					if goRate:
-						self.rate(origin, content, userID)
-				else:
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-					print("SHARON!!!!!!!!!!!!")
-				dbChanged = True
+			if userID not in self.excludeNumbers:
+				goRate = True
+				if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
+					firstWord = content.split("\n")[0].split(" ")[0]
+					if "user=" not in firstWord.lower():
+						self.signupUser(userID, origin)
+					else:
+						regRes = self.registerUsername(firstWord.split("=")[1], userID)
+						goRate = False
+						if regRes:
+							dbChanged = True
+
+
+				if thisDay < 0 or thisDay>9999:
+					print("DONT RATE BEFORE FIRSTDAY", thisDay)
+					goRate = False
+
+				if goRate:
+					self.rate(origin, content, userID)
+					dbChanged = True
+
 			else:
-				print("DONT RATE BEFORE FIRSTDAY", thisDay)
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+				print("SHARON!!!!!!!!!!!!")
+
 		# user = self.db["users"][userID]
 
 		if dbChanged:
@@ -667,11 +674,14 @@ class Challenge18Service():
 
 		sendBack = res[1]
 		self.api.send(userID, sendBack, autoPreview=True)
+		return res[0]
 
 	def usernameLegal(self, username, userID):
 		for user in self.db["users"]:
-			if "username" in user:
-				if user["username"] == username and user != userID:
+			if "username" in self.db["users"][user]:
+				# print("#####################")
+				# print(user["username"], userID)
+				if self.db["users"][user]["username"] == username and user != userID:
 					return False, "Oops! This username is already taken,\nplease choose another :)"
 		return True, "Great! your username is now: *{0}*".format(username)
 
