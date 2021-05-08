@@ -1,12 +1,14 @@
-2021/05/04-15:04:46.549 6c3c Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 5/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/05/04-15:04:46.549 6c3c Recovering log #641
-2021/05/04-15:04:46.581 6c3c Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 5/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000641.log 
-2021/05/04-15:06:35.470 6c47 Level-0 table #645: started
-2021/05/04-15:06:35.488 6c47 Level-0 table #645: 1348210 bytes OK
-2021/05/04-15:06:35.490 6c47 Delete type=0 #641
-2021/05/04-15:06:41.995 6c47 Compacting 1@1 + 1@2 files
-2021/05/04-15:06:42.022 6c47 Generated table #646@1: 23163 keys, 948325 bytes
-2021/05/04-15:06:42.022 6c47 Compacted 1@1 + 1@2 files => 948325 bytes
-2021/05/04-15:06:42.023 6c47 compacted to: files[ 0 0 1 0 0 0 0 ]
-2021/05/04-15:06:42.023 6c47 Delete type=2 #645
-2021/05/04-15:06:42.023 6c47 Delete type=2 #642
+2021/05/08-17:10:30.269 458 Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 5/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/05/08-17:10:30.269 458 Recovering log #684
+2021/05/08-17:10:30.460 458 Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 5/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000684.log 
+2021/05/08-17:10:50.510 463 Level-0 table #690: started
+2021/05/08-17:10:50.588 463 Level-0 table #690: 1334728 bytes OK
+2021/05/08-17:10:50.596 463 Delete type=0 #684
+2021/05/08-17:10:53.799 458 Compacting 1@1 + 2@2 files
+2021/05/08-17:10:54.025 458 Generated table #691@1: 39232 keys, 2251805 bytes
+2021/05/08-17:10:54.121 458 Generated table #692@1: 35037 keys, 1104175 bytes
+2021/05/08-17:10:54.121 458 Compacted 1@1 + 2@2 files => 3355980 bytes
+2021/05/08-17:10:54.122 458 compacted to: files[ 0 0 2 0 0 0 0 ]
+2021/05/08-17:10:54.123 458 Delete type=2 #686
+2021/05/08-17:10:54.123 458 Delete type=2 #687
+2021/05/08-17:10:54.123 458 Delete type=2 #690

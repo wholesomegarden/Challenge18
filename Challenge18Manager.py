@@ -110,6 +110,8 @@ def views(url):
 class Challenge18Manager():
 	id = "Challenge18Manager"
 	name = "🙏🌍 Challenge18 Manager 🐋🌸 "
+	serviceName = "🙏🌍 Challenge18 🐋🌸 "
+	discussionName = "🙏🌍 Discussion - Challenge18 🐋🌸 "
 	welcome = "*Welcome to 🙏🌍 Challenge18 🐋🌸* \n*שלחו* הודעה ואנחנו כבר נזכיר לכם :)"
 	help = "Challenge18 help message"
 	shortDescription = "Get your Challenge18 as whatsapp messages!"
@@ -136,6 +138,8 @@ class Challenge18Manager():
 	simulation = False
 	commands = {}
 	rolling = {"international":{}, "Hebrew":{}}
+	# rolling = {"international":{}}
+	# rolling = {"Hebrew":{}}
 
 
 	''' start master driver and log in '''
@@ -155,11 +159,11 @@ class Challenge18Manager():
 		self.challenge18 = Challenge18Service.share
 		self.challenge18.manager = Challenge18Manager.share
 		self.commands = {"hi":self.hello,"yo":self.hello,"list":self.listChallenges,
-		"create":None, "delete":self.deleteChallenge, "edit":self.editChallenge,"get":self.getChallengeID}
+		"new":self.newChallenge, "delete":self.deleteChallenge, "edit":self.editChallenge,"get":self.getChallengeID, "rolling":self.checkRolling}
 		# self.commands = {"subscribe":None,"group":self.createGroup,"=":self.subscribeToService,"-":self.unsubscribe, "/":self.findElement, "services":self.showServices}
 		Challenge18Manager.examples = self.commands
 
-	#
+	#newRollingGroup
 	# def __init__(self, db, api):
 	# 	Challenge18Manager.share = self
 	# 	self.db = db
@@ -265,6 +269,15 @@ class Challenge18Manager():
 		print("ROLLING PUBLIC CHALLENGES")
 		print("ROLLING PUBLIC CHALLENGES")
 		print("ROLLING PUBLIC CHALLENGES")
+		newRoll = False
+
+		reset = False
+		# reset = True
+		if reset:
+			for roll in self.rolling:
+				self.challenge18.db["rolling"][roll] = {"group":None, "discussion":None}
+			self.challenge18.backup()
+
 		while(True):
 			# print("ROLLING PUBLIC CHALLENGES")
 			# if "upcoming" not in self.db or "0dict" not in str(type(self.db["upcoming"])):
@@ -276,31 +289,34 @@ class Challenge18Manager():
 				if roll not in self.challenge18.db["rolling"]:
 					self.challenge18.db["rolling"][roll] = {"group":None, "discussion":None}
 				r = self.challenge18.db["rolling"][roll]
-				if r["discussion"] is None:
-					pass #''' create new discussion group '''
-				else:
+
+				if "dict" not in str(type(r["group"])) or "dict" not in str(type(r["discussion"])):
+					r["discussion"]=None
+					r["group"]=None
+
+				if r["discussion"] is not None:
 					try:
-						dparticipants = self.master.driver.group_get_participants_ids(r["discussion"])
+						dparticipants = self.master.driver.group_get_participants_ids(r["discussion"]["id"])
 						if len(dparticipants) > maxUsers:
 							r["discussion"]=None
+							r["group"]=None
 					except :
 						traceback.print_exc()
 						r["discussion"]=None
+						r["group"]=None
 
 
-
-				if r["group"] is None:
-					pass #''' create new group '''
-
-				else:
-					if r["group"] in self.challenge18.db["challenges"]:
-						if "today" in self.challenge18.db["challenges"][r["group"]]:
-							day = self.challenge18.db["challenges"][r["group"]]["today"] #''' check day '''
+				if r["group"] is not None:
+					if r["group"]["id"] in self.challenge18.db["challenges"]:
+						if "today" in self.challenge18.db["challenges"][r["group"]["id"]]:
+							day = self.challenge18.db["challenges"][r["group"]["id"]]["today"] #''' check day '''
 							if day >= 0:
 								r["group"]=None
+								r["discussion"]=None #
 							else:
 								try:
-									participants = self.master.driver.group_get_participants_ids(r["discussion"])
+									participants = self.master.driver.group_get_participants_ids(r["group"]["id"])
+									# print("ROLLING ",roll,len(participants), "Group participants",str(participants))
 									if len(participants) > maxUsers:
 										r["group"]=None
 										r["discussion"]=None #
@@ -310,6 +326,21 @@ class Challenge18Manager():
 									r["discussion"]=None
 						else:
 							r["group"]=None
+
+				if r["group"] is None or r["discussion"] is None:
+					sharon = self.addMasters[1]+"@c.us"
+					try:
+						res = newChallengeGroupID,  inviteChallenge, newDiscussionGroupID, inviteDiscussion, msg = self.newChallenge({"origin":sharon,"user":sharon,"content":"xxx"}, params = {"template":roll})
+						self.challenge18.db["rolling"][roll] = {"group":{"invite":inviteChallenge,"id":newChallengeGroupID}, "discussion":{"invite":inviteDiscussion,"id":newDiscussionGroupID}}
+						self.challenge18.backup()
+
+						# for m in self.addMasters[1:]:
+						for m in self.addMasters:
+							self.master.sendMessage(m+"@c.us",msg+"\n\n"+str(self.challenge18.db["challenges"][newChallengeGroupID]),autoPreview = True)
+						for g in [newChallengeGroupID,  newDiscussionGroupID, ]:
+							self.master.sendMessage(g, msg+"\n\n"+str(self.challenge18.db["challenges"][newChallengeGroupID]),autoPreview = True)
+					except:
+						traceback.print_exc()
 
 			time.sleep(10)
 
@@ -455,6 +486,38 @@ class Challenge18Manager():
 				self.api.send(user, sendBack)  # send to user
 			# self.api.send(group,sendBack) # send to user
 
+	def checkRolling(self, info):
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		if "user" in info:
+			user = info["user"]
+		if "content" in info:
+			content = info["content"]
+		print("list challenges!")
+		txt = "*Rolling Challenges:*\n\n"
+		counter = 1
+		for template in self.challenge18.db["rolling"]:
+			txt += "Template *{0}*\n".format(template)+str(self.challenge18.db["rolling"][template])
+
+			# print("$$$$$$$$$$$$$$$$$$")
+			# print("$$$$$$$$$$$$$$$$$$")
+			# print(self.challenge18.db["rolling"][template], self.challenge18.db["rolling"][template]["id"])
+			# print("$$$$$$$$$$$$$$$$$$")
+			# print("$$$$$$$$$$$$$$$$$$")
+			if "group" in self.challenge18.db["rolling"][template] and "id" in self.challenge18.db["rolling"][template]["group"] and self.challenge18.db["rolling"][template]["group"]["id"] is not None and self.challenge18.db["rolling"][template]["group"]["id"] in self.challenge18.db["challenges"]:
+				# txt += str(self.challenge18.db["challenges"][self.challenge18.db["rolling"][template]["group"]["id"]])+"\n"
+				try:
+					cData = self.getChallenge({"origin":self.challenge18.db["rolling"][template]["group"]["id"]})
+					txt+=str(cData)+"\n"
+				except:
+					traceback.print_exc()
+			txt += "\n\n"
+			counter+=1
+
+		self.api.send(origin, txt, autoPreview = True)  # send to user
+
+
 	def listChallenges(self, info):
 		origin, user, content = None, None, None
 		if "origin" in info:
@@ -482,6 +545,41 @@ class Challenge18Manager():
 			counter+=1
 
 		self.api.send(origin, txt)  # send to user
+
+	def newChallenge(self, info, params = {"template":"international"}):
+		service = "Challenge18"
+		groupName = service
+		# path = self.download_image()
+		path = ""
+		if service in self.master.services and "obj" in self.master.services[service] and self.master.services[service]["obj"] is not None:
+			groupName = self.master.services[service]["obj"].name
+			imageurl = self.master.services[service]["obj"].imageurl
+			if imageurl is not None:
+				path = self.master.download_image(service=service,pic_url=imageurl)
+
+		imagepath = path
+		# data = text, chatID, senderID = data
+		# data = "group/Challenge18", info["origin"], info["user"]
+		data = "group/Challenge18", None, info["user"]
+
+		newChallengeGroupID,  inviteChallenge = self.master.masterService.createGroup(data, service = "Challenge18", emptyNumber = info["user"], removeEmpty = False)
+		newDiscussionGroupID, inviteDiscussion = self.master.driver.newGroup(newGroupName = self.discussionName, number = "+"+info["user"].split("@")[0], image = imagepath, isDB = False)
+		msg = "Created new Challenge group:\n"+self.serviceName+"\n"+inviteChallenge+"\n\n"+"Created assosiated Discussion group:\n"+self.discussionName+"\n"+inviteDiscussion
+		self.api.send(info["origin"],msg, autoPreview = True)
+		# self.api.send(info["origin"],"Created new Challenge group:\n"+self.serviceName+"\n"+inviteChallenge, autoPreview = True)
+		# self.api.send(info["origin"],"Created new Discussion group:\n"+self.discussionName+"\n"+inviteDiscussion, autoPreview = True)
+
+		self.api.send(newDiscussionGroupID,"Challenge group:\n"+self.serviceName+"\n"+inviteChallenge, autoPreview = True)
+		self.api.send(newChallengeGroupID,"Discussion group:\n"+self.discussionName+"\n"+inviteDiscussion, autoPreview = True)
+
+		while newChallengeGroupID not in self.challenge18.db["challenges"]:
+			time.sleep(1)
+			print("New Challenge not in DB yet")
+
+		for key in params:
+			self.challenge18.db["challenges"][newChallengeGroupID][key] = params[key]
+
+		return newChallengeGroupID,  inviteChallenge, newDiscussionGroupID, inviteDiscussion, msg
 
 
 	def editChallenge(self, info):
@@ -550,7 +648,7 @@ class Challenge18Manager():
 		if "content" in info:
 			content = info["content"]
 		print("list challenges!")
-		txt = "*Challenge *#{0}\n\n".format(content.split("/")[1])
+		txt = "*Challenge #{0}*\n\n".format(content.split("/")[1])
 		chosenChallenge = {}
 		counter = 1
 		for ch in self.challenge18.db["challenges"]:

@@ -1,0 +1,2 @@
+[0508/171435.479458:INFO:CONSOLE(1)] "WebSocket connection to 'wss://web.whatsapp.com/ws' failed: Error in connection establishment: net::ERR_INTERNET_DISCONNECTED", source: https://web.whatsapp.com/bootstrap_qr.df9188bb4cd23ee53e79.js (1)
+[0508/171435.544522:INFO:CONSOLE(1)] "WebSocket connection to 'wss://web.whatsapp.com/ws' failed: Error in connection establishment: net::ERR_INTERNET_DISCONNECTED", source: https://web.whatsapp.com/bootstrap_qr.df9188bb4cd23ee53e79.js (1)

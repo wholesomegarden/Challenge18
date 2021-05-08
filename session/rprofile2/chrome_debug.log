@@ -1,3 +1,5 @@
-[28438:28438:0504/150703.339418:ERROR:profile_manager.cc(1618)] Cannot create profile at path /home/magic/wholesomegarden/Challenge18/session/rprofile2//home/magic/wholesomegarden/Challenge18/session/rprofile2rprofile2/Profile 1
-[28438:28438:0504/150703.455726:WARNING:CONSOLE(1701)] "The HTML Imports feature has been removed. See https://www.chromestatus.com/feature/5144752345317376 for more details.", source: chrome://md-user-manager/ (1701)
-[28438:28438:0504/150711.971063:WARNING:pref_notifier_impl.cc(40)] Pref observer for media_router.cast_allow_all_ips found at shutdown.
+[1059:1059:0508/171019.301494:ERROR:profile_manager.cc(1618)] Cannot create profile at path /home/magic/wholesomegarden/Challenge18/session/rprofile2//home/magic/wholesomegarden/Challenge18/session/rprofile2rprofile2/Profile 1
+[1059:1059:0508/171019.768311:WARNING:CONSOLE(1701)] "The HTML Imports feature has been removed. See https://www.chromestatus.com/feature/5144752345317376 for more details.", source: chrome://md-user-manager/ (1701)
+[1059:1059:0508/171029.800826:ERROR:CONSOLE(0)] "The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy.", source: https://web.whatsapp.com/ (0)
+[1107:1107:0508/171029.882987:WARNING:ipc_message_attachment_set.cc(49)] MessageAttachmentSet destroyed with unconsumed attachments: 0/1
+[1059:1059:0508/171030.879102:INFO:CONSOLE(0)] "The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy.", source: https://web.whatsapp.com/ (0)

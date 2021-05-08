@@ -1,22 +1,3 @@
-2021/05/04-22:19:03.853 286 Reusing MANIFEST /root/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/05/04-22:19:03.854 286 Recovering log #765
-2021/05/04-22:19:03.913 286 Reusing old log /root/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000765.log 
-2021/05/04-22:19:29.033 28a Level-0 table #775: started
-2021/05/04-22:19:29.177 28a Level-0 table #775: 1302950 bytes OK
-2021/05/04-22:19:29.180 28a Delete type=0 #765
-2021/05/04-22:19:34.132 28a Compacting 1@1 + 6@2 files
-2021/05/04-22:19:34.240 28a Generated table #776@1: 40813 keys, 2258410 bytes
-2021/05/04-22:19:34.306 28a Generated table #777@1: 30599 keys, 2245896 bytes
-2021/05/04-22:19:34.403 28a Generated table #778@1: 27420 keys, 2228748 bytes
-2021/05/04-22:19:34.520 28a Generated table #779@1: 35382 keys, 2237368 bytes
-2021/05/04-22:19:34.610 28a Generated table #780@1: 97253 keys, 2251480 bytes
-2021/05/04-22:19:34.634 28a Generated table #781@1: 8830 keys, 852240 bytes
-2021/05/04-22:19:34.634 28a Compacted 1@1 + 6@2 files => 12074142 bytes
-2021/05/04-22:19:34.634 28a compacted to: files[ 0 0 6 0 0 0 0 ]
-2021/05/04-22:19:34.635 28a Delete type=2 #771
-2021/05/04-22:19:34.635 28a Delete type=2 #772
-2021/05/04-22:19:34.635 28a Delete type=2 #775
-2021/05/04-22:19:34.635 28a Delete type=2 #768
-2021/05/04-22:19:34.635 28a Delete type=2 #770
-2021/05/04-22:19:34.635 28a Delete type=2 #769
-2021/05/04-22:19:34.635 28a Delete type=2 #767
+2021/05/04-22:41:43.311 285 Reusing MANIFEST /root/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/05/04-22:41:43.311 285 Recovering log #774
+2021/05/04-22:41:43.325 285 Reusing old log /root/Challenge18/session/rprofile2/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000774.log 
