@@ -310,6 +310,7 @@ class Challenge18Manager():
 					if r["group"]["id"] in self.challenge18.db["challenges"]:
 						if "today" in self.challenge18.db["challenges"][r["group"]["id"]]:
 							day = self.challenge18.db["challenges"][r["group"]["id"]]["today"] #''' check day '''
+							# print(roll, "day is", day)
 							if day >= 0:
 								r["group"]=None
 								r["discussion"]=None #
@@ -590,13 +591,21 @@ class Challenge18Manager():
 			chosen = self.data["chosen"]
 			key = info["content"].split("/")[1]
 			value = info["content"].split("/")[2]
+			intValue = None
+			try:
+				intValue = int(value)
+			except:
+				pass
+			if intValue is not None:
+				value = intValue
+
 			if key in self.challenge18.db["challenges"][chosen]:
 				self.api.send(info["origin"],"Set {0} from {2} to {1}".format(key,value, self.challenge18.db["challenges"][chosen][key]))
 			else:
 				self.api.send(info["origin"],"Set {0} to {1}".format(key,value))
 
 			self.challenge18.db["challenges"][chosen][key] = value
-			self.getChallengeID({"origin":info["origin"], "user":info["user"], "content":self.data["chosenID"]})
+			self.getChallengeID({"origin":info["origin"], "user":info["user"], "content":"get/"+str(self.data["chosenID"])})
 			self.challenge18.backup()
 
 	def deleteChallenge(self, info):
