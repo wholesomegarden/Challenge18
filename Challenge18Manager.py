@@ -565,6 +565,8 @@ class Challenge18Manager():
 
 		newChallengeGroupID,  inviteChallenge = self.master.masterService.createGroup(data, service = "Challenge18", emptyNumber = info["user"], removeEmpty = False)
 		newDiscussionGroupID, inviteDiscussion = self.master.driver.newGroup(newGroupName = self.discussionName, number = "+"+info["user"].split("@")[0], image = imagepath, isDB = False)
+		self.master.driver.promote_participant_admin_group(newDiscussionGroupID, info["user"])
+
 		msg = "Created new Challenge group:\n"+self.serviceName+"\n"+inviteChallenge+"\n\n"+"Created assosiated Discussion group:\n"+self.discussionName+"\n"+inviteDiscussion
 		self.api.send(info["origin"],msg, autoPreview = True)
 		# self.api.send(info["origin"],"Created new Challenge group:\n"+self.serviceName+"\n"+inviteChallenge, autoPreview = True)
