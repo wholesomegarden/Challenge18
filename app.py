@@ -60,7 +60,7 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-Headless = False
+Headless = True
 noFlask = False
 useDB = True
 onServer = True
@@ -521,9 +521,10 @@ class Master(object):
 							self.db["availableChats"][service].pop(delChat)
 							goBackup = True
 
-				for service in self.db["availableChats"]:
-					if len(self.db["availableChats"][service]) < minAvailable:
-						self.masterService.createGroup([None,None,None], service = service)
+				if False:
+					for service in self.db["availableChats"]:
+						if len(self.db["availableChats"][service]) < minAvailable:
+							self.masterService.createGroup([None,None,None], service = service)
 
 
 			except Exception as e:
@@ -867,8 +868,8 @@ If you'd like to register your school or company to a private challenge, you're 
 						if "אני רוצה לצאת לחילוץ" in mContent:
 							self.sendMessage(senderID, "אנא שלחו *שם מלא* ובנוסף *לאיזה חילוץ* אתם רוצים לצאת:")
 						else:
-							firstWord = mContent.split("\n")[0].split(" ")[0].lower()
-							if "user=" in firstWord:
+							firstWord = mContent.split("\n")[0].split(" ")[0]
+							if "user=" in firstWord.lower():
 								username = firstWord.split("=")[1]
 								Challenge18Service.share.registerUsername(username, senderID)
 							else:

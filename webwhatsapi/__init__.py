@@ -5,6 +5,8 @@ WebWhatsAPI module
 """
 
 # https://github.com/open-wa/wa-automate-python/blob/master/src/__init__.py
+onServer = True
+# onServer = False
 
 import binascii
 import logging
@@ -50,6 +52,7 @@ from .objects.number_status import NumberStatus
 from .wapi_js_wrapper import WapiJsWrapper
 
 import re
+
 
 TEST = {0:None}
 __version__ = "2.0.3"
@@ -105,7 +108,7 @@ JS_ADD_TEXT_TO_INPUT = """
   elm.dispatchEvent(new Event('input', {bubbles: true}));
   elm.dispatchEvent(new Event('keyup', {bubbles: true}));
   """
-onServer = True
+
 
 class WhatsAPIDriver(object):
 	"""

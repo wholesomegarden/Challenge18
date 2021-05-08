@@ -322,7 +322,7 @@ class MasterService(object):
 			self.master.backup()
 
 	# def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972543610404"):
-	def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972547932000"):
+	def createGroup(self, data, service = "Master", masterGroup = True, emptyNumber ="972547932000", removeEmpty = True):
 		text, chatID, senderID = data
 
 		if text is not None and len(text.split("group")) > 1:
@@ -404,8 +404,9 @@ class MasterService(object):
 				self.master.db["availableChats"][service] = {}
 			# time.sleep(1)
 			# self.master.driver.remove_participant_group(newGroupID,senderID+"@c.us")
-			code = "WAPI.removeParticipantGroup('"+newGroupID+"', '"+senderID+"@c.us"+"')"
-			self.master.driver.driver.execute_script(script=code)
+			if removeEmpty:
+				code = "WAPI.removeParticipantGroup('"+newGroupID+"', '"+senderID+"@c.us"+"')"
+				self.master.driver.driver.execute_script(script=code)
 
 			if obj is not None:
 				imageurl = obj.imageurl
@@ -429,6 +430,7 @@ class MasterService(object):
 
 
 		self.master.backup()
+		return newGroupID, groupInvite 
 
 
 	def runCommands(self, text, chatID, senderID):
