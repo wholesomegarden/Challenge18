@@ -132,7 +132,7 @@ class Challenge18Service():
 				   180: "🕉️"}
 
 	daysToSkip = [4,10,16]
-	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew, "Family": C18Tasks.familyEng, "FamilyHeb": C18Tasks.familyHeb}
+	push = {"international": C18Tasks.international, "Hebrew": C18Tasks.hebrew, "Family": C18Tasks.familyEng, "FamilyHeb": C18Tasks.familyHeb, "SongValuesHeb":C18Tasks.songValuesHeb}
 	debug = False
 	simulation = False
 
@@ -331,6 +331,11 @@ class Challenge18Service():
 		print("RRRRRRRRRRRRRRRRRRRRR")
 		if "template" in res:
 			defaultLanguage = res["template"].lower()
+			if defaultLanguage not in strings:
+				if "heb" in defaultLanguage:
+					defaultLanguage = "hebrew"
+				else:
+					defaultLanguage = "international"
 			print("RRRRRRRRRRRRRRRRRRRRRoooooooo", "template",defaultLanguage)
 		if "total" in res:
 			total += res["total"]
@@ -573,13 +578,15 @@ class Challenge18Service():
 							txt+=k+"\n"
 						self.api.send(origin, txt)  # send to user
 
-		elif "sim" == content.lower():
+		elif "sim" == content.split("/")[0].lower():
 			for m in self.addMasters:
 				if user.split("@")[0] in m:
 					self.simulation = True
 					emptyContent = False
 					noTimes = True
 					allDays = False
+					if "all" in content:
+						allDays = True
 
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user

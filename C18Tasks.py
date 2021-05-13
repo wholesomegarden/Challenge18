@@ -14,11 +14,13 @@ from english import C18FamilyEng
 from english import C18Original
 from hebrew import C18FamilyHeb
 from hebrew import C18HEB
+import C18SongValues
 
 hebrew = C18HEB.HEB
 familyEng = C18FamilyEng.Family
 familyHeb = C18FamilyHeb.Family
 international = C18Original.international
+songValuesHeb = C18SongValues.template
 
 # hebrew = {
 #
