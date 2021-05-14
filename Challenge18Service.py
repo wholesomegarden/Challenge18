@@ -623,11 +623,11 @@ class Challenge18Service():
 					showDay = 3
 					if "all" in content:
 						allDays = True
-					else if len(content.split("/")) > 1:
+					elif len(content.split("/")) > 1:
 						try:
 							simDay = int(content.split("/")[1])
 							showDay = simDay
-							
+
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
 					self.api.send(
