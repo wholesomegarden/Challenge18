@@ -8,7 +8,7 @@ def cleanTask(task, name):
         f = f.replace(k,switch[k]).strip("\n")
 
     return f
-def addTest(template, tests = {"505":{"11:47:00":"image/{0}/18.png"}}, name = "XXXNAMEXXX"):
+def addTest(template, tests = {505:{"11:47:00":"image/{0}/18.png"}}, name = "XXXNAMEXXX"):
     for newDay in tests:
         template[newDay] = {}
         for t in tests[newDay]:
