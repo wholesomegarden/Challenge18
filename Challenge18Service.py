@@ -452,7 +452,7 @@ class Challenge18Service():
 			if day in self.push[challenge["template"]]:
 				for tm in self.push[challenge["template"]][day]:
 					self.db["challenges"][ch]["upcoming"][tm] = "_"
-					print(tm, "_____________________________")
+					print(day, self.push[challenge["template"]][day][tm] , "_____________________________")
 
 			print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
 				  "DAY: ", challenge["today"])
