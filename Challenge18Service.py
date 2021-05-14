@@ -620,15 +620,20 @@ class Challenge18Service():
 					emptyContent = False
 					noTimes = True
 					allDays = False
+					showDay = 3
 					if "all" in content:
 						allDays = True
-
+					else if len(content.split("/")) > 1:
+						try:
+							simDay = int(content.split("/")[1])
+							showDay = simDay
+							
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
 					self.api.send(
 						origin, "SIMULATING ALL DAYS OF THE CHALLENGE !!!!!!! READY? GO!")
 					for d in self.push[challenge["template"]]:
-						if (d > 2 and d < 4) or allDays:
+						if (d > (showDay-1) and d < (showDay+1)) or allDays:
 							self.db["challenges"][origin] = self.formatChallenge(
 								day=d, template = self.db["challenges"][origin]["template"])
 							self.api.send(origin, "=====================\n(Simulation) DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(
