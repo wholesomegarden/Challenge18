@@ -439,7 +439,7 @@ class Challenge18Service():
 			# 	self.db["challenges"][challenge]["today"] += 1
 			day = self.db["challenges"][ch]["today"]
 
-onServer = False
+
 			if "template" not in challenge:
 				challenge["template"] = "international"
 
