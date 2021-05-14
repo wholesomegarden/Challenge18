@@ -443,10 +443,16 @@ class Challenge18Service():
 			if "template" not in challenge:
 				challenge["template"] = "international"
 
+			print("LOADING DAYYYYYYYYYYYYYYYYYYYYYYYYYY")
+			print("LOADING DAYYYYYYYYYYYYYYYYYYYYYYYYYY")
+			print("LOADING DAYYYYYYYYYYYYYYYYYYYYYYYYYY")
+			print("LOADING DAYYYYYYYYYYYYYYYYYYYYYYYYYY")
+			print("LOADING DAYYYYYYYYYYYYYYYYYYYYYYYYYY")
 			self.db["challenges"][ch]["upcoming"] = {}
 			if day in self.push[challenge["template"]]:
 				for tm in self.push[challenge["template"]][day]:
 					self.db["challenges"][ch]["upcoming"][tm] = "_"
+					print(tm, "_____________________________")
 
 			print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
 				  "DAY: ", challenge["today"])
