@@ -627,7 +627,8 @@ class Challenge18Service():
 						try:
 							simDay = int(content.split("/")[1])
 							showDay = simDay
-
+						except :
+							pass
 					currentDay = self.db["challenges"][origin]["today"]
 					# send to user
 					self.api.send(
