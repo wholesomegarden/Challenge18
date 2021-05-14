@@ -445,7 +445,7 @@ class Challenge18Service():
 
 			if "template" not in challenge:
 				challenge["template"] = "international"
-				
+
 			self.db["challenges"][ch]["upcoming"] = {}
 			if day in self.push[challenge["template"]]:
 				for tm in self.push[challenge["template"]][day]:
@@ -580,6 +580,7 @@ class Challenge18Service():
 						self.db["challenges"][origin]["template"] = "international"
 					self.db["challenges"][origin] = self.formatChallenge(
 						day=gotDay, template = self.db["challenges"][origin]["template"])
+					# self.loadDay(origin)
 					self.api.send(origin, "CHALLENGE CHANGED TO DAY " + str(self.db["challenges"][origin]["today"]) + "\n" + str(self.db["challenges"][origin]))  # send to user
 					dbChanged = True
 		if "template=" in content.lower() or "tem=" in content.lower():

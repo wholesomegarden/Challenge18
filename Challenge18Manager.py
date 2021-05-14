@@ -673,7 +673,7 @@ class Challenge18Manager():
 			counter+=1
 
 		txt += str(chosenChallenge) + "\n"
-		txt += str(self.getChallenge({"origin":ch})) + "\n\n"
+		txt += str(self.getChallenge({"origin":self.data["chosen"]})) + "\n\n"
 
 		self.api.send(origin, txt)  # send to user
 
