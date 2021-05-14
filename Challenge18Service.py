@@ -438,10 +438,7 @@ class Challenge18Service():
 			# if self.db["challenges"][challenge]["today"] == 0:
 			# 	self.db["challenges"][challenge]["today"] += 1
 			day = self.db["challenges"][ch]["today"]
-			if origin:
-				# send to user
-				self.api.send(
-					origin, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+str(self.db["challenges"][ch]))
+
 onServer = False
 			if "template" not in challenge:
 				challenge["template"] = "international"
@@ -453,6 +450,10 @@ onServer = False
 
 			print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
 				  "DAY: ", challenge["today"])
+			if origin:
+				# send to user
+				self.api.send(
+					origin, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+str(self.db["challenges"][ch]))
 
 	def prepUser(self, user, day):
 		if "days" not in self.db["users"][user]:
