@@ -398,7 +398,7 @@ class Challenge18Service():
 						if self.debug:
 							# send to user
 							self.api.send(
-								ch, "CHALLENGE CHANGED TO DAY " + str(day))
+								ch, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+self.db["challenges"][ch])
 
 						if "template" not in challenge:
 							challenge["template"] = "international"
@@ -426,6 +426,33 @@ class Challenge18Service():
 			#
 			#
 			time.sleep(3)
+
+	def loadDay(self, ch, origin = None):
+		if ch in self.db["challenges"]:
+			challenge = self.db["challenges"][ch]
+		# for challenge in self.db["challenges"]:
+
+			# self.db["challenges"][challenge]["today"] += 1
+			# self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"])
+
+			# if self.db["challenges"][challenge]["today"] == 0:
+			# 	self.db["challenges"][challenge]["today"] += 1
+			day = self.db["challenges"][ch]["today"]
+			if origin:
+				# send to user
+				self.api.send(
+					origin, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+self.db["challenges"][ch])
+
+			if "template" not in challenge:
+				challenge["template"] = "international"
+				
+			self.db["challenges"][ch]["upcoming"] = {}
+			if day in self.push[challenge["template"]]:
+				for tm in self.push[challenge["template"]][day]:
+					self.db["challenges"][ch]["upcoming"][tm] = "_"
+
+			print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", ch,
+				  "DAY: ", challenge["today"])
 
 	def prepUser(self, user, day):
 		if "days" not in self.db["users"][user]:

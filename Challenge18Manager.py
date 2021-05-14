@@ -592,7 +592,7 @@ class Challenge18Manager():
 		else:
 			chosen = self.data["chosen"]
 			key = info["content"].split("/")[1]
-			value = info["content"].split("/")[2]
+			value = info["coeditChallengentent"].split("/")[2]
 			intValue = None
 			try:
 				intValue = int(value)
@@ -607,6 +607,9 @@ class Challenge18Manager():
 				self.api.send(info["origin"],"Set {0} to {1}".format(key,value))
 
 			self.challenge18.db["challenges"][chosen][key] = value
+			if "day" in key:
+				self.challenge18.loadDay(chosen, origin = info["origin"])
+				self.api.send(info["origin"],"LOADING TASKS",)
 			self.getChallengeID({"origin":info["origin"], "user":info["user"], "content":"get/"+str(self.data["chosenID"])})
 			self.challenge18.backup()
 
