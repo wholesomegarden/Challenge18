@@ -592,7 +592,7 @@ class Challenge18Manager():
 		else:
 			chosen = self.data["chosen"]
 			key = info["content"].split("/")[1]
-			value = info["coeditChallengentent"].split("/")[2]
+			value = info["content"].split("/")[2]
 			intValue = None
 			try:
 				intValue = int(value)
