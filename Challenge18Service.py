@@ -441,8 +441,8 @@ class Challenge18Service():
 			if origin:
 				# send to user
 				self.api.send(
-					origin, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+self.db["challenges"][ch])
-
+					origin, "CHALLENGE CHANGED TO DAY " + str(day)+"\n"+str(self.db["challenges"][ch]))
+onServer = False
 			if "template" not in challenge:
 				challenge["template"] = "international"
 
