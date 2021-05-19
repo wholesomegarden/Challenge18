@@ -547,6 +547,17 @@ class Challenge18Manager():
 
 		self.api.send(origin, txt)  # send to user
 
+	def getName(self, id):
+		return id
+
+	def getPublicChallenges(self):
+		returnDB = {}
+		for ch in self.challenge18.db["challenges"]:
+			name = self.getName(ch)
+			returnDB[name] =  self.getChallengeScore({"origin":ch})
+
+		return returnDB
+
 	def newChallenge(self, info, params = {"template":"international"}):
 		service = "Challenge18"
 		groupName = service
@@ -679,6 +690,10 @@ class Challenge18Manager():
 
 	def getChallenge(self,info):
 		return self.challenge18.getChallenge(info)
+
+	def getChallengeScore(self, info):
+		return self.challenge18.getChallengeScore(info)
+
 
 	def getChallengeX(self,info):
 		res = {}

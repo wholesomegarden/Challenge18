@@ -54,3 +54,9 @@ ShazamAPI==0.0.2
 pydub==0.24.1
 SpeechRecognition==3.8.1
 opencv-python==4.2.0.32
+websocket_client==0.57.0
+pyopenssl==20.0.1
+pyttsx3==2.90
+gTTS==2.2.2
+playsound==1.2.2
+flask-socketio==5.0.3

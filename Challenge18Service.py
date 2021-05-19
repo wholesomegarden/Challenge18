@@ -152,7 +152,7 @@ class Challenge18Service():
 		# self.emojiValues = Challenge18Service.emojiValues
 		# self.help = Challenge18Service.help
 		self.managePush()
-		self.commands = {"#totalPoints":self.sendTotal,"#totalPointsHeb":self.sendTotalHeb}
+		self.commands = {"#totalPoints":self.sendTotal,"#totalPointsHeb":self.sendTotalHeb, "#public":self.sendPublic}
 		# self.manager = Challenge18Manager.share
 		self.manager = None
 		self.master = master
@@ -213,6 +213,50 @@ class Challenge18Service():
 						res["total"]+=u["score"]
 					else:
 						res["scores"].append(0)
+
+		return res
+
+	def getChallengeScore(self,info):
+		res = {}
+		origin, user, content = None, None, None
+		if "origin" in info:
+			origin = info["origin"]
+		# if "user" in info:
+		# 	user = info["user"]
+		# if "content" in info:
+		# 	content = info["content"]
+		res["users"] = {}
+		res["total"] = 0
+		# res["scores"] = []
+		res["day"] = None
+		if origin in self.db["challenges"]:
+			if "today" in self.db["challenges"][origin]:
+				res["day"] = self.db["challenges"][origin]["today"]
+			if "template" in self.db["challenges"][origin]:
+				res["template"] = self.db["challenges"][origin]["template"]
+		try:
+			print("OOOOOOOOOOOOOOOOOOOOO",info)
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print(":"+origin+":")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			print("OOOOOOOOOOOOOOOOOOOOO")
+			participants = self.master.driver.group_get_participants_ids(origin)
+		except :
+			traceback.print_exc()
+			participants = {}
+		if participants:
+			for user in participants:
+				# userData = res["users"][user] = {}
+				if user in self.db["users"]:
+					u = self.db["users"][user]
+					if "username" in u:
+						res["users"][u["username"]] = u["score"]
+						if "score" in u:
+							# res["scores"].append(u["score"])
+							res["total"]+=u["score"]
+					# else:
+						# res["scores"].append(0)
 
 		return res
 
@@ -282,6 +326,17 @@ class Challenge18Service():
 
 	def sendTotalHeb(self, data, ret = False):
 		return self.sendTotal(data,ret=ret, defaultLanguage = "hebrew")
+
+	def sendPublic(self, data, ret = False, defaultLanguage = "internetional", strings = {"default": "{0}"}):
+		origin, content = None, ""
+		if "origin" in data:
+			origin = data["origin"]
+			res = self.getChallengeScore(data)
+			if res is not None:
+				self.api.send(
+					origin, strings["default"].format(res), autoPreview=True)
+
+
 
 	def sendTotal(self, data, ret = False, defaultLanguage = "internetional", strings = {
 	"international":
@@ -675,16 +730,25 @@ class Challenge18Service():
 		else:
 			thisDay = self.db["challenges"][origin]["today"]
 			if userID not in self.excludeNumbers:
-				goRate = True
-				if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
-					firstWord = content.split("\n")[0].split(" ")[0]
-					if "user=" not in firstWord.lower():
-						self.signupUser(userID, origin)
-					else:
-						regRes = self.registerUsername(firstWord.split("=")[1], userID)
-						goRate = False
-						if regRes:
-							dbChanged = True
+				firstWord = content.split("\n")[0].split(" ")[0]
+				if firstWord not in self.commands:
+					goRate = True
+					if "username" not in self.db["users"][userID] or self.db["users"][userID]["username"] is None:
+						if "user=" not in firstWord.lower():
+							self.signupUser(userID, origin)
+						else:
+							regRes = self.registerUsername(firstWord.split("=")[1], userID)
+							goRate = False
+							if regRes:
+								dbChanged = True
+				else:
+					tCommand = Thread(target = self.commands[content.split("/")[0]], args = [{"origin":origin, "content":content}])
+					tCommand.start()
+					goRate = False
+					dbChanged = False
+
+
+
 
 
 				if thisDay < 0 or thisDay>9999:

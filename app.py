@@ -60,10 +60,11 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-Headless = True
+# Headless = True
 noFlask = False
 useDB = True
 onServer = True
+onServer = False
 
 
 LASTGROUP = {0:1000}
@@ -1643,6 +1644,41 @@ from flask import Flask, render_template, redirect, request, jsonify
 
 
 app = Flask(__name__,template_folder='templates')
+from flask_socketio import SocketIO, send, emit
+
+socketio = SocketIO(app, cors_allowed_origins='*')
+
+@socketio.on('connect')
+def test_connect():
+	print("CLIENT CONNECTED!!!!!!!!!")
+	print()
+	print("CLIENT CONNECTED!!!!!!!!!")
+	print()
+	print("CLIENT CONNECTED!!!!!!!!!")
+	print()
+	print("CLIENT CONNECTED!!!!!!!!!")
+	print()
+	print("CLIENT CONNECTED!!!!!!!!!")
+	print()
+	emit("updateCounter",{"newCount":"AWSOME NEW DATA"})
+	updateEverything(socketio)
+	# return "YOOOOOOOOOO"
+
+@app.route('/sync',methods=["GET","POST"])
+def sync():
+	updateEverything(socketio)
+	print("HHHHHHHIIIIIIIIII")
+	return "DONE"
+
+def updateEverything(s):
+	s.emit("updateCounter",{"newCount":"AWSOME NEW DATA"})
+	if Challenge18Manager.share is not None:
+		s.emit("allBoards",{"challenges":Challenge18Manager.share.getPublicChallenges()})
+		s.emit("updateCounter",{"newCount":Challenge18Manager.share.getPublicChallenges()})
+	# emit('updateCounter', {"newCount":"OMER IS AWESOME"})
+	# s.emit("updateCounter",{"newCount":"AWSOME NEW DATA"})
+
+
 
 qrfolder = os.path.join('static', 'img')
 app.config['QR_FOLDER'] = qrfolder
@@ -1650,6 +1686,23 @@ app.config['QR_FOLDER'] = qrfolder
 ''' setting referals '''
 refs = {"yo":"https://api.WhatsApp.com/send?phone=+972512170493"}
 refs["yoo"] = "https://web.WhatsApp.com/send?phone=+972512170493"
+
+encodedZero = "ּ"
+encodedOne = "֫"
+# def encodeMessage(msg, zero = "o", one = "x"):
+def encodeMessage(msg, zero = "%D6%BC", one = "%D6%AB"):
+	encoded = bin(int.from_bytes(msg.encode(), 'big'))
+	encoded = encoded[2:].replace("0",zero).replace("1",one)
+	print(encoded)
+	return encoded
+
+
+# def decodeMessage(msg, zero = "o", one = "x"):
+def decodeMessage(msg, zero = "%D6%BC", one = "%D6%AB"):
+	n = int("0b"+msg.replace(zero,"0").replace(one,"1"), 2)
+	decoded = n.to_bytes((n.bit_length() + 7) // 8, 'big').decode()
+	decoded = decoded
+	return decoded
 
 @app.route('/')
 def hello_world():
@@ -1881,6 +1934,7 @@ if __name__ == '__main__':
 		print("RUNNING PORT", MYPORT)
 		if runLocal :
 			pass
+			socketio.run(app, host='0.0.0.0', port = MYPORT)
 			app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 else:
@@ -1895,6 +1949,7 @@ else:
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
+			socketio.run(app, host='0.0.0.0', port = MYPORT)
 			app.run(debug=True, host='0.0.0.0',use_reloader=False, port = MYPORT)
 		# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 	print("STARTING APP22222222222")
