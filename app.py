@@ -60,11 +60,11 @@ production = False
 
 Headless = not runLocal
 noFlask = runLocal
-# Headless = True
+Headless = True
 noFlask = False
 useDB = True
 onServer = True
-onServer = False
+# onServer = False
 
 
 LASTGROUP = {0:1000}
