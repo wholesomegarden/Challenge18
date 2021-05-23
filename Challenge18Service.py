@@ -163,10 +163,14 @@ class Challenge18Service():
 	def halfday(self, day):
 		return day/.5 % 2 == 1
 
-	def updateDay(self, current):
-		if current in self.daysToSkip :
-			return current + .5
-		elif self.halfday(current):
+	def updateDay(self, current, ch = None):
+		if ch is not None and ch in self.db["challenges"]:
+			challenge = self.db["challenges"][ch]
+			if "skipShabbat" in challenge and str(challenge["skipShabbat"]).lower() in ["true","1"]: #Edit/skipShabbat/true
+				if current in self.daysToSkip :
+					return current + .5 # SKIPS SHABBAT
+
+		if self.halfday(current):
 			return int(current + .5)
 		return int(current + 1)
 
@@ -445,7 +449,7 @@ class Challenge18Service():
 					# for challenge in self.db["challenges"]:
 
 						# self.db["challenges"][challenge]["today"] += 1
-						self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"])
+						self.db["challenges"][ch]["today"] = self.updateDay(self.db["challenges"][ch]["today"], ch = ch)
 
 						# if self.db["challenges"][challenge]["today"] == 0:
 						# 	self.db["challenges"][challenge]["today"] += 1

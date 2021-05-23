@@ -183,13 +183,9 @@ class Challenge18Manager():
 
 	def halfday(self, day):
 		return day/.5 % 2 == 1
-
-	def updateDay(self, current):
-		if current in self.daysToSkip :
-			return current + .5
-		elif self.halfday(current):
-			return int(current + .5)
-		return int(current + 1)
+	#
+	# def updateDay(self, current):
+	# 	return self.challenge18.updateDay(current)
 
 	def managePush(self):
 		p = Thread(target=self.managePushAsync, args=[None])
