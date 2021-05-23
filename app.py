@@ -1661,7 +1661,7 @@ def test_connect():
 	print("CLIENT CONNECTED!!!!!!!!!")
 	print()
 	emit("updateCounter",{"newCount":"AWSOME NEW DATA"})
-	emit("allBoards",{"challenges":{"Loading":{},"Loading ":{},})
+	emit("allBoards",{"challenges":{"Loading":{},"Loading ":{},}})
 	updateEverything(socketio)
 	# return "YOOOOOOOOOO"
 
