@@ -1,3 +1,3 @@
-2021/05/08-17:06:06.388 145 Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/System Profile/Sync Data/LevelDB/MANIFEST-000001
-2021/05/08-17:06:06.389 145 Recovering log #3
-2021/05/08-17:06:06.389 145 Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/System Profile/Sync Data/LevelDB/000003.log 
+2021/05/24-23:04:07.796 3db0 Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/System Profile/Sync Data/LevelDB/MANIFEST-000001
+2021/05/24-23:04:07.796 3db0 Recovering log #3
+2021/05/24-23:04:07.796 3db0 Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/System Profile/Sync Data/LevelDB/000003.log 

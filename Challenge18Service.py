@@ -272,7 +272,7 @@ class Challenge18Service():
 		print("##################################")
 		print("##################################")
 		print("MANAGING PUSH FOR C18")
-		lastHour = 60 * 60
+		lastHour = 60 * 60 
 		while(True):
 			simCounter = 0
 			while self.simulation:

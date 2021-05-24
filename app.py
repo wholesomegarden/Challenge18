@@ -109,11 +109,13 @@ class Master(object):
 	# db = {'masters': ['972512170493', '972547932000'], 'system': ['972512170493', '972543610404'], 'users': {}, 'groups': {}, 'id': '972547932000-1610379075@g.us'}
 	# mynumber = '972512170493'
 	# mynumber = '972584422646'
-	mynumber = '972559468468'
+	# mynumber = '972559468468'
+	mynumber = '972515211576'
 	operator = '972547932000'
 	emptyNumber = '972543610404'
 	# db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}}
-	db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}, 'id': '972559468468-1616398365@g.us'}
+	# db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}, 'id': '972559468468-1616398365@g.us'}
+	db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}, 'id': '972515211576-1621884340@g.us'}
 	# db = {'masters': [mynumber, operator], 'system': [mynumber, emptyNumber], 'users': {}, 'groups': {}}
 
 	 # 'lastBackup': 1611071801.4876792, 'init': 1611071653.7335632, 'backupInterval': 0, 'backupDelay': 3, 'lastBackupServices': 0, 'servicesDB': {'Echo': {'dbID': '972512170493-1610802351@g.us'}, 'Danilator': {'dbID': '972512170493-1610802360@g.us'}, 'Reminders': {'dbID': '972512170493-1610802365@g.us'}, 'Music': {'dbID': '972512170493-1610802370@g.us'}, 'Master': {'dbID': '972512170493-1610965551@g.us'}, 'Experimental': {'dbID': '972512170493-1611059017@g.us'}}, 'availableChats': {'Master': {'972512170493-1611068831@g.us': 'https://chat.whatsapp.com/GhTABLFn3Aq18MI89MFBU8', '972512170493-1611071667@g.us': 'https://chat.whatsapp.com/LGABshra2Wd8rpZ8AduhuX'}, 'Music': {'972512170493-1611071128@g.us': 'https://chat.whatsapp.com/G3VQkKSrsuZJ3OiRz3Iof9', '972512170493-1611071137@g.us': 'https://chat.whatsapp.com/JN4juvGVYbbLVOoehExtTY'}, 'Experimental': {'972512170493-1611059125@g.us': 'https://chat.whatsapp.com/GIUwJiF3iCg1vioSHkkkQ8', '972512170493-1611059200@g.us': 'https://chat.whatsapp.com/IZXOC41bg112sKwE5UcoQO'}}}
@@ -315,6 +317,8 @@ class Master(object):
 			# driver.updateDB(self.db,number=self.db["id"])
 			if useDB:
 				lastDB = self.loadDB()
+				if "id" not in self.db:
+					self.db["id"] = Master.db["id"]
 				self.db = lastDB
 				self.db["init"] = time.time()
 				self.db["backupInterval"] = 10*60
@@ -1590,6 +1594,8 @@ If you'd like to register your school or company to a private challenge, you're 
 					self.activity = False
 					self.backupNow = False
 					self.db["lastBackup"] = time.time()
+					print("XXXXXXXXXXXXXXXXXXX")
+					print(self.db)
 					self.driver.updateDB(self.db,number=self.db["id"])
 
 

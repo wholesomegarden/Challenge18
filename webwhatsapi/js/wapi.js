@@ -26,6 +26,7 @@ if (!window.Store) {
 								{ id: "WapQuery", conditions: (module) => (module.queryExist) ? module : ((module.default && module.default.queryExist) ? module.default : null) },
 								{ id: "CryptoLib", conditions: (module) => (module.decryptE2EMedia) ? module : null },
 								{ id: "GroupInvite", conditions: (module) => (module.queryGroupInviteCode) ? module : null},
+								{ id: "GroupInvite", conditions: (module) => (module.sendQueryGroupInviteCode) ? module : null},
 								{ id: "OpenChat", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.openChat) ? module.default : null },
 								{ id: "UserConstructor", conditions: (module) => (module.default && module.default.prototype && module.default.prototype.isServer && module.default.prototype.isUser) ? module.default : null },
 								{ id: "SendTextMsgToChat", conditions: (module) => (module.sendTextMsgToChat) ? module.sendTextMsgToChat : null },
@@ -803,6 +804,20 @@ window.WAPI.getMetadata0 = async function (id, done) {
 };
 
 window.WAPI.getMetadata = async function (chatId, done) {
+	var chat = Store.Chat.get(chatId);
+	if (!chat.isGroup) return false;
+	// const output = await Store.GroupInvite.queryGroupInviteCode(chat);
+
+	let code = chat.groupMetadata && chat.groupMetadata.inviteCode  ?
+  chat.groupMetadata.inviteCode : await Store.GroupInvite.sendQueryGroupInviteCode(chat.id);
+	if (done !== undefined) done(`https://chat.whatsapp.com/${code}`);
+  return `https://chat.whatsapp.com/${code}`;
+
+	// return `https://chat.whatsapp.com/${chat.inviteCode}`;
+	// return `https://chat.whatsapp.com/${chat.inviteCode}`
+}
+
+window.WAPI.getMetadataO = async function (chatId, done) {
 	var chat = Store.Chat.get(chatId);
 	if (!chat.isGroup) return false;
 	const output = await Store.GroupInvite.queryGroupInviteCode(chat);
