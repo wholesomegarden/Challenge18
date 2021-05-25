@@ -1967,9 +1967,9 @@ def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
-	print(data)
-	print(request.data)
+	# print(request.data)
 	data = request.json
+	print(data)
 	# print(request.json)
 	# print(request.args)
 	if data is not None:
