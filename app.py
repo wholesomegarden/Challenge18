@@ -1652,6 +1652,11 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
+ssl = True
+if ssl:
+	import eventlet
+	eventlet.monkey_patch()
+
 
 
 app = Flask(__name__,template_folder='templates')
