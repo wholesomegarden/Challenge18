@@ -815,9 +815,14 @@ class Challenge18Service():
 
 
 	def signIn(self, username, userID):
+		print("SIGN IN {0},{1}".format(username,userID))
 		for user in self.db["users"]:
 			if "username" in self.db["users"][user]:
 				if self.db["users"][user]["username"] == username and user == userID:
+					print("FUCK YEA")
+					print("FUCK YEA")
+					print("FUCK YEA")
+					print("FUCK YEA")
 					return jsonify(access_token=self.getToken(userID)), 200
 
 		return jsonify({"msg": "Bad username or password"}), 401
