@@ -23,6 +23,12 @@ import speech_recognition as sr
 recognizer = sr.Recognizer()
 TEST = {0:None}
 
+
+ssl = True
+if ssl:
+	import eventlet
+	eventlet.monkey_patch()
+	
 '''
 heroku ps:exec -a linkgateway0
 cd /app
@@ -1652,10 +1658,6 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
-ssl = True
-if ssl:
-	import eventlet
-	eventlet.monkey_patch()
 
 
 
