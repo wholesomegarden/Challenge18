@@ -823,9 +823,9 @@ class Challenge18Service():
 					print("FUCK YEA")
 					print("FUCK YEA")
 					print("FUCK YEA")
-					return jsonify(access_token=self.getToken(userID)), 200
-
-		return jsonify({"msg": "Bad username or password"}), 401
+					return True, userID
+		return False, userID
+		
 
 	def backup(self):
 		self.api.backup(self.db)

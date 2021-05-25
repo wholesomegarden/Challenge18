@@ -1988,6 +1988,9 @@ def api():
 			print(username, phone)
 			print(username, phone)
 			return {"signIn": Challenge18Service.share.signIn(username, phone)}
+			if res[0]:
+				return jsonify(access_token=self.getToken(res[1])), 200
+			return jsonify({"msg": "Bad username or password"}), 401
 	return "DATA IS NONE", 401
 
 
