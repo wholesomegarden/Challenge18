@@ -1967,7 +1967,7 @@ def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
-	data = request.data
+	data = request.json
 	print(data)
 	if "usernameAvailalbe" in data:
 		return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
