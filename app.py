@@ -2011,6 +2011,11 @@ MYPORT = 443
 # MYPORT = 2000
 
 if __name__ == '__main__':
+	print("1111111111111111111")
+	print("1111111111111111111")
+	print("1111111111111111111")
+	print("1111111111111111111")
+	print("1111111111111111111")
 	flaskRun(master)
 	if not noFlask:
 		print("STARTING APP")
@@ -2034,6 +2039,12 @@ if __name__ == '__main__':
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 else:
 	flaskRun(master)
+	print("2222222222222222222")
+	print("2222222222222222222")
+	print("2222222222222222222")
+	print("2222222222222222222")
+	print("2222222222222222222")
+	print("2222222222222222222")
 	if not noFlask:
 		if runLocal :
 			pass
