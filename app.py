@@ -2012,7 +2012,7 @@ MYPORT = 443
 
 
 if __name__ == '__main__':
-	global flaskRuns
+	global flaskRuns =
 	if flaskRuns != 1 and flaskRuns != 0:
 		flaskRuns = 0
 	print("1111111111111111111",flaskRuns)
@@ -2039,7 +2039,7 @@ if __name__ == '__main__':
 		context = ('cert.pem', 'key.pem')
 		if runLocal :
 			pass
-			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
+			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True, use_reloader=False)
 			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
 			# app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
