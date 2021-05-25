@@ -1747,6 +1747,11 @@ def hello_world():
 
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def all_routes(text):
+	print("all_routes")
+	print("all_routes")
+	print("all_routes")
+	print("all_routes",text)
+
 	master = Master.shares[0]
 	requestOrigin = {'ip': request.remote_addr, "location": getIpLocation(request.remote_addr)}
 	if text.split("/")[0] == "send":
@@ -1962,8 +1967,8 @@ def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
-	print(data)
 	data = json.loads(request.data)
+	print(data)
 	if "usernameAvailalbe" in data:
 		return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
 	if "registerUsername" in data:
