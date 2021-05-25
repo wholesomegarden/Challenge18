@@ -2010,10 +2010,11 @@ MYPORT = 443
 
 # MYPORT = 2000
 
-flaskRuns = 0
 
 if __name__ == '__main__':
 	global flaskRuns
+	if flaskRuns != 1 and flaskRuns != 0:
+		flaskRuns = 0
 	print("1111111111111111111",flaskRuns)
 	print("1111111111111111111",flaskRuns)
 	print("1111111111111111111",flaskRuns)
