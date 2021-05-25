@@ -1961,7 +1961,7 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
-@app.route('/api', methods=['GET', 'POST'])
+@app.route('/api', methods=['POST'])
 def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
@@ -1969,6 +1969,10 @@ def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	data = request
 	print(data)
+	print(request.args)
+	print(request.data)
+	print(request.json)
+	# print(request.json)
 	if "usernameAvailalbe" in data:
 		return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
 	if "registerUsername" in data:
