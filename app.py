@@ -2030,7 +2030,7 @@ if __name__ == '__main__':
 			pass
 			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
 			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
-			app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
+			# app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 else:
 	flaskRun(master)
@@ -2048,7 +2048,7 @@ else:
 			print("RUNNING PORT", MYPORT)
 			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
 			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
-			app.run(debug=True, host='0.0.0.0',use_reloader=False, port = MYPORT)
+			# app.run(debug=True, host='0.0.0.0',use_reloader=False, port = MYPORT)
 		# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 	print("STARTING APP22222222222")
 	# print("STARTING APP22222222222")
