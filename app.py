@@ -1982,7 +1982,7 @@ def api():
 				return Challenge18Service.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
 			# return {"registerUsername": Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")}
 		if "signIn" in data or "logIn" in data:
-			username, phone = data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us")
+			username, phone = data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us"
 			print(username, phone)
 			print(username, phone)
 			print(username, phone)
