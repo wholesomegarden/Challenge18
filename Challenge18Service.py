@@ -21,6 +21,12 @@ from pprint import pprint as pp
 
 import C18Tasks
 
+from flask import Flask, render_template, redirect, request, jsonify
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 # from Challenge18Manager import Challenge18Manager
 
 from urllib.request import urlopen, Request, quote
@@ -802,6 +808,19 @@ class Challenge18Service():
 				if self.db["users"][user]["username"] == username and user != userID:
 					return False, "Oops! This username is already taken,\nplease choose another :)"
 		return True, "Great! your username is now: *{0}*".format(username)
+
+# https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
+	def getToken(self, userID):
+		access_token = create_access_token(identity=userID)
+
+
+	def signIn(self, username, userID):
+		for user in self.db["users"]:
+			if "username" in self.db["users"][user]:
+				if self.db["users"][user]["username"] == username and user == userID:
+					return jsonify(access_token=self.getToken(userID)), 200
+
+		return jsonify({"msg": "Bad username or password"}), 401
 
 	def backup(self):
 		self.api.backup(self.db)

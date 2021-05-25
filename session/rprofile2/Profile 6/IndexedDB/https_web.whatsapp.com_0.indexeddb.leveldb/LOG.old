@@ -1,3 +1,12 @@
-2021/05/24-23:04:10.794 3dc7 Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 6/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/05/24-23:04:10.794 3dc7 Recovering log #11
-2021/05/24-23:04:10.796 3dc7 Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 6/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000011.log 
+2021/05/24-23:09:42.133 41ee Reusing MANIFEST /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 6/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2021/05/24-23:09:42.133 41ee Recovering log #11
+2021/05/24-23:09:42.153 41ee Reusing old log /home/magic/wholesomegarden/Challenge18/session/rprofile2/Profile 6/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000011.log 
+2021/05/24-23:13:05.133 4221 Level-0 table #16: started
+2021/05/24-23:13:05.190 4221 Level-0 table #16: 1294022 bytes OK
+2021/05/24-23:13:05.195 4221 Delete type=0 #11
+2021/05/24-23:13:20.765 4221 Compacting 1@1 + 1@2 files
+2021/05/24-23:13:20.867 4221 Generated table #17@1: 31290 keys, 1413748 bytes
+2021/05/24-23:13:20.867 4221 Compacted 1@1 + 1@2 files => 1413748 bytes
+2021/05/24-23:13:20.869 4221 compacted to: files[ 0 0 1 0 0 0 0 ]
+2021/05/24-23:13:20.869 4221 Delete type=2 #13
+2021/05/24-23:13:20.869 4221 Delete type=2 #16

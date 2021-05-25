@@ -60,3 +60,4 @@ pyttsx3==2.90
 gTTS==2.2.2
 playsound==1.2.2
 flask-socketio==5.0.3
+flask-jwt-extended==4.2.1

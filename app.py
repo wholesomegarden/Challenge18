@@ -1647,12 +1647,21 @@ maxtimeout = 30
 
 ''' running front server '''
 from flask import Flask, render_template, redirect, request, jsonify
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 
 
 app = Flask(__name__,template_folder='templates')
 from flask_socketio import SocketIO, send, emit
 
 socketio = SocketIO(app, cors_allowed_origins='*')
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "GYRESETDRYTFUGYIUHOt7"  # Change this!
+jwt = JWTManager(app)
 
 @socketio.on('connect')
 def test_connect():
@@ -1719,6 +1728,22 @@ def hello_world():
 		return render_template("loggedIn.html", user_image = full_filename, status = master.status)
 	else:
 		return render_template("index.html", user_image = full_filename, status = master.status)
+
+
+# {
+# 	"registerUsername":
+# 		{
+# 		"username":"xxx",
+# 		"phone":"97258423232"
+# 		"email":null
+# 		}
+# }
+#
+# {
+# 	"usernameAvailalbe": "username":"xxx",
+#
+# }
+#
 
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def all_routes(text):
@@ -1921,8 +1946,34 @@ def flaskRunAsync(data):
 	print("9999999999999999999999999999")
 
 
-# MYPORT = 5000
+
+# Protect a route with jwt_required, which will kick out requests
+# without a valid JWT present.
+@app.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+@app.route('/api', methods=['GET', 'POST'])
+def api():
+	data = request.data
+	if "usernameAvailalbe" in data:
+		return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
+	if "registerUsername" in data:
+		res = Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
+		if res:
+			return Challenge18.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
+		# return {"registerUsername": Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")}
+	if "signIn" in data:
+		return {"signIn": Challenge18.share.signIn(data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us")}
+
+
+MYPORT = 443
 MYPORT = 8087
+
+# MYPORT = 2000
 
 if __name__ == '__main__':
 	flaskRun(master)
@@ -1939,8 +1990,10 @@ if __name__ == '__main__':
 		print("RUNNING PORT", MYPORT)
 		print("RUNNING PORT", MYPORT)
 		print("RUNNING PORT", MYPORT)
+		context = ('cert.pem', 'key.pem')
 		if runLocal :
 			pass
+			# socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
 			socketio.run(app, host='0.0.0.0', port = MYPORT)
 			app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
@@ -1949,6 +2002,8 @@ else:
 	if not noFlask:
 		if runLocal :
 			pass
+			context = ('cert.pem', 'key.pem')
+
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
@@ -1956,6 +2011,7 @@ else:
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
+			# socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
 			socketio.run(app, host='0.0.0.0', port = MYPORT)
 			app.run(debug=True, host='0.0.0.0',use_reloader=False, port = MYPORT)
 		# app.run(debug=True, host='0.0.0.0',use_reloader=False)
