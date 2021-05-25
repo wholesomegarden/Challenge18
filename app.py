@@ -1964,7 +1964,8 @@ def protected():
 
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
 def getToken(userID):
-	return access_token = create_access_token(identity=userID)
+	access_token = create_access_token(identity=userID)
+	return access_token
 
 @app.route('/api', methods=['POST'])
 def api():
