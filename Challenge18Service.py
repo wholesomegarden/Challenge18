@@ -255,6 +255,8 @@ class Challenge18Service():
 				if user in self.db["users"]:
 					u = self.db["users"][user]
 					if "username" in u:
+						if "score" not in u:
+							self.db["users"][user]["score"] = 0
 						res["users"][u["username"]] = u["score"]
 						if "score" in u:
 							# res["scores"].append(u["score"])
@@ -272,7 +274,7 @@ class Challenge18Service():
 		print("##################################")
 		print("##################################")
 		print("MANAGING PUSH FOR C18")
-		lastHour = 60 * 60 
+		lastHour = 60 * 60
 		while(True):
 			simCounter = 0
 			while self.simulation:
