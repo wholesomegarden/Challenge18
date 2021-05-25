@@ -1958,7 +1958,12 @@ def protected():
 
 @app.route('/api', methods=['GET', 'POST'])
 def api():
-	data = request.data
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print(data)
+	data = json.loads(request.data)
 	if "usernameAvailalbe" in data:
 		return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
 	if "registerUsername" in data:
