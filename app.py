@@ -2010,17 +2010,17 @@ MYPORT = 443
 
 # MYPORT = 2000
 
-runs = 0
+flaskRuns = 0
 
 if __name__ == '__main__':
-	
-	print("1111111111111111111",runs)
-	print("1111111111111111111",runs)
-	print("1111111111111111111",runs)
-	print("1111111111111111111",runs)
-	print("1111111111111111111",runs)
-	print("1111111111111111111",runs)
-	runs += 1
+	global flaskRuns
+	print("1111111111111111111",flaskRuns)
+	print("1111111111111111111",flaskRuns)
+	print("1111111111111111111",flaskRuns)
+	print("1111111111111111111",flaskRuns)
+	print("1111111111111111111",flaskRuns)
+	print("1111111111111111111",flaskRuns)
+	flaskRuns += 1
 	flaskRun(master)
 	if not noFlask:
 		print("STARTING APP")
