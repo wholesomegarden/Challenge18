@@ -1967,22 +1967,22 @@ def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
-	data = request.json
 	print(data)
-	print(request.args)
 	print(request.data)
-	print(request.json)
+	data = request.json
+	# print(request.json)
+	# print(request.args)
 	if data is not None:
 		# print(request.json)
 		if "usernameAvailalbe" in data:
-			return {"usernameAvailalbe": Challenge18.share.usernameLegal(data["usernameAvailalbe"])}
+			return {"usernameAvailalbe": Challenge18Service.share.usernameLegal(data["usernameAvailalbe"])}
 		if "registerUsername" in data:
-			res = Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
+			res = Challenge18Service.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
 			if res:
-				return Challenge18.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
+				return Challenge18Service.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
 			# return {"registerUsername": Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")}
-		if "signIn" in data:
-			return {"signIn": Challenge18.share.signIn(data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us")}
+		if "signIn" in data or "logIn" in data:
+			return {"signIn": Challenge18Service.share.signIn(data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us")}
 	return "DATA IS NONE", 401
 
 
