@@ -1981,6 +1981,7 @@ def getToken(userID):
 	return access_token
 
 @app.route('/api', methods=['POST'])
+@cross_origin()
 def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
