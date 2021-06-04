@@ -1656,6 +1656,7 @@ maxtimeout = 30
 
 ''' running front server '''
 from flask import Flask, render_template, redirect, request, jsonify
+from flask_cors import CORS, cross_origin
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -1666,6 +1667,8 @@ from flask_jwt_extended import JWTManager
 
 app = Flask(__name__,template_folder='templates')
 from flask_socketio import SocketIO, send, emit
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 socketio = SocketIO(app, cors_allowed_origins='*')
 
