@@ -1,4 +1,11 @@
 # app.py
+
+ssl = False
+if ssl:
+	import eventlet
+	eventlet.monkey_patch()
+
+
 import os, sys, time
 import errno
 import traceback
@@ -24,11 +31,7 @@ recognizer = sr.Recognizer()
 TEST = {0:None}
 
 
-ssl = True
-if ssl:
-	import eventlet
-	eventlet.monkey_patch()
-	
+
 '''
 heroku ps:exec -a linkgateway0
 cd /app
@@ -1994,7 +1997,9 @@ def api():
 			if res:
 				return Challenge18Service.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
 			# return {"registerUsername": Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")}
-		if "signIn" in data or "logIn" in data:
+
+
+		if "signIn" in data:# or "logIn" in data:
 			username, phone = data["signIn"]["username"],data["signIn"]["phone"].strip("+")+"@c.us"
 			print(username, phone)
 			print(username, phone)
@@ -2006,9 +2011,9 @@ def api():
 			return jsonify({"msg": "Bad username or password"}), 401
 	return "DATA IS NONE", 401
 
-
-MYPORT = 443
-# MYPORT = 8087
+MYPORT = 8087
+if ssl:
+	MYPORT = 443
 
 # MYPORT = 2000
 
@@ -2038,8 +2043,11 @@ if __name__ == '__main__':
 		context = ('cert.pem', 'key.pem')
 		if runLocal :
 			pass
-			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True, use_reloader=False)
-			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
+			if ssl:
+				# socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
+				socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True, use_reloader=False)
+			else:
+				socketio.run(app, host='0.0.0.0', port = MYPORT)			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
 			# app.run(debug=True, host='0.0.0.0',use_reloader=False, port=MYPORT)
 	# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 else:
@@ -2062,8 +2070,11 @@ else:
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
 			print("RUNNING PORT", MYPORT)
-			socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
-			# socketio.run(app, host='0.0.0.0', port = MYPORT+1)
+			if ssl:
+				# socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True)
+				socketio.run(app, host='0.0.0.0', port = MYPORT, certfile="cert.pem", keyfile="key.pem", server_side=True, debug=True, use_reloader=False)
+			else:
+				socketio.run(app, host='0.0.0.0', port = MYPORT)
 			# app.run(debug=True, host='0.0.0.0',use_reloader=False, port = MYPORT)
 		# app.run(debug=True, host='0.0.0.0',use_reloader=False)
 	print("STARTING APP22222222222")

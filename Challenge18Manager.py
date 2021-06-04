@@ -563,7 +563,12 @@ class Challenge18Manager():
 			groupName = self.master.services[service]["obj"].name
 			imageurl = self.master.services[service]["obj"].imageurl
 			if imageurl is not None:
-				path = self.master.download_image(service=service,pic_url=imageurl)
+				try:
+					print(imageurl)
+					path = self.master.download_image(service=service,pic_url=imageurl)
+				except:
+					print("COULD NOT DOWNLOAD image")
+					traceback.print_exc()
 
 		imagepath = path
 		# data = text, chatID, senderID = data
