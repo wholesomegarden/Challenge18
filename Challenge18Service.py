@@ -790,10 +790,14 @@ class Challenge18Service():
 		signupMessage = "To show up on the scoreboard please choose a username, and send back:\n\n*user=MyUserName*"
 		self.api.send(userID, signupMessage, autoPreview=True)
 
-	def registerUsername(self, username, userID):
+	def registerUsername(self, username, userID, fullData):
 		res = self.usernameLegal(username, userID)
 		if res[0]:
-			self.db["users"][userID]["username"] = username
+			if userID not in self.db["users"]:
+				self.db["users"][userID] = {}
+			self.db["users"][userID]["username"] = username #xxx
+			for k in fullData:
+				self.db["users"][userID][k] = fullData[k]
 			self.backup()
 
 		sendBack = res[1]
@@ -814,7 +818,7 @@ class Challenge18Service():
 		access_token = create_access_token(identity=userID)
 
 
-	def signIn(self, username, userID):
+	def signIn(self, username, userID, fullData):
 		print("SIGN IN {0},{1}".format(username,userID))
 		for user in self.db["users"]:
 			if "username" in self.db["users"][user]:
@@ -825,7 +829,7 @@ class Challenge18Service():
 					print("FUCK YEA")
 					return True, userID
 		return False, userID
-		
+
 
 	def backup(self):
 		self.api.backup(self.db)
