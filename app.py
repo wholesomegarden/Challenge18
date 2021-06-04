@@ -1667,9 +1667,17 @@ from flask_jwt_extended import JWTManager
 
 app = Flask(__name__,template_folder='templates')
 from flask_socketio import SocketIO, send, emit
-cors = CORS(app)
+app.config['SECRET_KEY'] = 'LHUIGYFVHbkjlhuytuvbHTDCFGVHBJtydryctvyuhijhuogyift'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+
+MYPORT = 8087
+if ssl:
+	MYPORT = 443
+
+# MYPORT = 2000
+
+cors = CORS(app, resources={r"/api": {"origins": "http://localhost:{0}".format(MYPORT)}})
 socketio = SocketIO(app, cors_allowed_origins='*')
 
 # Setup the Flask-JWT-Extended extension
@@ -1981,7 +1989,7 @@ def getToken(userID):
 	return access_token
 
 @app.route('/api', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
@@ -2014,12 +2022,6 @@ def api():
 				return jsonify(access_token=getToken(res[1])), 200
 			return jsonify({"msg": "Bad username or password"}), 401
 	return "DATA IS NONE", 401
-
-MYPORT = 8087
-if ssl:
-	MYPORT = 443
-
-# MYPORT = 2000
 
 
 if __name__ == '__main__':
