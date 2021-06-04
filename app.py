@@ -2007,7 +2007,7 @@ def api():
 		if "register" in data:
 			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 			if res:
-				res2 Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
+				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 				if res2[0]:
 					return jsonify(access_token=getToken(res2[1])), 200
 
