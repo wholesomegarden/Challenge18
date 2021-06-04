@@ -2005,7 +2005,7 @@ def api():
 		if "usernameAvailalbe" in data:
 			return {"usernameAvailalbe": Challenge18Service.share.usernameLegal(data["usernameAvailalbe"])}
 		if "register" in data:
-			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
+			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us",data)
 			if res:
 				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 				if res2[0]:

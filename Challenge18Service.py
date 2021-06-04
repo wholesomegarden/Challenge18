@@ -818,7 +818,7 @@ class Challenge18Service():
 		access_token = create_access_token(identity=userID)
 
 
-	def signIn(self, username, userID, fullData):
+	def signIn(self, username, userID):
 		print("SIGN IN {0},{1}".format(username,userID))
 		for user in self.db["users"]:
 			if "username" in self.db["users"][user]:
