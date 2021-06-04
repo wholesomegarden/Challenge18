@@ -885,7 +885,7 @@ If you'd like to register your school or company to a private challenge, you're 
 							firstWord = mContent.split("\n")[0].split(" ")[0]
 							if "user=" in firstWord.lower():
 								username = firstWord.split("=")[1]
-								Challenge18Service.share.registerUsername(username, senderID)
+								Challenge18Service.share.register(username, senderID)
 							else:
 								self.sendMessage(senderID, autoReplyMsg, autoPreview = True)
 
@@ -1752,7 +1752,7 @@ def hello_world():
 
 
 # {
-# 	"registerUsername":
+# 	"register":
 # 		{
 # 		"username":"xxx",
 # 		"phone":"97258423232"
@@ -2004,11 +2004,14 @@ def api():
 		# print(request.json)
 		if "usernameAvailalbe" in data:
 			return {"usernameAvailalbe": Challenge18Service.share.usernameLegal(data["usernameAvailalbe"])}
-		if "registerUsername" in data:
-			res = Challenge18Service.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
+		if "register" in data:
+			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 			if res:
-				return Challenge18Service.share.signIn(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")
-			# return {"registerUsername": Challenge18.share.registerUsername(data["registerUsername"]["username"],data["registerUsername"]["phone"].strip("+")+"@c.us")}
+				res2 Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
+				if res2[0]:
+					return jsonify(access_token=getToken(res2[1])), 200
+
+			# return {"register": Challenge18.share.register(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")}
 
 
 		if "signIn" in data:# or "logIn" in data:
