@@ -2045,7 +2045,7 @@ def encode_auth_token(user_id):
     Generates the Auth Token
     :return: string
     """
-	exp = datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
+	exp = datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5)
     try:
         payload = {
             'exp': exp
