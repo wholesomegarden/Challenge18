@@ -1975,15 +1975,16 @@ def flaskRunAsync(data):
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
+# @jwt_required()
 @app.route("/xapi", methods=["POST"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-@jwt_required()
 def protected():
 	# Access the identity of the current user with get_jwt_identity
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	current_user = get_jwt_identity()
+
 	# getToken()
 	print("CCCCCCCCCCCCC",current_user)
 	data = request.json
