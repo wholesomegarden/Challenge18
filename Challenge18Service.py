@@ -813,6 +813,21 @@ class Challenge18Service():
 					return False, "Oops! This username is already taken,\nplease choose another :)"
 		return True, "Great! your username is now: *{0}*".format(username)
 
+	def checkUsername(self, username):
+		for user in self.db["users"]:
+			if "username" in self.db["users"][user]:
+				if self.db["users"][user]["username"].lower() == username.lower():
+					return False, "Oops! This username is already taken,\nplease choose another :)"
+		return True, "Great! you can register with username: *{0}*".format(username)
+
+	def checkPhone(self, userID):
+		userID = userID.split("@")[0].strip("+")+"@c.us"
+		if userID in self.db["users"]:
+			if "username" in self.db["users"] and self.db["users"]["username"] is not None and len(self.db["users"]["username"]) > 1:
+				return False, "Oops! This phone is already taken,\nplease choose another :)"
+
+		return True, "Great! you can register with this phone *{0}*".format(userID)
+
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
 	def getToken(self, userID):
 		access_token = create_access_token(identity=userID)
