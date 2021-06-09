@@ -1684,8 +1684,8 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "GYRESETDRYTFUGYIUHOt7"  # Change this!
+import jwt as pyjwt
 jwt = JWTManager(app)
-
 @socketio.on('connect')
 def test_connect():
 	print("CLIENT CONNECTED!!!!!!!!!")
@@ -1998,7 +1998,7 @@ def protected():
 		# print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
 		print()
 		print(gotToken)
-		DECODED = jwt.decode(gotToken,app.config["JWT_SECRET_KEY"])
+		DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"])
 		print(DECODED)
 		# print(myToken)
 		if str(gotToken) == str(myToken):
