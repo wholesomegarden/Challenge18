@@ -2038,7 +2038,7 @@ def api():
 			print(username, phone)
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
-				final = jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+				final = jsonify({"access_token":getToken(res[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 				# return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 				# return jsonify(access_token=getToken(res[1])), 200
 			else:
