@@ -1670,6 +1670,7 @@ from flask_socketio import SocketIO, send, emit
 app.config['SECRET_KEY'] = 'LHUIGYFVHbkjlhuytuvbHTDCFGVHBJtydryctvyuhijhuogyift'
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['CORS_HEADERS'] = 'Authorization'
+app.config['CORS_HEADERS'] = "HTTP_AUTHORIZATION"
 
 
 MYPORT = 8087
@@ -1978,7 +1979,7 @@ def flaskRunAsync(data):
 # without a valid JWT present.
 # @jwt_required()
 @app.route("/xapi", methods=["POST"])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization', "HTTP_AUTHORIZATION"])
 def protected():
 	# Access the identity of the current user with get_jwt_identity
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
