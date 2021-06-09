@@ -1988,14 +1988,14 @@ def getToken(userID):
 	access_token = create_access_token(identity=userID)
 	return access_token
 
-def userDefaults(D):
+def userDefaults(D,phone = None):
 	dataDefaults = {"accountType":"individual", "language":"English","plan":"free"}
 
 	for dKey in dataDefaults:
 		if dKey not in D:
 			D[dKey] = dataDefaults[dKey]
-	if "phone" not in D:
-		D["phone"] = "+"+D["id"].split("@")[0]
+	if phone is not None:
+		D["phone"] = "+"+phone
 
 	return D
 
@@ -2028,11 +2028,14 @@ def api():
 		# if "phoneTaken" in data:
 		# 	return {"phoneTaken": Challenge18Service.share.phoneTaken(data["phoneTaken"]["phone"].strip("+")+"@c.us")}
 		if "register" in data:
-			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us",data)
+			username, phone = data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us"
+
+			res = Challenge18Service.share.registerUsername(username, phone,data)
 			if res[0]:
-				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
+				res2 =  Challenge18Service.share.signIn(username, phone)
 				if res2[0]:
-					userData = userDefaults(Challenge18Service.share.db["users"][res2[1]])
+					phone = data["signIn"]["username"],data["register"]["phone"].strip("+")+"@c.us"
+					userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],"phone" = phone)
 
 					final = jsonify({"access_token":getToken(res2[1]), "user":userData}), 200
 					# return jsonify(access_token=), 200
@@ -2052,7 +2055,7 @@ def api():
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
 
-				userData = userDefaults(Challenge18Service.share.db["users"][res[1]])
+				userData = userDefaults(Challenge18Service.share.db["users"][res[1]],"phone" = phone)
 
 				final = jsonify({"access_token":getToken(res[1]), "user":userData}), 200
 
