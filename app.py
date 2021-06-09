@@ -1995,19 +1995,21 @@ def protected():
 
 	data = request.json
 	if "userID" in data:
-		myToken = getToken(data["userID"])
+		# myToken = getToken(data["userID"])
 		# print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
 		print()
 		print(gotToken)
 		print("DDDDDDDDD")
-		decoded = decode_token(gotToken)
+		current_user = decoded = decode_auth_token(gotToken)
+		# decoded = decode_token(gotToken)
 		print(" ")
 		# DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"], verify = False)
 		print(decoded)
 		print(" ")
 		print("DDDDDDDDD")
 		# print(myToken)
-		if str(gotToken) == str(myToken):
+		# if str(gotToken) == str(myToken):
+		if current_user == data["userID"]:
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
 
 			if "editProfile" in data:
@@ -2033,6 +2035,46 @@ def protected():
 
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
 def getToken(userID):
+	access_token = encode_auth_token(userID)
+	return access_token
+
+import datetime
+
+def encode_auth_token(user_id):
+    """
+    Generates the Auth Token
+    :return: string
+    """
+    try:
+        payload = {
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
+            'iat': datetime.datetime.utcnow(),
+            'sub': user_id
+        }
+        return pyjwt.encode(
+            payload,
+            app.config["JWT_SECRET_KEY"],
+            algorithm='HS256'
+        )
+    except Exception as e:
+        return e
+
+def decode_auth_token(auth_token):
+    """
+    Decodes the auth token
+    :param auth_token:
+    :return: integer|string
+    """
+    try:
+        payload = pyjwt.decode(auth_token, app.config["JWT_SECRET_KEY"])
+        return payload['sub']
+    except jwt.ExpiredSignatureError:
+        return 'Signature expired. Please log in again.'
+    except jwt.InvalidTokenError:
+        return 'Invalid token. Please log in again.'
+
+
+def getTokenX(userID):
 	access_token = create_access_token(identity=userID)
 	return access_token
 
