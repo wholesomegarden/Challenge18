@@ -823,7 +823,7 @@ class Challenge18Service():
 	def checkPhone(self, userID):
 		userID = userID.split("@")[0].strip("+")+"@c.us"
 		if userID in self.db["users"]:
-			if "username" in self.db["users"] and self.db["users"]["username"] is not None and len(self.db["users"]["username"]) > 1:
+			if "username" in self.db["users"][userID] and self.db["users"][userID]["username"] is not None and len(self.db["users"][userID]["username"]) > 1:
 				return False, "Oops! This phone is already taken,\nplease choose another :)"
 
 		return True, "Great! you can register with this phone *{0}*".format(userID)
