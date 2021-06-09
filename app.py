@@ -1661,6 +1661,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_jwt_extended import decode_token
 
 
 
@@ -1994,12 +1995,17 @@ def protected():
 
 	data = request.json
 	if "userID" in data:
-		# myToken = getToken(data["userID"])
+		myToken = getToken(data["userID"])
 		# print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
 		print()
 		print(gotToken)
-		DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"], verify = False)
-		print(DECODED)
+		print("DDDDDDDDD")
+		decoded = decode_token(gotToken)
+		print(" ")
+		# DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"], verify = False)
+		print(decoded)
+		print(" ")
+		print("DDDDDDDDD")
 		# print(myToken)
 		if str(gotToken) == str(myToken):
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
