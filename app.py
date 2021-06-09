@@ -1998,7 +1998,7 @@ def protected():
 		# print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
 		print()
 		print(gotToken)
-		DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"])
+		DECODED = pyjwt.decode(gotToken,app.config["JWT_SECRET_KEY"], verify = False)
 		print(DECODED)
 		# print(myToken)
 		if str(gotToken) == str(myToken):
