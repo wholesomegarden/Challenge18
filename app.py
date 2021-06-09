@@ -2018,11 +2018,11 @@ def protected():
 				allowedChanges = ["username","phone","email","fullName","language","memberName","memberRole","organization","city","country",]
 				for profileKey in allowedChanges:
 					if profileKey in data["editProfile"]:
-						if profileKey in Challenge18Service.share.db[current_user]:
-							print("changing {0} {1} to {2}".format(profileKey,Challenge18Service.share.db[current_user][profileKey],data["editProfile"][profileKey]))
+						if profileKey in Challenge18Service.share.db["users"][current_user]:
+							print("changing {0} {1} to {2}".format(profileKey,Challenge18Service.share.db["users"][current_user][profileKey],data["editProfile"][profileKey]))
 						else:
 							print("setting {0} to {1}".format(profileKey,data["editProfile"][profileKey]))
-						Challenge18Service.share.db[current_user][profileKey] = data["editProfile"][profileKey]
+						Challenge18Service.share.db["users"][current_user][profileKey] = data["editProfile"][profileKey]
 				userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
 				# userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
 
