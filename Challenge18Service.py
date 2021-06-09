@@ -799,8 +799,12 @@ class Challenge18Service():
 			if userID not in self.db["users"]:
 				self.db["users"][userID] = {}
 			self.db["users"][userID]["username"] = username #xxx
-			for k in fullData["register"]:
-				self.db["users"][userID][k] = fullData[k]
+			if "register" in fullData:
+				for k in fullData["register"]:
+					self.db["users"][userID][k] = fullData["register"][k]
+			elif fullData is not None and "dict" in str(type(fullData)) and len(fullData) > 1:
+				for k in fullData:
+					self.db["users"][userID][k] = fullData[k]
 			self.backup()
 		else:
 			return res
