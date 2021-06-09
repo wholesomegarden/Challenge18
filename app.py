@@ -2023,7 +2023,7 @@ def protected():
 						else:
 							print("setting {0} to {1}".format(profileKey,data["editProfile"][profileKey]))
 						Challenge18Service.share.db["users"][current_user][profileKey] = data["editProfile"][profileKey]
-				userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
+				userData = userDefaults(Challenge18Service.share.db["users"][current_user], id = current_user)
 				# userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
 
 				final = jsonify({"logged_in_as":current_user, "user":userData}), 200
@@ -2035,8 +2035,8 @@ def protected():
 
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
 def getToken(userID):
-	access_token = encode_auth_token(userID)
-	return access_token
+	access_token, exp = encode_auth_token(userID)
+	return access_token, exp
 
 import datetime
 
@@ -2045,9 +2045,10 @@ def encode_auth_token(user_id):
     Generates the Auth Token
     :return: string
     """
+	exp = datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
     try:
         payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5),
+            'exp': exp
             'iat': datetime.datetime.utcnow(),
             'sub': user_id
         }
@@ -2055,7 +2056,7 @@ def encode_auth_token(user_id):
             payload,
             app.config["JWT_SECRET_KEY"],
             algorithm='HS256'
-        )
+        ), exp
     except Exception as e:
         return e
 
@@ -2078,15 +2079,15 @@ def getTokenX(userID):
 	access_token = create_access_token(identity=userID)
 	return access_token
 
-def userDefaults(D,phone = None):
+def userDefaults(D,id = None):
 	dataDefaults = {"accountType":"individual", "language":"English","plan":"free", "paid": False}
 
 	for dKey in dataDefaults:
 		if dKey not in D:
 			D[dKey] = dataDefaults[dKey]
-	if phone is not None:
-		D["id"] = phone
-		D["phone"] = "+"+phone.split("@")[0]
+	if id is not None:
+		D["id"] = id
+		D["phone"] = "+"+id.split("@")[0]
 
 	return D
 
@@ -2147,9 +2148,9 @@ def api():
 				res2 =  Challenge18Service.share.signIn(username, phone)
 				if res2[0]:
 					phone = data["signIn"]["username"],data["register"]["phone"].strip("+")+"@c.us"
-					userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
-
-					final = jsonify({"access_token":getToken(res2[1]), "user":userData}), 200
+					userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],id = phone)
+					token, exp = getToken(res2[1])
+					final = jsonify({"access_token":token,"exp":exp, "user":userData}), 200
 					# return jsonify(access_token=), 200
 					# return jsonify(access_token=getToken(res2[1])), 200
 			else:
@@ -2167,9 +2168,9 @@ def api():
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
 
-				userData = userDefaults(Challenge18Service.share.db["users"][res[1]],phone = phone)
-
-				final = jsonify({"access_token":getToken(res[1]), "user":userData}), 200
+				userData = userDefaults(Challenge18Service.share.db["users"][res[1]],id = phone)
+				token, exp = getToken(res2[1])
+				final = jsonify({"access_token":token,"exp":exp, "user":userData}), 200
 
 				# return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 				# return jsonify(access_token=getToken(res[1])), 200
