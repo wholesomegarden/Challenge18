@@ -1985,7 +1985,7 @@ def protected():
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	final = "TOKEN ERROR", 401
 	# current_user = get_jwt_identity()
-	gotToken = request.headers["Authorization"].split(" ")[1]:
+	gotToken = request.headers["Authorization"].split(" ")[1]
 
 	# print("CCCCCCCCCCCCC",current_user)
 	data = request.json
