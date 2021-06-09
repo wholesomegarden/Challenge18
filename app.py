@@ -1995,7 +1995,7 @@ def userDefaults(D,phone = None):
 		if dKey not in D:
 			D[dKey] = dataDefaults[dKey]
 	if phone is not None:
-		D["phone"] = "+"+phone
+		D["phone"] = "+"+phone.split("@")[0]
 
 	return D
 
