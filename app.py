@@ -1680,29 +1680,6 @@ if ssl:
 cors = CORS(app, resources={r"/api": {"origins": "http://localhost:{0}".format(MYPORT)}})
 socketio = SocketIO(app, cors_allowed_origins='*')
 
-@app.after_request
-def after_request(response):
-    """
-    Post request processing - add CORS, cache control headers
-    """
-    # Enable CORS requests for local development
-    # The following will allow the local angular-cli development environment to
-    # make requests to this server (otherwise, you will get 403s due to same-
-    # origin poly)
-    response.headers.add('Access-Control-Allow-Origin',
-                         'http://localhost:4200')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type,Authorization,Set-Cookie,Cookie,Cache-Control,Pragma,Expires')  # noqa
-    response.headers.add('Access-Control-Allow-Methods',
-                         'GET,PUT,POST,DELETE')
-
-    # disable caching all requests
-    response.cache_control.no_cache = True
-    response.cache_control.no_store = True
-    response.cache_control.must_revalidate = True
-    return response
-
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "GYRESETDRYTFUGYIUHOt7"  # Change this!
 jwt = JWTManager(app)
@@ -1998,10 +1975,9 @@ def flaskRunAsync(data):
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
-# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 @app.route("/xapi", methods=["POST"])
-@jwt_required()
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+@auth_required()
 def protected():
 	# Access the identity of the current user with get_jwt_identity
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
@@ -2075,8 +2051,8 @@ def test():
 		# 	final = jsonify({"result":res[0], "msg":res[1]}), 200
 	return final[0], final[1]
 
-	# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 @app.route('/api', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def api():
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
