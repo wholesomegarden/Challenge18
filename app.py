@@ -1975,8 +1975,8 @@ def flaskRunAsync(data):
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
-# @jwt_required()
-@app.route("/xapi", methods=["GET"])
+@jwt_required()
+@app.route("/xapi", methods=["POST"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def protected():
 	# Access the identity of the current user with get_jwt_identity
@@ -2031,15 +2031,15 @@ def userDefaults(D,phone = None):
 	return D
 
 # @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-@app.route('/test', methods=['POST'])
+@app.route('/test', methods=['GET','POST'])
 def test():
 	print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	# print(request.data)
-	data = request.json
-	print(data)
+	# data = request.json
+	# print(data)
 	final = jsonify({"msg":"HELLO WORLD :D"}), 200
 	# print(request.json)
 	# print(request.args)
