@@ -2032,7 +2032,7 @@ def userDefaults(D,phone = None):
 
 # @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 @app.route('/test', methods=['POST'])
-def api():
+def test():
 	print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
 	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
