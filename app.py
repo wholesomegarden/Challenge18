@@ -2041,38 +2041,38 @@ def getToken(userID):
 import datetime
 
 def encode_auth_token(user_id):
-    """
-    Generates the Auth Token
-    :return: string
-    """
+	"""
+	Generates the Auth Token
+	:return: string
+	"""
 	exp = datetime.datetime.utcnow() + datetime.timedelta(days=1, seconds=5)
-    try:
-        payload = {
-            'exp': exp
-            'iat': datetime.datetime.utcnow(),
-            'sub': user_id
-        }
-        return pyjwt.encode(
-            payload,
-            app.config["JWT_SECRET_KEY"],
-            algorithm='HS256'
-        ), exp
-    except Exception as e:
-        return e
+	try:
+		payload = {
+			'exp': exp
+			'iat': datetime.datetime.utcnow(),
+			'sub': user_id
+		}
+		return pyjwt.encode(
+			payload,
+			app.config["JWT_SECRET_KEY"],
+			algorithm='HS256'
+		), exp
+	except Exception as e:
+		return e
 
 def decode_auth_token(auth_token):
-    """
-    Decodes the auth token
-    :param auth_token:
-    :return: integer|string
-    """
-    try:
-        payload = pyjwt.decode(auth_token, app.config["JWT_SECRET_KEY"], algorithms = ['HS256'])
-        return payload['sub']
-    except jwt.ExpiredSignatureError:
-        return 'Signature expired. Please log in again.'
-    except jwt.InvalidTokenError:
-        return 'Invalid token. Please log in again.'
+	"""
+	Decodes the auth token
+	:param auth_token:
+	:return: integer|string
+	"""
+	try:
+		payload = pyjwt.decode(auth_token, app.config["JWT_SECRET_KEY"], algorithms = ['HS256'])
+		return payload['sub']
+	except jwt.ExpiredSignatureError:
+		return 'Signature expired. Please log in again.'
+	except jwt.InvalidTokenError:
+		return 'Invalid token. Please log in again.'
 
 
 def getTokenX(userID):
