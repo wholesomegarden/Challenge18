@@ -2003,10 +2003,10 @@ def api():
 	if data is not None:
 		# print(request.json)
 		if "checkUsername" in data:
-			res = Challenge18Service.share.checkUsername(data["checkUsername"])[0]
+			res = Challenge18Service.share.checkUsername(data["checkUsername"])
 			return jsonify({"result":res[0], "msg":res[1]}), 200
 		if "checkPhone" in data:
-			res = Challenge18Service.share.checkUsername(data["checkPhone"])[0]
+			res = Challenge18Service.share.checkPhone(data["checkPhone"])
 			return jsonify({"result":res[0], "msg":res[1]}), 200
 		#
 		# if "checkUsername" in data:
