@@ -1975,12 +1975,16 @@ def flaskRunAsync(data):
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
+# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 @app.route("/xapi", methods=["GET"])
 @jwt_required()
-@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def protected():
 	# Access the identity of the current user with get_jwt_identity
+	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
+	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
+	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	current_user = get_jwt_identity()
+	print("CCCCCCCCCCCCC",current_user)
 	data = request.json
 	final = "TOKEN ERROR", 401
 	if "userID" in data:
@@ -2025,6 +2029,27 @@ def userDefaults(D,phone = None):
 		D["phone"] = "+"+phone.split("@")[0]
 
 	return D
+
+# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+@app.route('/test', methods=['POST'])
+def api():
+	print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	print("AAAAAAAAAAAPPPPPPPPPIIIIIIIIIIIII")
+	# print(request.data)
+	data = request.json
+	print(data)
+	final = jsonify({"msg":"HELLO WORLD :D"}), 200
+	# print(request.json)
+	# print(request.args)
+	if data is not None:
+		# print(request.json)
+		pass
+		# if "checkUsername" in data:
+		# 	res = Challenge18Service.share.checkUsername(data["checkUsername"])
+		# 	final = jsonify({"result":res[0], "msg":res[1]}), 200
+	return final[0], final[1]
 
 @app.route('/api', methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
