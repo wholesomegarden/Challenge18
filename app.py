@@ -2045,7 +2045,7 @@ def api():
 				final = jsonify({"msg": "Bad username or password"}), 401
 	print("FINAL")
 	print(final)
-	return final
+	return final[0], final[1]
 
 
 if __name__ == '__main__':
