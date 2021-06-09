@@ -1979,8 +1979,8 @@ def flaskRunAsync(data):
 @jwt_required()
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def protected():
-    # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
+	# Access the identity of the current user with get_jwt_identity
+	current_user = get_jwt_identity()
 	data = request.json
 	final = "TOKEN ERROR", 401
 	if "userID" in data:
