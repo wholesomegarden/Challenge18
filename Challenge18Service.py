@@ -793,16 +793,21 @@ class Challenge18Service():
 	def registerUsername(self, username, userID, fullData):
 		res = self.usernameLegal(username, userID)
 		if res[0]:
+			res2 = self.checkPhone(userID)
+			if not res2[0]:
+				return res2
 			if userID not in self.db["users"]:
 				self.db["users"][userID] = {}
 			self.db["users"][userID]["username"] = username #xxx
 			for k in fullData:
 				self.db["users"][userID][k] = fullData[k]
 			self.backup()
+		else:
+			return res
 
 		sendBack = res[1]
 		self.api.send(userID, sendBack, autoPreview=True)
-		return res[0]
+		return res
 
 	def usernameLegal(self, username, userID):
 		for user in self.db["users"]:

@@ -2016,11 +2016,15 @@ def api():
 		# 	return {"phoneTaken": Challenge18Service.share.phoneTaken(data["phoneTaken"]["phone"].strip("+")+"@c.us")}
 		if "register" in data:
 			res = Challenge18Service.share.registerUsername(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us",data)
-			if res:
+			if res[0]:
 				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 				if res2[0]:
-					return jsonify(access_token=getToken(res2[1])), 200
-
+					return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+					# return jsonify(access_token=), 200
+					# return jsonify(access_token=getToken(res2[1])), 200
+			else:
+				return jsonify({"result":res[0], "msg":res[1]}), 200
+				Challenge18Service.share
 			# return {"register": Challenge18.share.register(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")}
 
 
@@ -2032,7 +2036,8 @@ def api():
 			print(username, phone)
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
-				return jsonify(access_token=getToken(res[1])), 200
+				return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+				# return jsonify(access_token=getToken(res[1])), 200
 			return jsonify({"msg": "Bad username or password"}), 401
 	return "DATA IS NONE", 401
 
