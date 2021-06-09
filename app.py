@@ -1989,10 +1989,14 @@ def getToken(userID):
 	return access_token
 
 def userDefaults(D):
-	dataDefaults = {"accountType":"individual", "language":"english","plan":"free"}
+	dataDefaults = {"accountType":"individual", "language":"English","plan":"free"}
+
 	for dKey in dataDefaults:
 		if dKey not in D:
 			D[dKey] = dataDefaults[dKey]
+	if "phone" not in D:
+		D["phone"] = "+"+D["id"].split("@")[0]
+
 	return D
 
 @app.route('/api', methods=['POST'])
