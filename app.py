@@ -1988,6 +1988,13 @@ def getToken(userID):
 	access_token = create_access_token(identity=userID)
 	return access_token
 
+def userDefaults(D):
+	dataDefaults = {"type":"individual", "language":"english","xxx":"yea"}
+	for dKey in dataDefaults:
+		if dKey not in D:
+			D[dKey] = D[dKey]
+	return D
+
 @app.route('/api', methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def api():
@@ -2021,7 +2028,9 @@ def api():
 			if res[0]:
 				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 				if res2[0]:
-					final = jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+					userData = userDefaults(Challenge18Service.share.db["users"][res2[1]])
+
+					final = jsonify({"access_token":getToken(res2[1]), "user":userData}), 200
 					# return jsonify(access_token=), 200
 					# return jsonify(access_token=getToken(res2[1])), 200
 			else:
@@ -2038,7 +2047,11 @@ def api():
 			print(username, phone)
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
-				final = jsonify({"access_token":getToken(res[1]), "user":Challenge18Service.share.db["users"][res[1]]}), 200
+
+				userData = userDefaults(Challenge18Service.share.db["users"][res[1]])
+
+				final = jsonify({"access_token":getToken(res[1]), "user":userData}), 200
+
 				# return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 				# return jsonify(access_token=getToken(res[1])), 200
 			else:
