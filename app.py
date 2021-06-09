@@ -1977,21 +1977,22 @@ def flaskRunAsync(data):
 # without a valid JWT present.
 @app.route("/xapi", methods=["POST"])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-@jwt_required()
+# @jwt_required()
 def protected():
 	# Access the identity of the current user with get_jwt_identity
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
-	current_user = get_jwt_identity()
-
-	# getToken()
-	print("CCCCCCCCCCCCC",current_user)
-	data = request.json
 	final = "TOKEN ERROR", 401
+	# current_user = get_jwt_identity()
+	gotToken = request.headers["Authorization"].split(" ")[1]:
+
+	# print("CCCCCCCCCCCCC",current_user)
+	data = request.json
 	if "userID" in data:
-		print("JJJJJJJJJJJJJJJJJJJJJJ", current_user, data["userID"])
-		if current_user == data["userID"]:
+		myToken = getToken(data["userID"])
+		print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
+		if gotToken == myToken:
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
 
 			if "editProfile" in data:
