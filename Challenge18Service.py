@@ -799,7 +799,7 @@ class Challenge18Service():
 			if userID not in self.db["users"]:
 				self.db["users"][userID] = {}
 			self.db["users"][userID]["username"] = username #xxx
-			for k in fullData:
+			for k in fullData["register"]:
 				self.db["users"][userID][k] = fullData[k]
 			self.backup()
 		else:
