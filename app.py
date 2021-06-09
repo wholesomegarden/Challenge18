@@ -1994,12 +1994,13 @@ def protected():
 
 	data = request.json
 	if "userID" in data:
-		myToken = getToken(data["userID"])
-		print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
+		# myToken = getToken(data["userID"])
+		# print("JJJJJJJJJJJJJJJJJJJJJJ", gotToken, myToken, data["userID"])
 		print()
 		print(gotToken)
-		print()
-		print(myToken)
+		DECODED = jwt.decode(gotToken,app.config["JWT_SECRET_KEY"])
+		print(DECODED)
+		# print(myToken)
 		if str(gotToken) == str(myToken):
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
 
