@@ -2004,10 +2004,10 @@ def api():
 		# print(request.json)
 		if "checkUsername" in data:
 			res = Challenge18Service.share.checkUsername(data["checkUsername"])[0]
-			return jsonify({"result":res[0]"msg":res[1]}), 200
+			return jsonify({"result":res[0], "msg":res[1]}), 200
 		if "checkPhone" in data:
 			res = Challenge18Service.share.checkUsername(data["checkPhone"])[0]
-			return jsonify({"result":res[0]"msg":res[1]}), 200
+			return jsonify({"result":res[0], "msg":res[1]}), 200
 		#
 		# if "checkUsername" in data:
 		# 	return Challenge18Service.share.checkUsername(data["checkUsername"]["username"][0])
