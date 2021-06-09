@@ -1975,12 +1975,38 @@ def flaskRunAsync(data):
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.
-@app.route("/protected", methods=["GET"])
+@app.route("/xapi", methods=["GET"])
 @jwt_required()
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+	data = request.json
+	final = "TOKEN ERROR", 401
+	if "userID" in data:
+		print("JJJJJJJJJJJJJJJJJJJJJJ", current_user, data["userID"])
+		if current_user == data["userID"]:
+			print("YYYYYYYYYYYYYY", current_user, data["userID"])
+
+			if "editProfile" in data:
+				# if "access_token" in request.headers:
+				# 	if data["access_token"] == jwt.
+				allowedChanges = ["username","phone","email","fullName","language","memberName","memberRole","organization","city","country",]
+				for profileKey in allowedChanges:
+					if profileKey in data["editProfile"]:
+						if profileKey in Challenge18Service.share.db[current_user]:
+							print("changing {0} {1} to {2}".format(profileKey,Challenge18Service.share.db[current_user][profileKey],data["editProfile"][profileKey]))
+						else:
+							print("setting {0} to {1}".format(profileKey,data["editProfile"][profileKey]))
+						Challenge18Service.share.db[current_user][profileKey] = data["editProfile"][profileKey]
+				userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
+				# userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
+
+				final = jsonify({"logged_in_as":current_user, "user":userData}), 200
+				print("YYYYYYYYYYYYYYEEESSSSSSSSSSS", current_user, data["userID"])
+
+	return final[0], final[1]
+	# return jsonify(logged_in_as=current_user), 200
 
 
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
@@ -1989,12 +2015,13 @@ def getToken(userID):
 	return access_token
 
 def userDefaults(D,phone = None):
-	dataDefaults = {"accountType":"individual", "language":"English","plan":"free"}
+	dataDefaults = {"accountType":"individual", "language":"English","plan":"free", "paid": False}
 
 	for dKey in dataDefaults:
 		if dKey not in D:
 			D[dKey] = dataDefaults[dKey]
 	if phone is not None:
+		D["id"] = phone
 		D["phone"] = "+"+phone.split("@")[0]
 
 	return D
@@ -2063,6 +2090,7 @@ def api():
 				# return jsonify(access_token=getToken(res[1])), 200
 			else:
 				final = jsonify({"msg": "Bad username or password"}), 401
+
 	print("FINAL")
 	print(final[0],final[1])
 	return final[0], final[1]
