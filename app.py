@@ -1998,16 +1998,18 @@ def api():
 	# print(request.data)
 	data = request.json
 	print(data)
+	final = "DATA IS NONE", 401
 	# print(request.json)
 	# print(request.args)
 	if data is not None:
 		# print(request.json)
 		if "checkUsername" in data:
 			res = Challenge18Service.share.checkUsername(data["checkUsername"])
-			return jsonify({"result":res[0], "msg":res[1]}), 200
+			final = jsonify({"result":res[0], "msg":res[1]}), 200
 		if "checkPhone" in data:
 			res = Challenge18Service.share.checkPhone(data["checkPhone"])
-			return jsonify({"result":res[0], "msg":res[1]}), 200
+			final = jsonify({"result":res[0], "msg":res[1]}), 200
+
 		#
 		# if "checkUsername" in data:
 		# 	return Challenge18Service.share.checkUsername(data["checkUsername"]["username"][0])
@@ -2019,11 +2021,11 @@ def api():
 			if res[0]:
 				res2 =  Challenge18Service.share.signIn(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")
 				if res2[0]:
-					return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+					final = jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 					# return jsonify(access_token=), 200
 					# return jsonify(access_token=getToken(res2[1])), 200
 			else:
-				return jsonify({"result":res[0], "msg":res[1]}), 200
+				final = jsonify({"result":res[0], "msg":res[1]}), 200
 				Challenge18Service.share
 			# return {"register": Challenge18.share.register(data["register"]["username"],data["register"]["phone"].strip("+")+"@c.us")}
 
@@ -2036,10 +2038,14 @@ def api():
 			print(username, phone)
 			res = Challenge18Service.share.signIn(username, phone)
 			if res[0]:
-				return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+				final = jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
+				# return jsonify({"access_token":getToken(res2[1]), "user":Challenge18Service.share.db["users"][res2[1]]}), 200
 				# return jsonify(access_token=getToken(res[1])), 200
-			return jsonify({"msg": "Bad username or password"}), 401
-	return "DATA IS NONE", 401
+			else:
+				final = jsonify({"msg": "Bad username or password"}), 401
+	print("FINAL")
+	print(final)
+	return final
 
 
 if __name__ == '__main__':
