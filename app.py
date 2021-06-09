@@ -1989,10 +1989,10 @@ def getToken(userID):
 	return access_token
 
 def userDefaults(D):
-	dataDefaults = {"type":"individual", "language":"english","xxx":"yea"}
+	dataDefaults = {"type":"individual", "language":"english","plan":"free"}
 	for dKey in dataDefaults:
 		if dKey not in D:
-			D[dKey] = D[dKey]
+			D[dKey] = dataDefaults[dKey]
 	return D
 
 @app.route('/api', methods=['POST'])
