@@ -2011,7 +2011,7 @@ def protected():
 		# if str(gotToken) == str(myToken):
 		if current_user == data["userID"]:
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
-
+			userData = userDefaults(Challenge18Service.share.db["users"][current_user], id = current_user)
 			if "editProfile" in data:
 				# if "access_token" in request.headers:
 				# 	if data["access_token"] == jwt.
@@ -2023,14 +2023,39 @@ def protected():
 						else:
 							print("setting {0} to {1}".format(profileKey,data["editProfile"][profileKey]))
 						Challenge18Service.share.db["users"][current_user][profileKey] = data["editProfile"][profileKey]
-				userData = userDefaults(Challenge18Service.share.db["users"][current_user], id = current_user)
+
 				# userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
 
 				final = jsonify({"logged_in_as":current_user, "user":userData}), 200
 				print("YYYYYYYYYYYYYYEEESSSSSSSSSSS", current_user, data["userID"])
 
+			elif "getTemplateNames" in data:
+
+				templates = getTemplateNames(current_user)
+				finalDict = {"logged_in_as":current_user, "user":userData}
+				finalDict["templates"] = templates
+				final = jsonify(finalDict), 200
+
+			# final[0]["user"] = userData
+			# final[0]["logged_in_as"] = current_user
 	return final[0], final[1]
 	# return jsonify(logged_in_as=current_user), 200
+
+# const DUMMY_DATA = {
+#   English: ["International SDG", "Family", "Songs & Values"],
+#   Hebrew: ['אתגרי האו"ם', "משפחה", "שירים וערכים"],
+# };
+
+
+def getTemplateNames(userID):
+	DUMMY_DATA = {
+  "English": ["International SDG", "Family", "Songs & Values"],
+  "Hebrew": ['אתגרי האו"ם', "משפחה", "שירים וערכים"],
+	}
+	# Get public templates
+	# Get user templates (userID)
+	return DUMMY_DATA
+
 
 
 # https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
