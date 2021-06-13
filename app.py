@@ -2049,7 +2049,7 @@ def protected():
 				final["templates"] = templates
 
 			elif "userRequestChallenge" in data:
-				userRequestChallenge(current_user, data["userRequestChallenge"])
+				userRequestChallenge(current_user, userData, data["userRequestChallenge"])
 				final = {"logged_in_as":current_user}
 				userJoinChallenge(current_user, userData) # Automatically joins
 
@@ -2080,8 +2080,8 @@ def userJoinChallenge(userID, user):
 	room = current_user
 	return False
 
-def userRequestChallenge(userID, templateName):
-	user["requestChallenge"] = None
+def userRequestChallenge(userID,user, templateName):
+	user["requestChallenge"] = templateName
 	mockData = {"template":templateName, "invite":"google.com/"+templateName}
 	# Get public invite for this challenge
 	return mockData
