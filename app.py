@@ -2049,8 +2049,10 @@ def protected():
 				final["templates"] = templates
 
 			elif "userRequestChallenge" in data:
-				userRequestChallenge(current_user, userData, data["userRequestChallenge"])
+				res = userRequestChallenge(current_user, userData, data["userRequestChallenge"])
 				final = {"logged_in_as":current_user}
+				for k in res:
+					final[k] = res[k]
 				userJoinChallenge(current_user, userData) # Automatically joins
 
 			# final[0]["user"] = userData
