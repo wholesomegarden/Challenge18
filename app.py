@@ -2075,7 +2075,7 @@ def userJoinChallenge(userID, user):
 		user["myChallenges"][user["requestChallenge"]] = challengeData
 		user["requestChallenge"] = None
 
-		emit("myChallenges",user["myChallenges"], room=userID)
+		socketio.emit("myChallenges",user["myChallenges"], room=userID)
 	return True
 	room = current_user
 	return False
