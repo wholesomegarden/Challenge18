@@ -2066,7 +2066,7 @@ def protected():
 def userJoinChallenge(userID, user):
 	if "requestChallenge" in user and user["requestChallenge"] is not None:
 		templateName = user["requestChallenge"]
-		mockData = {"language":"English","invite":"google.com/"+templateName,"day":-5, "numOfUsers":34, "score":1234}}
+		mockData = {"language":"English","invite":"google.com/"+templateName,"day":-5, "numOfUsers":34, "score":1234}
 
 		# challengeData = Challenge18Service.userJoinChallenge
 		challengeData = mockData
