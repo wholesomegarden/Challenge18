@@ -2052,7 +2052,7 @@ def protected():
 				res = userRequestChallenge(current_user, userData, data["userRequestChallenge"])
 				final = {"logged_in_as":current_user}
 				for k in res:
-					final[k] = res[k]
+					final[k] = res[]
 				userJoinChallenge(current_user, userData) # Automatically joins
 
 			# final[0]["user"] = userData
@@ -2172,6 +2172,8 @@ def test():
 	final = jsonify({"msg":"HELLO WORLD :D"}), 200
 	# print(request.json)
 	# print(request.args)
+	data = request.json
+
 	if data is not None:
 		# print(request.json)
 		pass
