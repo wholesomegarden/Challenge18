@@ -2052,7 +2052,7 @@ def protected():
 				res = userRequestChallenge(current_user, userData, data["userRequestChallenge"])
 				final = {"logged_in_as":current_user}
 				for k in res:
-					final[k] = res[1]
+					final[k] = res[k]
 				userJoinChallenge(current_user, userData) # Automatically joins
 
 			# final[0]["user"] = userData
