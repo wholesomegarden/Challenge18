@@ -2068,13 +2068,19 @@ def protected():
 def userJoinChallenge(userID, user):
 	if "requestChallenge" in user and user["requestChallenge"] is not None:
 		templateName = user["requestChallenge"]
-		mockData = {"language":"English","invite":"google.com/"+templateName,"day":-5, "numOfUsers":34, "score":1234}
+		mockData = {"name": user["requestChallenge"], "language":"English","invite":"google.com/"+templateName,"day":-5, "numOfUsers":34, "score":1234}
 
 		# challengeData = Challenge18Service.userJoinChallenge
 		challengeData = mockData
 		if "myChallenges" not in user:
 			user["myChallenges"] = {}
-		user["myChallenges"][user["requestChallenge"]] = challengeData
+
+		id = "template"
+		c = 1
+		for k in user["myChallenges"]:
+			c += 1
+		id += str(c)
+		user["myChallenges"][id] = challengeData
 		user["requestChallenge"] = None
 
 		socketio.emit("myChallenges",user["myChallenges"], room=userID)
@@ -2170,7 +2176,6 @@ def test():
 	# data = request.json
 	# print(data)
 	data = request.json
-
 	final = jsonify({"msg":"HELLO WORLD :D"}), 200
 	# print(request.json)
 	# print(request.args)
