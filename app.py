@@ -1667,7 +1667,8 @@ from flask_jwt_extended import decode_token
 
 
 app = Flask(__name__,template_folder='templates')
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send, emit, join_room
+
 app.config['SECRET_KEY'] = 'LHUIGYFVHbkjlhuytuvbHTDCFGVHBJtydryctvyuhijhuogyift'
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['CORS_HEADERS'] = 'Authorization'
@@ -1687,6 +1688,8 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 app.config["JWT_SECRET_KEY"] = "GYRESETDRYTFUGYIUHOt7"  # Change this!
 import jwt as pyjwt
 jwt = JWTManager(app)
+
+
 @socketio.on('connect')
 def test_connect():
 	print("CLIENT CONNECTED!!!!!!!!!")
@@ -1703,6 +1706,15 @@ def test_connect():
 	emit("allBoards",{"challenges":{"Loading":{},"Loading ":{},}})
 	updateEverything(socketio)
 	# return "YOOOOOOOOOO"
+
+
+@socketio.on("joinRoom")
+def message(data):
+    room = data
+    print(f"client {room} wants to join: {room}")
+    join_room(room)
+	print(f"client {room} connected to join: {room}")
+    # emit('broadcast message', data['message'], room=room)
 
 @app.route('/sync',methods=["GET","POST"])
 def sync():
@@ -1986,7 +1998,7 @@ def protected():
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
 	print("XXXXXXXXXAAAAAAAPPPPPPPIIIIII")
-	final = "TOKEN ERROR", 401
+	final = "TOKEN ERROR"
 	# current_user = get_jwt_identity()
 	# print("CCCCCCCCCCCCC",current_user)
 	headers = dict(request.headers)
@@ -2011,6 +2023,7 @@ def protected():
 		# if str(gotToken) == str(myToken):
 		if current_user == data["userID"]:
 			print("YYYYYYYYYYYYYY", current_user, data["userID"])
+			print (data)
 			userData = userDefaults(Challenge18Service.share.db["users"][current_user], id = current_user)
 			if "editProfile" in data:
 				# if "access_token" in request.headers:
@@ -2026,19 +2039,23 @@ def protected():
 
 				# userData = userDefaults(Challenge18Service.share.db["users"][res2[1]],phone = phone)
 
-				final = jsonify({"logged_in_as":current_user, "user":userData}), 200
+				final = {"logged_in_as":current_user, "user":userData}
 				print("YYYYYYYYYYYYYYEEESSSSSSSSSSS", current_user, data["userID"])
 
 			elif "getTemplateNames" in data:
 
 				templates = getTemplateNames(current_user)
-				finalDict = {"logged_in_as":current_user, "user":userData}
-				finalDict["templates"] = templates
-				final = jsonify(finalDict), 200
+				final = {"logged_in_as":current_user, "user":userData}
+				final["templates"] = templates
+
+			elif "userRequestChallenge" in data:
+				userRequestChallenge(current_user, data["userRequestChallenge"])
+				final = {"logged_in_as":current_user}
+				userJoinChallenge(current_user, userData) # Automatically joins
 
 			# final[0]["user"] = userData
 			# final[0]["logged_in_as"] = current_user
-	return final[0], final[1]
+	return jsonify(finalDict), 200
 	# return jsonify(logged_in_as=current_user), 200
 
 # const DUMMY_DATA = {
@@ -2046,6 +2063,30 @@ def protected():
 #   Hebrew: ['אתגרי האו"ם', "משפחה", "שירים וערכים"],
 # };
 
+def userJoinChallenge(userID, user):
+	if "requestChallenge" in user and user["requestChallenge"] is not None:
+		templateName = user["requestChallenge"]
+		mockData = {"language":"English","invite":"google.com/"+templateName,"day":-5, "numOfUsers":34, "score":1234}}
+
+		# challengeData = Challenge18Service.userJoinChallenge
+		challengeData = mockData
+		if "myChallenges" not in user:
+			user["myChallenges"] = {}
+		user["myChallenges"][user["requestChallenge"]] = challengeData
+		user["requestChallenge"] = None
+
+		emit("myChallenges",user["myChallenges"], room=userID))
+	return True
+	room = current_user
+	return False
+
+def userRequestChallenge(userID, templateName):
+	user["requestChallenge"] = None
+	mockData = {"template":templateName, "invite":"google.com/"+templateName}
+	# Get public invite for this challenge
+	return mockData
+
+	return None
 
 def getTemplateNames(userID):
 	DUMMY_DATA = {
