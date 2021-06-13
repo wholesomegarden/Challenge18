@@ -2055,7 +2055,7 @@ def protected():
 
 			# final[0]["user"] = userData
 			# final[0]["logged_in_as"] = current_user
-	return jsonify(finalDict), 200
+	return jsonify(final), 200
 	# return jsonify(logged_in_as=current_user), 200
 
 # const DUMMY_DATA = {
