@@ -1710,11 +1710,11 @@ def test_connect():
 
 @socketio.on("joinRoom")
 def message(data):
-    room = data
-    print(f"client {room} wants to join: {room}")
-    join_room(room)
+	room = data
+	print(f"client {room} wants to join: {room}")
+	join_room(room)
 	print(f"client {room} connected to join: {room}")
-    # emit('broadcast message', data['message'], room=room)
+	# emit('broadcast message', data['message'], room=room)
 
 @app.route('/sync',methods=["GET","POST"])
 def sync():
